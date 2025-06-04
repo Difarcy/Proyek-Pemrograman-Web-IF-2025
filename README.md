@@ -1,8 +1,8 @@
 # Proyek Pemrograman Web IF 2025
 
-Nama    : Jafar Siddik Aulia Rahman  
-NIM     : 301220005  
-Prodi   : Teknik Informatika Semester 6  
+`Nama  :` Jafar Siddik Aulia Rahman  
+`NIM   :` 301220005  
+`Prodi :` Teknik Informatika Semester 6   
 
 Sebagai referensi dalam pengerjaan proyek ini,  
 penulis merujuk pada skripsi karya Teja Kusuma, S.Kom.,  

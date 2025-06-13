@@ -61,15 +61,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>">Home</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>">Home</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="<?= base_url('help-center') ?>">Help Center</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url('documentation') ?>">Documentation</a></li>
                     <li class="nav-item"><a class="nav-link active" href="<?= base_url('api-reference') ?>">API Reference</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url('community') ?>">Community</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url('contact') ?>">Contact Us</a></li>
                 </ul>
                 <div>
-                    <a href="<?= base_url('login') ?>" class="btn btn-link">Sign in</a>
-                    <a href="<?= base_url('login') ?>" class="btn btn-inventrack text-white ms-2">Get Started</a>
+                    <a href="<?= base_url('auth/login') ?>" class="btn btn-link">Sign in</a>
+                    <a href="<?= base_url('auth/login') ?>" class="btn btn-inventrack text-white ms-2">Get Started</a>
                 </div>
             </div>
         </div>

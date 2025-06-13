@@ -106,6 +106,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>">Home</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
                     <li class="nav-item"><a class="nav-link" href="#inventory">Inventory</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
@@ -374,11 +375,11 @@
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="footer-title">Support</h5>
-                    <a href="#" class="footer-link">Help Center</a>
-                    <a href="#" class="footer-link">Documentation</a>
-                    <a href="#" class="footer-link">API Reference</a>
-                    <a href="#" class="footer-link">Community</a>
-                    <a href="#" class="footer-link">Contact Us</a>
+                    <a href="<?= base_url('help-center') ?>" class="footer-link">Help Center</a>
+                    <a href="<?= base_url('documentation') ?>" class="footer-link">Documentation</a>
+                    <a href="<?= base_url('api-reference') ?>" class="footer-link">API Reference</a>
+                    <a href="<?= base_url('community') ?>" class="footer-link">Community</a>
+                    <a href="<?= base_url('contact') ?>" class="footer-link">Contact Us</a>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="footer-title">Contact</h5>

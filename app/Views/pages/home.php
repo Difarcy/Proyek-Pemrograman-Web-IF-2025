@@ -115,8 +115,8 @@
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 <div>
-                    <a href="<?= base_url('login') ?>" class="btn btn-link">Sign in</a>
-                    <a href="<?= base_url('login') ?>" class="btn btn-inventrack text-white ms-2">Get Started</a>
+                    <a href="<?= base_url('auth/login') ?>" class="btn btn-link">Sign in</a>
+                    <a href="<?= base_url('auth/login') ?>" class="btn btn-inventrack text-white ms-2">Get Started</a>
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@
                     <p class="lead mb-4">
                         Take full control of your inventory with Inventrack. Effortlessly monitor stock levels, streamline your operations, and gain instant insights—anytime, anywhere. Experience smarter inventory management designed for growing businesses.
                     </p>
-                    <a href="<?= base_url('login') ?>" class="btn btn-inventrack text-white px-4">Get Started</a>
+                    <a href="<?= base_url('auth/login') ?>" class="btn btn-inventrack text-white px-4">Get Started</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <img src="/assets/gambar-beranda.jpg" alt="Inventrack Dashboard" class="img-fluid rounded" style="max-height:480px;object-fit:cover;">

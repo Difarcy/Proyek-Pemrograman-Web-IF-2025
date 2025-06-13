@@ -30,3 +30,5 @@ $routes->group('', function($routes) {
     $routes->get('community', 'Pages::community');
     $routes->get('contact', 'Pages::contact');
 });
+
+$routes->get('auth/login', 'Auth::login');

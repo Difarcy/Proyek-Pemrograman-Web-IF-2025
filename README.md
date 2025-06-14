@@ -27,3 +27,13 @@ Karya: **Teja Kusumah (NPM 301200033)** – Program Studi Teknik Informatika, FT
 - **Pencatatan Barang Masuk & Keluar**  
 - **Laporan Stok Barang**  
 - **Dashboard Informasi & Profil Toko**
+
+---
+
+## Halaman dan Fitur baru:
+
+- **Halaman Beranda** 
+- **Fitur Animasi Pada Tombol**  
+- **Halaman Support**  
+- **Permbaharuan Pada Halaman Login**  
+- **Halaman Register dan Forgot Password?**

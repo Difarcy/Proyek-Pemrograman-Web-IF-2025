@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventrack - Login</title>
+    <title>Forgot Password - Inventrack</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             background: #f3f0ff;
@@ -37,7 +38,7 @@
         }
         .login-form-section {
             width: 50%;
-            padding: 40px 32px;
+            padding: 28px 14px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,23 +56,18 @@
         .form-control, .form-select {
             border-radius: 8px;
             font-size: 0.85rem;
-            margin-bottom: 1rem;
-            min-height: 2.2rem;
         }
         .btn-inventrack {
             background: #8f5aff;
             color: #fff;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.85rem;
-            padding: 0.45rem 1.1rem;
-            min-height: 2.2rem;
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            padding: 0.4rem 1rem;
         }
         .btn-inventrack.btn-lg {
-            font-size: 0.85rem;
-            padding: 0.45rem 1.1rem;
-            min-height: 2.2rem;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
         }
         .btn-inventrack:hover {
             background: #7a4fd6;
@@ -87,15 +83,6 @@
                 padding: 32px 16px;
             }
         }
-        #togglePasswordIcon {
-            color: #888;
-            opacity: 0.7;
-            transition: color 0.2s, opacity 0.2s;
-        }
-        #togglePasswordIcon:hover {
-            color: #8f5aff;
-            opacity: 1;
-        }
         .login-form-section .text-center.mt-4, .login-form-section .text-center.mt-4 a, .login-form-section .text-center.mt-4 div {
             font-size: 0.85rem !important;
         }
@@ -109,51 +96,23 @@
         <div class="login-form-section">
             <div class="text-center mb-4">
                 <div class="login-title"><a href="<?= base_url() ?>" style="text-decoration:none;color:#8f5aff;">Inventrack</a></div>
-                <div class="login-subtitle">View available inventory stock</div>
+                <div class="login-subtitle">Forgot your password?</div>
             </div>
-            <form method="post" action="<?= base_url('auth/login') ?>">
+            <form method="post" action="<?= base_url('forgot-password') ?>">
                 <div class="mb-3">
                     <input type="text" class="form-control" name="username" placeholder="Username or Email" required autofocus>
                 </div>
-                <div class="mb-3 position-relative">
-                    <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password" required>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor:pointer;" onclick="togglePassword()">
-                        <i class="fa fa-eye" id="togglePasswordIcon"></i>
-                    </span>
-                </div>
-                <div class="mb-3">
-                    <select class="form-select" name="role" required>
-                        <option value="" disabled selected>Select Role</option>
-                        <option value="admin">Admin</option>
-                        <option value="staff">Staff</option>
-                    </select>
-                </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-inventrack btn-lg">Login</button>
+                    <button type="submit" class="btn btn-inventrack btn-lg">Send Reset Instructions</button>
                 </div>
                 <div class="text-center mt-4">
-                    <div class="mb-3"><a href="#" style="color:#222;text-decoration:none;">Forgot password?</a></div>
-                    <div style="margin-top: 14px;">Don't have an account? <a href="#" style="color:#8f5aff;">Sign up</a></div>
+                    <div class="mb-2"><a href="<?= base_url('auth/login') ?>" style="color:#888;text-decoration:none;">Back to Login</a></div>
+                    <div><a href="<?= base_url('register') ?>" style="color:#8f5aff;">Don't have an account? Sign up</a></div>
                 </div>
             </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-    <script>
-    function togglePassword() {
-        const passwordInput = document.getElementById('passwordInput');
-        const icon = document.getElementById('togglePasswordIcon');
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
-    </script>
 </body>
 </html> 

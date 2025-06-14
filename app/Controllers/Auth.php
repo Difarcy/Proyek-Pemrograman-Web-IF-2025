@@ -7,4 +7,14 @@ class Auth extends BaseController
     {
         return view('pages/login');
     }
+
+    public function register()
+    {
+        return view('pages/register');
+    }
+
+    public function forgotPassword()
+    {
+        return view('pages/forgot-password');
+    }
 } 

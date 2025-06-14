@@ -95,6 +95,44 @@
             font-weight: bold;
             color: #8f5aff;
         }
+        .navbar-nav .nav-link {
+            position: relative;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .navbar-nav .nav-link::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: #8f5aff;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link:focus::after {
+            width: 100%;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+            color: #8f5aff !important;
+            background: none;
+            transform: scale(1.08);
+        }
+        .btn-inventrack, .btn-link {
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+        }
+        .btn-inventrack:hover, .btn-inventrack:focus {
+            background: #7a4fd6;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(143,90,255,0.15);
+            transform: scale(1.05);
+        }
+        .btn-link:hover, .btn-link:focus {
+            color: #8f5aff;
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -136,7 +174,7 @@
                     <a href="<?= base_url('auth/login') ?>" class="btn btn-inventrack text-white px-4">Get Started</a>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="/assets/gambar-beranda.jpg" alt="Inventrack Dashboard" class="img-fluid rounded" style="max-height:480px;object-fit:cover;">
+                    <img src="/assets/gambar-beranda.jpg" alt="Inventrack Dashboard" class="img-fluid rounded" style="max-height:560px;object-fit:cover;margin-top:32px;">
                 </div>
             </div>
         </div>

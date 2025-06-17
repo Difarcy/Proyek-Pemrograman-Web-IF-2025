@@ -1,20 +1,50 @@
 <?php
+
 namespace App\Controllers;
 
-class Auth extends BaseController
+use CodeIgniter\Controller;
+
+class Auth extends Controller
 {
     public function login()
     {
-        return view('pages/login');
+        return view('auth/login');
     }
 
-    public function register()
+    public function attemptLogin()
     {
-        return view('pages/register');
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+
+        $db = \Config\Database::connect();
+        $user = $db->table('users')
+                  ->where('username', $username)
+                  ->get()
+                  ->getRow();
+
+        if ($user && password_verify($password, $user->password)) {
+            $sessionData = [
+                'user_id' => $user->id,
+                'username' => $user->username,
+                'role' => $user->role,
+                'logged_in' => true
+            ];
+            
+            session()->set($sessionData);
+
+            if ($user->role === 'admin') {
+                return redirect()->to('/admin/dashboard');
+            } else {
+                return redirect()->to('/user/dashboard');
+            }
+        }
+
+        return redirect()->back()->with('error', 'Username atau password salah');
     }
 
-    public function forgotPassword()
+    public function logout()
     {
-        return view('pages/forgot-password');
+        session()->destroy();
+        return redirect()->to('/login');
     }
 } 

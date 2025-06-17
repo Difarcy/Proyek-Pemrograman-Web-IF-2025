@@ -1,0 +1,3 @@
+<?php
+// Stok Barang User
+?> 

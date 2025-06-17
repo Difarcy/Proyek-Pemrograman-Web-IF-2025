@@ -1,0 +1,3 @@
+<?php
+// Barang Keluar Admin
+?> 

@@ -171,11 +171,11 @@ php spark db:seed UserSeeder
 
 ### Admin
 - Username: admin
-- Password: vstock
+- Password: password
 
 ### User
 - Username: user
-- Password: vstock
+- Password: password
 
 ## Struktur Folder
 

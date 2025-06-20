@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin</title>
+    <title>Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <style>
         html, body {
             font-family: 'Inter', Arial, Helvetica, sans-serif;
@@ -175,29 +177,77 @@
         .main-header.collapsed-header {
             left: 70px !important;
         }
-        .info-box {
+        .info-widget {
             background: #fff;
-            border-radius: 0.6rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 0.9rem;
+            border-radius: 1.1rem;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
+            padding: 1.3rem 1.3rem 0.7rem 1.3rem;
             margin-bottom: 1.1rem;
             display: flex;
-            align-items: center;
-            transition: box-shadow 0.2s;
-            font-size: 0.97rem;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 170px;
+            position: relative;
+            border: none;
+            transition: box-shadow 0.18s;
         }
-        .info-box:hover {
-            box-shadow: 0 4px 24px rgba(0,123,255,0.13);
-        }
-        .info-box-icon {
-            font-size: 1.25rem;
-            width: 38px;
-            height: 38px;
+        .info-widget .widget-icon {
+            position: absolute;
+            top: 1.1rem;
+            right: 1.1rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0,123,255,0.07);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0.6rem;
-            margin-right: 0.8rem;
+            opacity: 1;
+        }
+        .info-widget .widget-icon i, .info-widget .widget-icon svg {
+            font-size: 1.6rem;
+            color: #0d6efd;
+        }
+        .info-widget .widget-value {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 0.15rem;
+            margin-top: 0.1rem;
+        }
+        .info-widget .widget-label {
+            font-size: 1.08rem;
+            color: #555;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+        .info-widget .widget-link {
+            display: flex;
+            align-items: center;
+            color: #0d6efd;
+            font-size: 1.01rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-top: 1px solid #f0f2f7;
+            margin-left: -1.3rem;
+            margin-right: -1.3rem;
+            margin-top: 1.1rem;
+            padding: 0.7rem 1.3rem 0.1rem 1.3rem;
+            border-bottom-left-radius: 1.1rem;
+            border-bottom-right-radius: 1.1rem;
+            transition: background 0.13s;
+        }
+        .info-widget .widget-link:hover {
+            background: #f5f8ff;
+            text-decoration: underline;
+        }
+        .info-widget .widget-link i {
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+            transition: transform 0.13s;
+        }
+        .info-widget .widget-link:hover i {
+            transform: translateX(2px);
         }
         .bg-info { background: #17a2b8 !important; color: #fff; }
         .bg-danger { background: #dc3545 !important; color: #fff; }
@@ -226,6 +276,11 @@
         @media (max-width: 991.98px) {
             .sidebar, .main-header { left: 0; }
             .content-wrapper, .collapsed-content { margin-left: 0 !important; padding-top: 70px; }
+            .info-widget { min-height: 120px; padding: 1rem 1rem 0.5rem 1rem; }
+            .info-widget .widget-icon { width: 38px; height: 38px; font-size: 1.1rem; }
+            .info-widget .widget-value { font-size: 1.3rem; }
+            .info-widget .widget-label { font-size: 0.98rem; }
+            .info-widget .widget-link { font-size: 0.97rem; padding: 0.5rem 1rem 0.1rem 1rem; }
         }
         /* Dark mode simple */
         .dark-mode {
@@ -280,6 +335,177 @@
         .dropdown-toggle::after {
             display: none !important;
         }
+        .dropdown-notif {
+            position: relative;
+        }
+        .dropdown-notif .dropdown-menu {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
+            display: block !important;
+            margin-top: 0.5rem;
+            z-index: 1000;
+        }
+        .dropdown-notif.show-notif .dropdown-menu,
+        .dropdown-notif:hover .dropdown-menu,
+        .dropdown-notif:focus-within .dropdown-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .widget-gradient {
+            border-radius: 1.1rem;
+            color: #fff;
+            padding: 1rem 1.1rem 0.6rem 1.1rem;
+            margin-bottom: 0.7rem;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+            width: 100%;
+            max-width: 100%;
+        }
+        .widget-gradient.bg1 {
+            background: linear-gradient(135deg, #4e9af1 0%, #5bb6f9 100%);
+        }
+        .widget-gradient.bg2 {
+            background: linear-gradient(135deg, #2ed8b6 0%, #59e6c2 100%);
+        }
+        .widget-gradient.bg3 {
+            background: linear-gradient(135deg, #f6c445 0%, #f9d37c 100%);
+        }
+        .widget-gradient.bg4 {
+            background: linear-gradient(135deg, #ff6a8d 0%, #ff8ca8 100%);
+        }
+        .widget-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.01em;
+        }
+        .widget-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+        }
+        .widget-icon {
+            font-size: 1.35rem;
+            opacity: 0.85;
+            margin-bottom: 0.1rem;
+        }
+        .widget-value {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            text-align: right;
+            margin-left: 0.7rem;
+        }
+        .widget-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.93rem;
+            opacity: 0.93;
+            font-weight: 500;
+            margin-top: 0.1rem;
+        }
+        .widget-footer-label {
+            font-size: 0.91rem;
+        }
+        .widget-footer-value {
+            font-size: 0.93rem;
+            font-weight: 600;
+        }
+        .row.tight-widgets {
+            margin-left: -0.3rem;
+            margin-right: -0.3rem;
+        }
+        .tight-widgets > [class^='col-'] {
+            padding-left: 0.3rem;
+            padding-right: 0.3rem;
+        }
+        @media (max-width: 991.98px) {
+            .widget-gradient { min-height: 80px; padding: 0.7rem 0.7rem 0.4rem 0.7rem; }
+            .widget-title { font-size: 0.91rem; }
+            .widget-icon { font-size: 1.05rem; }
+            .widget-value { font-size: 1.05rem; }
+            .widget-footer { font-size: 0.85rem; }
+        }
+        .badge-status-tersedia,
+        .badge-status-habis,
+        .badge-status-hampirhabis,
+        .badge-status-barumasuk,
+        .badge-status-tidakaktif {
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0.28em 0.9em;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.01em;
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+        }
+        .badge-status-tersedia { background: #28a745 !important; color: #fff !important; }
+        .badge-status-habis { background: #ff6a8d !important; color: #fff !important; }
+        .badge-status-hampirhabis { background: #ffc107 !important; color: #fff !important; }
+        .badge-status-barumasuk { background: #4e9af1 !important; color: #fff !important; }
+        .badge-status-tidakaktif { background: #adb5bd !important; color: #fff !important; }
+        .badge-status-menunggu,
+        .badge-status-diproses,
+        .badge-status-selesai,
+        .badge-status-dibatalkan,
+        .badge-status-pending,
+        .badge-status-retur {
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0.28em 0.9em;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.01em;
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+            color: #fff !important;
+        }
+        .badge-status-menunggu { background: #adb5bd !important; }
+        .badge-status-diproses { background: #4e9af1 !important; }
+        .badge-status-selesai { background: #28a745 !important; }
+        .badge-status-dibatalkan { background: #ff6a8d !important; }
+        .badge-status-pending { background: #ffc107 !important; }
+        .badge-status-retur { background: #fd7e14 !important; }
+        .badge-status-dikirim,
+        .badge-status-ditolak {
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0.28em 0.9em;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.01em;
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+            color: #fff !important;
+        }
+        .badge-status-dikirim { background: #ffc107 !important; }
+        .badge-status-ditolak {
+            background: #ff6a8d !important;
+            color: #fff !important;
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0.28em 0.9em;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.01em;
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -325,8 +551,8 @@
     </div>
     <div class="user-info d-flex align-items-center ml-auto" style="z-index:1;">
         <!-- Notifikasi -->
-        <div class="dropdown mr-2">
-            <button class="btn btn-link position-relative p-0" id="notifDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:1.4rem;color:#343a40;outline:none!important;box-shadow:none!important;">
+        <div class="dropdown mr-2 dropdown-notif">
+            <button class="btn btn-link position-relative p-0" id="notifDropdown" type="button" aria-haspopup="true" aria-expanded="false" style="font-size:1.4rem;color:#343a40;outline:none!important;box-shadow:none!important;">
                 <i class="fas fa-bell"></i>
                 <span class="badge badge-danger position-absolute d-flex align-items-center justify-content-center" style="top: 0.1px; right: 6px; font-size: 0.5rem; border-radius: 50%; width: 12px; height: 12px; border: 1px solid white;">1</span>
             </button>
@@ -356,11 +582,11 @@
                     <?= ucfirst(session('username') ?? 'Admin') ?>
                 </span>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<?= base_url('admin/profil') ?>">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profil Saya
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<?= base_url('admin/ubah-password') ?>">
                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                     Ubah Password
                 </a>
@@ -375,130 +601,315 @@
 </div>
 <div class="content-wrapper" id="contentWrapper">
     <div class="container-fluid">
-        <h1 class="mb-4">Dashboard <span class="badge badge-primary">Admin</span></h1>
+        <h1 class="mb-4">Dashboard</h1>
+        <div class="row tight-widgets">
+            <div class="col-12 col-md-6 col-xl-3 mb-2">
+                <div class="widget-gradient bg1">
+                    <div class="widget-title">Total Barang</div>
+                    <div class="widget-row">
+                        <span class="widget-icon"><i class="bi bi-box"></i></span>
+                        <span class="widget-value">150</span>
+                    </div>
+                    <div class="widget-footer">
+                        <span class="widget-footer-label">Hari Ini</span>
+                        <span class="widget-footer-value">10</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-2">
+                <div class="widget-gradient bg2">
+                    <div class="widget-title">Total Barang Masuk</div>
+                    <div class="widget-row">
+                        <span class="widget-icon"><i class="bi bi-box-arrow-in-down"></i></span>
+                        <span class="widget-value">25</span>
+                    </div>
+                    <div class="widget-footer">
+                        <span class="widget-footer-label">Hari Ini</span>
+                        <span class="widget-footer-value">3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-2">
+                <div class="widget-gradient bg3">
+                    <div class="widget-title">Total Barang Keluar</div>
+                    <div class="widget-row">
+                        <span class="widget-icon"><i class="bi bi-box-arrow-up"></i></span>
+                        <span class="widget-value">15</span>
+                    </div>
+                    <div class="widget-footer">
+                        <span class="widget-footer-label">Hari Ini</span>
+                        <span class="widget-footer-value">2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-2">
+                <div class="widget-gradient bg4">
+                    <div class="widget-title">Jumlah Customer</div>
+                    <div class="widget-row">
+                        <span class="widget-icon"><i class="bi bi-people"></i></span>
+                        <span class="widget-value">50</span>
+                    </div>
+                    <div class="widget-footer">
+                        <span class="widget-footer-label">Hari Ini</span>
+                        <span class="widget-footer-value">1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="fas fa-boxes"></i></span>
-                    <div>
-                        <span class="info-box-text">Total Barang</span><br>
-                        <span class="info-box-number">150</span>
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-white border-0"><h5 class="mb-0">Barang Terbaru</h5></div>
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Kategori</th>
+                                        <th>Stok</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>BRG001</td>
+                                        <td>Laptop Asus</td>
+                                        <td>Elektronik</td>
+                                        <td>5</td>
+                                        <td>2024-03-20</td>
+                                        <td><span class="badge-status-tersedia">tersedia</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>BRG002</td>
+                                        <td>Mouse Gaming</td>
+                                        <td>Elektronik</td>
+                                        <td>0</td>
+                                        <td>2024-03-19</td>
+                                        <td><span class="badge-status-habis">habis</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>BRG003</td>
+                                        <td>Keyboard Mechanical</td>
+                                        <td>Elektronik</td>
+                                        <td>1</td>
+                                        <td>2024-03-18</td>
+                                        <td><span class="badge-status-hampirhabis">hampir habis</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>BRG004</td>
+                                        <td>Printer Epson</td>
+                                        <td>Elektronik</td>
+                                        <td>10</td>
+                                        <td>2024-03-17</td>
+                                        <td><span class="badge-status-barumasuk">baru masuk</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>BRG005</td>
+                                        <td>Flashdisk 32GB</td>
+                                        <td>Aksesoris</td>
+                                        <td>0</td>
+                                        <td>2024-03-16</td>
+                                        <td><span class="badge-status-tidakaktif">tidak aktif</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-danger"><i class="fas fa-arrow-down"></i></span>
-                    <div>
-                        <span class="info-box-text">Barang Masuk</span><br>
-                        <span class="info-box-number">25</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-success"><i class="fas fa-arrow-up"></i></span>
-                    <div>
-                        <span class="info-box-text">Barang Keluar</span><br>
-                        <span class="info-box-number">15</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-warning"><i class="fas fa-users"></i></span>
-                    <div>
-                        <span class="info-box-text">Total Customer</span><br>
-                        <span class="info-box-number">50</span>
+                    <div class="card-footer bg-white text-center border-0 p-2">
+                        <a href="<?= base_url('admin/stok-barang') ?>" class="d-inline-block" style="color:inherit;text-decoration:none;font-weight:500;">Lihat Semua</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header bg-white border-0"><h5 class="mb-0">Stok Menipis</h5></div>
-                    <div class="card-body p-0">
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Stok</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>BRG001</td>
-                                    <td>Laptop Asus</td>
-                                    <td>5</td>
-                                    <td><span class="badge badge-warning">Hampir Habis</span></td>
-                                </tr>
-                                <tr>
-                                    <td>BRG002</td>
-                                    <td>Mouse Gaming</td>
-                                    <td>3</td>
-                                    <td><span class="badge badge-danger">Kritis</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-header bg-white border-0"><h5 class="mb-0">Transaksi Barang Masuk Terbaru</h5></div>
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Supplier</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2024-03-20</td>
+                                        <td>BRG001</td>
+                                        <td>Laptop Asus</td>
+                                        <td>10</td>
+                                        <td>PT Supplier Jaya</td>
+                                        <td><span class="badge-status-menunggu">Menunggu</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2024-03-19</td>
+                                        <td>BRG002</td>
+                                        <td>Mouse Gaming</td>
+                                        <td>0</td>
+                                        <td>PT Supplier Jaya</td>
+                                        <td><span class="badge-status-diproses">Diproses</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2024-03-18</td>
+                                        <td>BRG003</td>
+                                        <td>Keyboard Mechanical</td>
+                                        <td>5</td>
+                                        <td>PT Supplier Makmur</td>
+                                        <td><span class="badge-status-selesai">Selesai</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>2024-03-17</td>
+                                        <td>BRG004</td>
+                                        <td>Printer Epson</td>
+                                        <td>0</td>
+                                        <td>PT Supplier Makmur</td>
+                                        <td><span class="badge-status-dibatalkan">Dibatalkan</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>2024-03-16</td>
+                                        <td>BRG005</td>
+                                        <td>Flashdisk 32GB</td>
+                                        <td>15</td>
+                                        <td>PT Supplier Jaya</td>
+                                        <td><span class="badge-status-pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>2024-03-15</td>
+                                        <td>BRG006</td>
+                                        <td>Monitor LG</td>
+                                        <td>2</td>
+                                        <td>PT Supplier Makmur</td>
+                                        <td><span class="badge-status-retur">Retur</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="card-footer bg-white text-right border-0">
-                        <a href="<?= base_url('admin/stok-barang') ?>" class="btn btn-sm btn-info">Lihat Semua</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-header bg-white border-0"><h5 class="mb-0">Transaksi Terbaru</h5></div>
-                    <div class="card-body p-0">
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th>No. Transaksi</th>
-                                    <th>Tanggal</th>
-                                    <th>Jenis</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>VST20240320001</td>
-                                    <td>20/03/2024</td>
-                                    <td>Barang Masuk</td>
-                                    <td><span class="badge badge-success">Selesai</span></td>
-                                </tr>
-                                <tr>
-                                    <td>VST20240320002</td>
-                                    <td>20/03/2024</td>
-                                    <td>Barang Keluar</td>
-                                    <td><span class="badge badge-warning">Proses</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer bg-white text-right border-0">
-                        <a href="<?= base_url('admin/laporan') ?>" class="btn btn-sm btn-info">Lihat Semua</a>
+                    <div class="card-footer bg-white text-center border-0 p-2">
+                        <a href="<?= base_url('admin/barang-masuk') ?>" class="d-inline-block" style="color:inherit;text-decoration:none;font-weight:500;">Lihat Semua</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Grafik placeholder -->
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12">
                 <div class="card mb-4">
+                    <div class="card-header bg-white border-0"><h5 class="mb-0">Transaksi Barang Keluar Terbaru</h5></div>
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Tujuan Pengguna</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2024-03-20</td>
+                                        <td>BRG001</td>
+                                        <td>Laptop Asus</td>
+                                        <td>2</td>
+                                        <td>PT Customer Sejahtera</td>
+                                        <td><span class="badge-status-menunggu">Menunggu</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2024-03-19</td>
+                                        <td>BRG002</td>
+                                        <td>Mouse Gaming</td>
+                                        <td>1</td>
+                                        <td>PT Customer Sejahtera</td>
+                                        <td><span class="badge-status-diproses">Diproses</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2024-03-18</td>
+                                        <td>BRG003</td>
+                                        <td>Keyboard Mechanical</td>
+                                        <td>1</td>
+                                        <td>PT Customer Makmur</td>
+                                        <td><span class="badge-status-dikirim">Dikirim</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>2024-03-17</td>
+                                        <td>BRG004</td>
+                                        <td>Printer Epson</td>
+                                        <td>1</td>
+                                        <td>PT Customer Makmur</td>
+                                        <td><span class="badge-status-selesai">Selesai</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>2024-03-16</td>
+                                        <td>BRG005</td>
+                                        <td>Flashdisk 32GB</td>
+                                        <td>5</td>
+                                        <td>PT Customer Jaya</td>
+                                        <td><span class="badge-status-ditolak">Ditolak</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>2024-03-15</td>
+                                        <td>BRG006</td>
+                                        <td>Monitor LG</td>
+                                        <td>1</td>
+                                        <td>PT Customer Jaya</td>
+                                        <td><span class="badge-status-dibatalkan">Dibatalkan</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-center border-0 p-2">
+                        <a href="<?= base_url('admin/barang-keluar') ?>" class="d-inline-block" style="color:inherit;text-decoration:none;font-weight:500;">Lihat Semua</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-8 mb-4">
+                <div class="card h-100">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Grafik Barang Masuk/Keluar</h5></div>
                     <div class="card-body">
-                        <div style="height:250px;display:flex;align-items:center;justify-content:center;color:#aaa;">[Grafik Barang Masuk/Keluar]</div>
+                        <canvas id="chartMasukKeluar" height="120"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-header bg-white border-0"><h5 class="mb-0">Grafik Kategori Barang</h5></div>
+            <div class="col-12 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white border-0"><h5 class="mb-0">Grafik Stok Barang per Kategori</h5></div>
                     <div class="card-body">
-                        <div style="height:250px;display:flex;align-items:center;justify-content:center;color:#aaa;">[Grafik Kategori Barang]</div>
+                        <canvas id="chartKategori" height="180"></canvas>
                     </div>
                 </div>
             </div>
@@ -526,6 +937,92 @@
             document.body.classList.add('dark-mode');
         } else {
             document.body.classList.remove('dark-mode');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var notifBtn = document.getElementById('notifDropdown');
+        var notifDropdown = notifBtn.closest('.dropdown-notif');
+        notifBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            notifDropdown.classList.toggle('show-notif');
+        });
+        // Close on click outside
+        document.addEventListener('mousedown', function(e) {
+            if (!notifDropdown.contains(e.target)) {
+                notifDropdown.classList.remove('show-notif');
+            }
+        });
+        // Close on mouseleave (optional, for hover out)
+        notifDropdown.addEventListener('mouseleave', function() {
+            notifDropdown.classList.remove('show-notif');
+        });
+    });
+    // Grafik Barang Masuk/Keluar
+    const ctxMasukKeluar = document.getElementById('chartMasukKeluar').getContext('2d');
+    new Chart(ctxMasukKeluar, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            datasets: [
+                {
+                    label: 'Barang Masuk',
+                    data: [12, 19, 15, 17, 22, 18, 25, 20, 23, 19, 21, 24],
+                    borderColor: '#4e9af1',
+                    backgroundColor: 'rgba(78,154,241,0.12)',
+                    tension: 0.35,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#4e9af1',
+                    fill: true
+                },
+                {
+                    label: 'Barang Keluar',
+                    data: [8, 14, 10, 13, 16, 12, 18, 15, 17, 13, 15, 18],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40,167,69,0.10)',
+                    tension: 0.35,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#28a745',
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'top' },
+                tooltip: { mode: 'index', intersect: false }
+            },
+            scales: {
+                x: { grid: { display: false } },
+                y: { beginAtZero: true, grid: { color: '#f0f2f7' } }
+            }
+        }
+    });
+    // Grafik Stok Barang per Kategori
+    const ctxKategori = document.getElementById('chartKategori').getContext('2d');
+    new Chart(ctxKategori, {
+        type: 'doughnut',
+        data: {
+            labels: ['Elektronik', 'Aksesoris', 'ATK', 'Lainnya'],
+            datasets: [{
+                data: [40, 25, 20, 15],
+                backgroundColor: [
+                    '#4e9af1', // biru
+                    '#28a745', // hijau
+                    '#ffc107', // kuning
+                    '#ff6a8d'  // pink
+                ],
+                borderWidth: 2,
+                borderColor: '#fff',
+                hoverOffset: 6
+            }]
+        },
+        options: {
+            cutout: '70%',
+            plugins: {
+                legend: { display: true, position: 'bottom' },
+                tooltip: { enabled: true }
+            }
         }
     });
 </script>

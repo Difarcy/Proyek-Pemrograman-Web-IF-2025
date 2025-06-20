@@ -775,4 +775,19 @@ class Admin extends BaseController
 
         return redirect()->to('admin/profil-toko');
     }
+
+    public function profil_toko_admin()
+    {
+        return view('admin/profil_toko_admin');
+    }
+
+    public function profil()
+    {
+        return view('admin/profil_admin');
+    }
+
+    public function ubahPassword()
+    {
+        return view('admin/ubah_password_admin');
+    }
 }

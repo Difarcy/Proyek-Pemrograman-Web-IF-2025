@@ -72,6 +72,10 @@ $routes->group('admin', ['filter' => 'auth:admin'], function($routes) {
     // Manajemen Pengguna routes
     $routes->get('manajemen-pengguna', 'Admin::manajemenPengguna');
     $routes->get('profil-toko', 'Admin::profilToko');
+
+    // Rute untuk profil dan ubah password
+    $routes->get('profil', 'Admin::profil');
+    $routes->get('ubah-password', 'Admin::ubahPassword');
 });
 
 // User routes

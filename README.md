@@ -1,8 +1,9 @@
 # Informasi Mahasiswa
-Nama: Jafar Siddik Aulia Rahman
-NIM: 301220005
-Fakultas/Prodi: FTI / Pemrograman Internet (Semester 6)
-Universitas: Universitas Bale Bandung
+
+Nama: Jafar Siddik Aulia Rahman  
+NIM: 301220005  
+Fakultas/Prodi: FTI / Pemrograman Internet (Semester 6)  
+Universitas: Universitas Bale Bandung  
 
 Tugas ini merupakan pengembangan aplikasi berbasis web yang merujuk dan mengadaptasi dari skripsi berjudul:
 "Rancang Bangun Aplikasi VStock Menggunakan Codeigniter Untuk Mengelola Data Barang di TB Putra Jaya Perkasa II"

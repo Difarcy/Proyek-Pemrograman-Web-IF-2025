@@ -1,74 +1,96 @@
-<?= $this->include('components/header') ?>
-<?= $this->include('components/sidebar_admin') ?>
+<?= $this->extend('layout/main') ?>
 
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-    <!-- Content Header -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Data Customer</h1>
-                </div>
-            </div>
+<?= $this->section('title') ?>Data Customer<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<div class="container-fluid">
+    <h1 class="mb-4">Data Customer</h1>
+    <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
+            <h5 class="mb-0">Daftar Customer</h5>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">
+                <i class="fas fa-plus"></i> Tambah Customer
+            </button>
         </div>
-    </div>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Daftar Customer</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
-                            <i class="fas fa-plus"></i> Tambah Customer
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped datatable">
-                            <thead>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Customer</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>No. Telepon</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (isset($customer) && is_array($customer)): ?>
+                            <?php foreach ($customer as $index => $item): ?>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode Customer</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>No. Telepon</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>CUST001</td>
-                                    <td>John Doe</td>
-                                    <td>Jl. Contoh No. 123</td>
-                                    <td>081234567890</td>
-                                    <td>john@example.com</td>
-                                    <td><span class="badge badge-success">Aktif</span></td>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= $item['kode_customer'] ?? 'CUST001' ?></td>
+                                    <td><?= $item['nama'] ?? 'John Doe' ?></td>
+                                    <td><?= $item['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
+                                    <td><?= $item['no_telp'] ?? '081234567890' ?></td>
+                                    <td><?= $item['email'] ?? 'john@example.com' ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
+                                        <span class="badge badge-<?= ($item['status'] ?? 'aktif') === 'aktif' ? 'success' : 'secondary' ?>">
+                                            <?= ucfirst($item['status'] ?? 'aktif') ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit" 
+                                                data-id="<?= $item['id'] ?? 1 ?>"
+                                                data-kode="<?= $item['kode_customer'] ?? 'CUST001' ?>"
+                                                data-nama="<?= $item['nama'] ?? 'John Doe' ?>"
+                                                data-alamat="<?= $item['alamat'] ?? 'Jl. Contoh No. 123' ?>"
+                                                data-telepon="<?= $item['no_telp'] ?? '081234567890' ?>"
+                                                data-email="<?= $item['email'] ?? 'john@example.com' ?>"
+                                                data-status="<?= $item['status'] ?? 'aktif' ?>">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/data-customer/delete/1') ?>')">
+                                        <a href="<?= base_url('admin/data-customer/delete/' . ($item['id'] ?? 1)) ?>" 
+                                           class="btn btn-danger btn-sm" 
+                                           onclick="return confirm('Yakin ingin menghapus customer ini?')">
                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                        </a>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
                                             <i class="fas fa-history"></i>
                                         </button>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td>1</td>
+                                <td>CUST001</td>
+                                <td>John Doe</td>
+                                <td>Jl. Contoh No. 123</td>
+                                <td>081234567890</td>
+                                <td>john@example.com</td>
+                                <td><span class="badge badge-success">Aktif</span></td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/data-customer/delete/1') ?>')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 
 <!-- Modal Tambah -->
@@ -81,7 +103,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/data-customer/tambah') ?>" method="post">
+            <form action="<?= base_url('admin/data-customer/store') ?>" method="post">
+                <?= csrf_field() ?>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Kode Customer</label>
@@ -97,7 +120,7 @@
                     </div>
                     <div class="form-group">
                         <label>No. Telepon</label>
-                        <input type="tel" class="form-control" name="telepon" required>
+                        <input type="tel" class="form-control" name="no_telp" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
@@ -106,8 +129,8 @@
                     <div class="form-group">
                         <label>Status</label>
                         <select class="form-control" name="status" required>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="nonaktif">Tidak Aktif</option>
                         </select>
                     </div>
                 </div>
@@ -130,33 +153,34 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/data-customer/edit/1') ?>" method="post">
+            <form id="form-edit" method="post">
+                <?= csrf_field() ?>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Kode Customer</label>
-                        <input type="text" class="form-control" name="kode_customer" value="CUST001" required>
+                        <input type="text" class="form-control" name="kode_customer" id="edit_kode_customer" required>
                     </div>
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" class="form-control" name="nama" value="John Doe" required>
+                        <input type="text" class="form-control" name="nama" id="edit_nama" required>
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
-                        <textarea class="form-control" name="alamat" rows="3" required>Jl. Contoh No. 123</textarea>
+                        <textarea class="form-control" name="alamat" id="edit_alamat" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>No. Telepon</label>
-                        <input type="tel" class="form-control" name="telepon" value="081234567890" required>
+                        <input type="tel" class="form-control" name="no_telp" id="edit_no_telp" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" value="john@example.com" required>
+                        <input type="email" class="form-control" name="email" id="edit_email" required>
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <select class="form-control" name="status" required>
-                            <option value="Aktif" selected>Aktif</option>
-                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        <select class="form-control" name="status" id="edit_status" required>
+                            <option value="aktif">Aktif</option>
+                            <option value="nonaktif">Tidak Aktif</option>
                         </select>
                     </div>
                 </div>
@@ -200,81 +224,53 @@
                                 <td><span class="badge badge-success">Selesai</span></td>
                             </tr>
                             <tr>
-                                <td>2024-03-15</td>
+                                <td>2024-03-18</td>
                                 <td>TRX002</td>
                                 <td>Pembelian</td>
-                                <td>Rp 2.000.000</td>
-                                <td><span class="badge badge-success">Selesai</span></td>
+                                <td>Rp 750.000</td>
+                                <td><span class="badge badge-warning">Proses</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<?= $this->section('scripts') ?>
 <script>
-    // Initialize DataTables
-    $(document).ready(function() {
-        $('.datatable').DataTable({
-            "responsive": true,
-            "autoWidth": false
-        });
+    // Handle modal edit data
+    $('#modal-edit').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var kode = button.data('kode');
+        var nama = button.data('nama');
+        var alamat = button.data('alamat');
+        var telepon = button.data('telepon');
+        var email = button.data('email');
+        var status = button.data('status');
+        
+        var modal = $(this);
+        modal.find('#edit_kode_customer').val(kode);
+        modal.find('#edit_nama').val(nama);
+        modal.find('#edit_alamat').val(alamat);
+        modal.find('#edit_no_telp').val(telepon);
+        modal.find('#edit_email').val(email);
+        modal.find('#edit_status').val(status);
+        
+        // Update form action
+        modal.find('#form-edit').attr('action', '<?= base_url('admin/data-customer/update/') ?>' + id);
     });
-
-    // Function to show success message
-    function showSuccess(message) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: message,
-            timer: 2000,
-            showConfirmButton: false
-        });
-    }
-
-    // Function to show error message
-    function showError(message) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: message
-        });
-    }
-
-    // Function to confirm delete
+    
     function confirmDelete(url) {
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Data yang dihapus tidak dapat dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = url;
-            }
-        });
+        if (confirm('Yakin ingin menghapus customer ini?')) {
+            window.location.href = url;
+        }
     }
 </script>
-</body>
-</html> 
+<?= $this->endSection() ?> 

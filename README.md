@@ -30,90 +30,93 @@ VSTOCK adalah sistem manajemen stok barang berbasis web yang dikembangkan menggu
 ## Fitur Utama
 
 ### Admin
-1. 📊 Dashboard
-   - Tampilan ringkasan data stok
-   - Statistik barang masuk/keluar
-   - Grafik penjualan
 
-2. 📦 Stok Barang
-   - Manajemen data barang
-   - Monitoring stok
-   - Kategori barang
+#### Dashboard
+- Tampilan ringkasan data stok  
+- Statistik barang masuk & keluar  
+- Grafik penjualan  
 
-3. 👥 Data Customer
-   - Daftar customer
-   - Riwayat transaksi customer
-   - Informasi kontak
+#### Stok Barang
+- Manajemen data barang  
+- Monitoring stok  
+- Kategori barang  
 
-4. 🏢 Data Supplier
-   - Daftar supplier
-   - Riwayat pembelian
-   - Informasi kontak
+#### Barang Masuk
+- Pencatatan barang masuk  
+- Riwayat barang masuk  
+- Laporan barang masuk  
 
-5. 👤 Data Petugas
-   - Daftar petugas
-   - Informasi petugas
-   - Riwayat aktivitas
+#### Barang Keluar
+- Pencatatan barang keluar  
+- Riwayat barang keluar  
+- Laporan barang keluar  
 
-6. 📥 Barang Masuk
-   - Pencatatan barang masuk
-   - Riwayat barang masuk
-   - Laporan barang masuk
+#### Data Customer
+- Daftar customer  
+- Riwayat transaksi customer  
+- Informasi kontak  
 
-7. 📤 Barang Keluar
-   - Pencatatan barang keluar
-   - Riwayat barang keluar
-   - Laporan barang keluar
+#### Data Supplier
+- Daftar supplier  
+- Riwayat pembelian  
+- Informasi kontak  
 
-8. 👥 Manajemen Pengguna
-   - Tambah pengguna baru
-   - Edit pengguna
-   - Hapus pengguna
-   - Atur hak akses
+#### Data Petugas
+- Daftar petugas  
+- Informasi petugas  
+- Riwayat aktivitas  
 
-9. 🏪 Profil Toko
-   - Informasi toko
-   - Pengaturan toko
-   - Logo dan identitas
+#### Laporan
+- Laporan stok  
+- Laporan penjualan  
+- Laporan pembelian  
+- Export laporan  
 
-10. 📑 Laporan
-    - Laporan stok
-    - Laporan penjualan
-    - Laporan pembelian
-    - Export laporan
+#### Manajemen Pengguna
+- Tambah pengguna baru  
+- Edit & hapus pengguna  
+- Atur hak akses  
+
+#### Profil Toko
+- Informasi toko  
+- Pengaturan toko  
+- Logo & identitas toko  
+
+---
 
 ### User
-1. 📊 Dashboard
-   - Tampilan ringkasan data stok
-   - Statistik barang masuk/keluar
 
-2. 📦 Stok Barang
-   - Lihat data barang
-   - Monitoring stok
+#### Dashboard
+- Tampilan ringkasan data stok  
+- Statistik barang masuk & keluar  
 
-3. 👥 Data Customer
-   - Lihat data customer
-   - Riwayat transaksi
+#### Stok Barang
+- Lihat data barang  
+- Monitoring stok  
 
-4. 🏢 Data Supplier
-   - Lihat data supplier
-   - Riwayat pembelian
+#### Barang Masuk
+- Pencatatan barang masuk  
+- Riwayat barang masuk  
 
-5. 👤 Data Petugas
-   - Lihat data petugas
-   - Informasi petugas
+#### Barang Keluar
+- Pencatatan barang keluar  
+- Riwayat barang keluar  
 
-6. 📥 Barang Masuk
-   - Pencatatan barang masuk
-   - Riwayat barang masuk
+#### Data Customer
+- Lihat data customer  
+- Riwayat transaksi  
 
-7. 📤 Barang Keluar
-   - Pencatatan barang keluar
-   - Riwayat barang keluar
+#### Data Supplier
+- Lihat data supplier  
+- Riwayat pembelian  
 
-8. 📑 Laporan
-   - Lihat laporan stok
-   - Lihat laporan transaksi
+#### Data Petugas
+- Lihat data petugas  
+- Informasi petugas  
+
+#### Laporan
+- Lihat laporan stok  
+- Lihat laporan transaksi  
 
 ## Teknologi yang Digunakan
 

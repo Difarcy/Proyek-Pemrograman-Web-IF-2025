@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
 use CodeIgniter\Controller;
 
 class Auth extends Controller
@@ -16,31 +17,28 @@ class Auth extends Controller
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $db = \Config\Database::connect();
-        $user = $db->table('users')
-                  ->where('username', $username)
-                  ->get()
-                  ->getRow();
+        $userModel = new UserModel();
+        $user = $userModel->where('username', $username)->first();
 
         if ($user) {
             // Debug: Log the password verification
             log_message('debug', 'Attempting login for user: ' . $username);
-            log_message('debug', 'Password verification result: ' . (password_verify($password, $user->password) ? 'true' : 'false'));
+            log_message('debug', 'Password verification result: ' . (password_verify($password, $user['password']) ? 'true' : 'false'));
             
-            if (password_verify($password, $user->password)) {
-                $sessionData = [
-                    'user_id' => $user->id,
-                    'username' => $user->username,
-                    'role' => $user->role,
-                    'logged_in' => true
-                ];
-                
-                session()->set($sessionData);
+            if (password_verify($password, $user['password'])) {
+            $sessionData = [
+                'user_id' => $user['id'],
+                'username' => $user['username'],
+                'role' => $user['role'],
+                'logged_in' => true
+            ];
+            
+            session()->set($sessionData);
 
-                if ($user->role === 'admin') {
-                    return redirect()->to('/admin/dashboard');
-                } else {
-                    return redirect()->to('/user/dashboard');
+            if ($user['role'] === 'admin') {
+                return redirect()->to('/admin/dashboard');
+            } else {
+                return redirect()->to('/user/dashboard');
                 }
             }
         }

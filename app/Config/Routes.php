@@ -39,7 +39,7 @@ $routes->group('admin', ['filter' => 'auth:admin'], function($routes) {
     $routes->get('data-supplier/edit/(:num)', 'Admin::editSupplier/$1');
     $routes->post('data-supplier/update/(:num)', 'Admin::updateSupplier/$1');
     $routes->get('data-supplier/delete/(:num)', 'Admin::deleteSupplier/$1');
-    
+
     // Petugas routes
     $routes->get('data-petugas', 'Admin::petugas');
     $routes->get('data-petugas/create', 'Admin::createPetugas');

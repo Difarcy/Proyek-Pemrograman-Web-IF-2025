@@ -5,86 +5,156 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <h1 class="mb-4">Data Supplier</h1>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
             <h5 class="mb-0">Daftar Supplier</h5>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">
                 <i class="fas fa-plus"></i> Tambah Supplier
             </button>
         </div>
-        <div class="card-body">
+        <div class="card-body p-3">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode Supplier</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No. Telepon</th>
+                            <th>Nama Supplier</th>
                             <th>Email</th>
+                            <th>Telepon</th>
+                            <th>Alamat</th>
+                            <th>Kota</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (isset($supplier) && is_array($supplier)): ?>
-                            <?php foreach ($supplier as $index => $item): ?>
-                                <tr>
-                                    <td><?= $index + 1 ?></td>
-                                    <td><?= $item['kode_supplier'] ?? 'SUP001' ?></td>
-                                    <td><?= $item['nama'] ?? 'PT Maju Jaya' ?></td>
-                                    <td><?= $item['alamat'] ?? 'Jl. Industri No. 45' ?></td>
-                                    <td><?= $item['no_telp'] ?? '081234567890' ?></td>
-                                    <td><?= $item['email'] ?? 'info@majujaya.com' ?></td>
-                                    <td>
-                                        <span class="badge badge-<?= ($item['status'] ?? 'aktif') === 'aktif' ? 'success' : 'secondary' ?>">
-                                            <?= ucfirst($item['status'] ?? 'aktif') ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit" 
-                                                data-id="<?= $item['id'] ?? 1 ?>"
-                                                data-kode="<?= $item['kode_supplier'] ?? 'SUP001' ?>"
-                                                data-nama="<?= $item['nama'] ?? 'PT Maju Jaya' ?>"
-                                                data-alamat="<?= $item['alamat'] ?? 'Jl. Industri No. 45' ?>"
-                                                data-telepon="<?= $item['no_telp'] ?? '081234567890' ?>"
-                                                data-email="<?= $item['email'] ?? 'info@majujaya.com' ?>"
-                                                data-status="<?= $item['status'] ?? 'aktif' ?>">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <a href="<?= base_url('admin/data-supplier/delete/' . ($item['id'] ?? 1)) ?>" 
-                                           class="btn btn-danger btn-sm" 
-                                           onclick="return confirm('Yakin ingin menghapus supplier ini?')">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
-                                            <i class="fas fa-history"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                        <?php if (empty($suppliers)): ?>
+                        <tr>
+                            <td>1</td>
+                            <td>PT Supplier Jaya</td>
+                            <td>info@supplierjaya.com</td>
+                            <td>021-1234567</td>
+                            <td>Jl. Industri No. 123</td>
+                            <td>Jakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>PT Supplier Makmur</td>
+                            <td>info@suppliermakmur.com</td>
+                            <td>021-1234568</td>
+                            <td>Jl. Perdagangan No. 456</td>
+                            <td>Jakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CV Supplier Sejahtera</td>
+                            <td>info@suppliersejahtera.com</td>
+                            <td>022-1234567</td>
+                            <td>Jl. Ekonomi No. 789</td>
+                            <td>Bandung</td>
+                            <td><span class="badge-status badge-status-nonaktif">nonaktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>PT Supplier Maju</td>
+                            <td>info@suppliermaju.com</td>
+                            <td>022-1234568</td>
+                            <td>Jl. Bisnis No. 321</td>
+                            <td>Bandung</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>CV Supplier Unggul</td>
+                            <td>info@supplierunggul.com</td>
+                            <td>0274-1234567</td>
+                            <td>Jl. Komersial No. 654</td>
+                            <td>Yogyakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         <?php else: ?>
-                            <tr>
-                                <td>1</td>
-                                <td>SUP001</td>
-                                <td>PT Maju Jaya</td>
-                                <td>Jl. Industri No. 45</td>
-                                <td>081234567890</td>
-                                <td>info@majujaya.com</td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
-                                        <i class="fas fa-edit"></i>
+                        <?php foreach ($suppliers as $index => $supplier): ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= $supplier['nama'] ?? 'Nama Supplier' ?></td>
+                            <td><?= $supplier['email'] ?? 'email@example.com' ?></td>
+                            <td><?= $supplier['telepon'] ?? '021-1234567' ?></td>
+                            <td><?= $supplier['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
+                            <td><?= $supplier['kota'] ?? 'Jakarta' ?></td>
+                            <td>
+                                <?php 
+                                $status = $supplier['status'] ?? 'Aktif';
+                                if ($status === 'Aktif') {
+                                    echo '<span class="badge-status badge-status-aktif">aktif</span>';
+                                } else {
+                                    echo '<span class="badge-status badge-status-nonaktif">nonaktif</span>';
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/data-supplier/delete/1') ?>')">
-                                        <i class="fas fa-trash"></i>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
                                     </button>
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </tbody>
                 </table>

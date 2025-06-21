@@ -5,86 +5,156 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <h1 class="mb-4">Data Customer</h1>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
             <h5 class="mb-0">Daftar Customer</h5>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">
                 <i class="fas fa-plus"></i> Tambah Customer
             </button>
         </div>
-        <div class="card-body">
+        <div class="card-body p-3">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode Customer</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No. Telepon</th>
+                            <th>Nama Customer</th>
                             <th>Email</th>
+                            <th>Telepon</th>
+                            <th>Alamat</th>
+                            <th>Kota</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (isset($customer) && is_array($customer)): ?>
-                            <?php foreach ($customer as $index => $item): ?>
-                                <tr>
-                                    <td><?= $index + 1 ?></td>
-                                    <td><?= $item['kode_customer'] ?? 'CUST001' ?></td>
-                                    <td><?= $item['nama'] ?? 'John Doe' ?></td>
-                                    <td><?= $item['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
-                                    <td><?= $item['no_telp'] ?? '081234567890' ?></td>
-                                    <td><?= $item['email'] ?? 'john@example.com' ?></td>
-                                    <td>
-                                        <span class="badge badge-<?= ($item['status'] ?? 'aktif') === 'aktif' ? 'success' : 'secondary' ?>">
-                                            <?= ucfirst($item['status'] ?? 'aktif') ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit" 
-                                                data-id="<?= $item['id'] ?? 1 ?>"
-                                                data-kode="<?= $item['kode_customer'] ?? 'CUST001' ?>"
-                                                data-nama="<?= $item['nama'] ?? 'John Doe' ?>"
-                                                data-alamat="<?= $item['alamat'] ?? 'Jl. Contoh No. 123' ?>"
-                                                data-telepon="<?= $item['no_telp'] ?? '081234567890' ?>"
-                                                data-email="<?= $item['email'] ?? 'john@example.com' ?>"
-                                                data-status="<?= $item['status'] ?? 'aktif' ?>">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <a href="<?= base_url('admin/data-customer/delete/' . ($item['id'] ?? 1)) ?>" 
-                                           class="btn btn-danger btn-sm" 
-                                           onclick="return confirm('Yakin ingin menghapus customer ini?')">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
-                                            <i class="fas fa-history"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                        <?php if (empty($customers)): ?>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>john.doe@email.com</td>
+                            <td>081234567890</td>
+                            <td>Jl. Sudirman No. 123</td>
+                            <td>Jakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>jane.smith@email.com</td>
+                            <td>081234567891</td>
+                            <td>Jl. Thamrin No. 456</td>
+                            <td>Jakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Bob Johnson</td>
+                            <td>bob.johnson@email.com</td>
+                            <td>081234567892</td>
+                            <td>Jl. Gatot Subroto No. 789</td>
+                            <td>Bandung</td>
+                            <td><span class="badge-status badge-status-nonaktif">nonaktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Alice Brown</td>
+                            <td>alice.brown@email.com</td>
+                            <td>081234567893</td>
+                            <td>Jl. Asia Afrika No. 321</td>
+                            <td>Bandung</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Charlie Wilson</td>
+                            <td>charlie.wilson@email.com</td>
+                            <td>081234567894</td>
+                            <td>Jl. Malioboro No. 654</td>
+                            <td>Yogyakarta</td>
+                            <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         <?php else: ?>
-                            <tr>
-                                <td>1</td>
-                                <td>CUST001</td>
-                                <td>John Doe</td>
-                                <td>Jl. Contoh No. 123</td>
-                                <td>081234567890</td>
-                                <td>john@example.com</td>
-                                <td><span class="badge badge-success">Aktif</span></td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
-                                        <i class="fas fa-edit"></i>
+                        <?php foreach ($customers as $index => $customer): ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= $customer['nama'] ?? 'Nama Customer' ?></td>
+                            <td><?= $customer['email'] ?? 'email@example.com' ?></td>
+                            <td><?= $customer['telepon'] ?? '081234567890' ?></td>
+                            <td><?= $customer['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
+                            <td><?= $customer['kota'] ?? 'Jakarta' ?></td>
+                            <td>
+                                <?php 
+                                $status = $customer['status'] ?? 'Aktif';
+                                if ($status === 'Aktif') {
+                                    echo '<span class="badge-status badge-status-aktif">aktif</span>';
+                                } else {
+                                    echo '<span class="badge-status badge-status-nonaktif">nonaktif</span>';
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/data-customer/delete/1') ?>')">
-                                        <i class="fas fa-trash"></i>
+                                    <button class="btn btn-sm btn-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
                                     </button>
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </tbody>
                 </table>

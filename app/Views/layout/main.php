@@ -12,11 +12,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+        // Immediate dark mode check to prevent flash of unstyled content
+        (function() {
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
     <style>
         html, body {
             font-family: 'Inter', Arial, Helvetica, sans-serif;
             font-size: 15px;
             background: #f4f6f9;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Immediate dark mode styles to prevent flash */
+        html.dark-mode, body.dark-mode {
+            background: #1a1d21 !important;
+            color: #e0e0e0 !important;
+        }
+        
+        /* Force immediate dark mode application */
+        body.dark-mode * {
+            transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease !important;
+        }
+        
+        /* Ensure all elements respond immediately to dark mode */
+        body.dark-mode .main-header,
+        body.dark-mode .content-wrapper,
+        body.dark-mode .card,
+        body.dark-mode .info-widget,
+        body.dark-mode .dropdown-menu,
+        body.dark-mode .form-control,
+        body.dark-mode .btn,
+        body.dark-mode .table,
+        body.dark-mode .modal-content {
+            transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease !important;
         }
         .main-header {
             position: fixed;
@@ -30,7 +65,7 @@
             display: flex;
             align-items: center;
             padding: 0 1.5rem;
-            transition: left 0.2s;
+            transition: left 0.2s, background-color 0.3s ease, color 0.3s ease;
             font-size: 15px;
         }
         .main-header .app-title {
@@ -169,7 +204,7 @@
             margin-left: 250px;
             padding: 76px 1.2rem 1.2rem 1.2rem;
             min-height: 100vh;
-            transition: margin-left 0.2s;
+            transition: margin-left 0.2s, background-color 0.3s ease, color 0.3s ease;
             font-size: 0.97rem;
         }
         .collapsed-content {
@@ -190,7 +225,7 @@
             min-height: 170px;
             position: relative;
             border: none;
-            transition: box-shadow 0.18s;
+            transition: box-shadow 0.18s, background-color 0.3s ease, color 0.3s ease;
         }
         .info-widget .widget-icon {
             position: absolute;
@@ -254,16 +289,59 @@
         .bg-danger { background: #dc3545 !important; color: #fff; }
         .bg-success { background: #28a745 !important; color: #fff; }
         .bg-warning { background: #ffc107 !important; color: #212529; }
-        .card { border-radius: 0.6rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: none; font-size: 0.97rem; }
-        .badge-primary { background: #007BFF; font-size: 0.85rem; }
-        .card-header, .card-footer { font-size: 0.97rem; }
-        .table thead th {
-            background: #e9f2ff;
-            color: #007BFF;
-            border-top: none;
-            font-size: 0.97rem;
+        .card {
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
         }
-        .table td, .table th { padding: 0.55rem 0.7rem; font-size: 0.97rem; }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        .card-header h5 {
+            margin: 0;
+            font-weight: 600;
+            color: #495057;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-footer {
+            background-color: #fff;
+            border-top: 1px solid #dee2e6;
+            padding: 1rem 1.5rem;
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        .badge-primary { background: #007BFF; font-size: 0.85rem; }
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            padding: 0.75rem;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
         .btn, .btn-sm, .btn-info, .btn-primary, .btn-warning, .btn-danger {
             font-size: 0.89rem !important;
             padding: 0.18rem 0.55rem !important;
@@ -283,29 +361,101 @@
             .info-widget .widget-label { font-size: 0.98rem; }
             .info-widget .widget-link { font-size: 0.97rem; padding: 0.5rem 1rem 0.1rem 1rem; }
         }
-        /* Dark mode simple */
+        /* Dark mode support */
         .dark-mode {
-            background: #181c24 !important;
+            background: #1a1d21 !important;
             color: #e0e0e0 !important;
         }
-        .dark-mode .main-header, .dark-mode .content-wrapper, .dark-mode .card, .dark-mode .dropdown-menu {
-            background: #23272f !important;
+        .dark-mode html {
+            background: #1a1d21 !important;
+        }
+        .dark-mode .main-header {
+            background: #2a2f3a !important;
+            color: #e0e0e0 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+        }
+        .dark-mode .content-wrapper {
+            background: #1a1d21 !important;
             color: #e0e0e0 !important;
         }
-        .dark-mode .sidebar {
-            background: #232a36 !important;
+        .dark-mode .info-widget {
+            background: #2a2f3a !important;
+            color: #e0e0e0 !important;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2) !important;
         }
-        .dark-mode .sidebar .brand-link {
-            background: #1a1f27 !important;
+        .dark-mode .card {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
         }
-        .dark-mode .sidebar .nav-link.active, .dark-mode .sidebar .nav-link:hover {
-            background: linear-gradient(90deg, #1a1f27 60%, #232a36 100%) !important;
+        .dark-mode .card-header {
+            background-color: #2d3748;
+            border-bottom-color: #4a5568;
         }
-        .dark-mode .breadcrumb {
-            background: transparent !important;
+        .dark-mode .card-header h5 {
+            color: #e2e8f0;
+        }
+        .dark-mode .card-footer {
+            background-color: #2d3748;
+            border-top-color: #4a5568;
+        }
+        .dark-mode .card-body {
             color: #e0e0e0 !important;
         }
-        .dark-mode .dropdown-menu { box-shadow: 0 2px 12px rgba(0,0,0,0.5) !important; }
+        .dark-mode .form-control {
+            background: #323742 !important;
+            border-color: #3a3f4a !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .form-control:focus {
+            background: #323742 !important;
+            border-color: #007bff !important;
+            color: #e0e0e0 !important;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25) !important;
+        }
+        .dark-mode .btn-secondary {
+            background: #6c757d !important;
+            border-color: #6c757d !important;
+            color: #fff !important;
+        }
+        .dark-mode .btn-secondary:hover {
+            background: #5a6268 !important;
+            border-color: #545b62 !important;
+        }
+        .dark-mode .search-filter-card {
+            background: #2a2f3a !important;
+            border-color: #3a3f4a !important;
+        }
+        .dark-mode .search-filter-card .card-title {
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .table {
+            color: #e0e0e0;
+        }
+        .dark-mode .table thead th {
+            background-color: #374151;
+            border-bottom-color: #4b5563;
+            color: #e5e7eb;
+        }
+        .dark-mode .table tbody td {
+            border-bottom-color: #4b5563;
+            color: #e5e7eb;
+        }
+        .dark-mode .table tbody tr:hover {
+            background-color: #374151;
+        }
+        .dark-mode .table-bordered {
+            border-color: #4b5563;
+        }
+        .dark-mode .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .dark-mode .pagination-info-new {
+            color: #b0b0b0;
+        }
+        .dark-mode .pagination-dots {
+            color: #b0b0b0;
+        }
         .bento-toggle-btn {
             background: transparent;
             border: none;
@@ -474,6 +624,25 @@
             text-align: center;
             color: #fff !important;
         }
+        
+        /* Warna status */
+        .badge-status-tersedia { background: #28a745 !important; }
+        .badge-status-habis { background: #ff6a8d !important; }
+        .badge-status-hampirhabis { background: #ffc107 !important; color: #000 !important; }
+        .badge-status-barumasuk { background: #4e9af1 !important; }
+        .badge-status-tidakaktif { background: #adb5bd !important; }
+        .badge-status {
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 0.28em 0.9em;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.01em;
+            width: 109px; /* Atur sesuai lebar badge "Hampir Habis" */
+            display: inline-block;
+            text-align: center;
+            color: #fff !important;
+         }
         .badge-status-menunggu { background: #adb5bd !important; }
         .badge-status-diproses { background: #4e9af1 !important; }
         .badge-status-selesai { background: #28a745 !important; }
@@ -542,6 +711,518 @@
             border-radius: 1.5px;
             margin: 0 1px;
         }
+        
+        /* Special layout for profile and password pages */
+        .content-wrapper.profile-layout {
+            margin-left: 250px;
+            padding: 56px 0 0 0 !important;
+            min-height: 100vh;
+            transition: margin-left 0.2s;
+            font-size: 0.97rem;
+        }
+        .content-wrapper.profile-layout .container-fluid {
+            padding: 0;
+            margin: 0;
+            height: calc(100vh - 56px);
+        }
+        .content-wrapper.profile-layout .card {
+            margin: 0 !important;
+            border-radius: 0;
+            height: calc(100vh - 56px);
+            display: flex;
+            flex-direction: column;
+        }
+        .content-wrapper.profile-layout .card-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        .content-wrapper.profile-layout .card-header {
+            border-radius: 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .content-wrapper.profile-layout .card-footer {
+            border-radius: 0;
+            border-top: 1px solid #e9ecef;
+        }
+        .collapsed-content.profile-layout {
+            margin-left: 70px !important;
+        }
+        
+        /* Dark mode for profile layout */
+        .dark-mode .content-wrapper.profile-layout .card {
+            background: #23272f !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .content-wrapper.profile-layout .card-header,
+        .dark-mode .content-wrapper.profile-layout .card-footer {
+            border-color: #3a3f4a !important;
+        }
+        
+        /* Profile photo styling */
+        .profile-photo-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .profile-photo-wrapper:hover {
+            transform: scale(1.05);
+        }
+        .profile-photo-wrapper .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+        .profile-photo-wrapper .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+        .profile-photo-wrapper:hover .photo-overlay {
+            opacity: 1;
+        }
+        .profile-photo-wrapper:hover .profile-photo {
+            filter: brightness(0.7);
+        }
+        .profile-photo-wrapper .photo-overlay i {
+            color: white;
+            font-size: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Profile photo read-only */
+        .profile-photo-readonly {
+            cursor: default;
+        }
+        .profile-photo-readonly:hover {
+            transform: none;
+        }
+        .profile-photo-readonly:hover .photo-overlay {
+            opacity: 0;
+        }
+        .profile-photo-readonly:hover .profile-photo {
+            filter: none;
+        }
+        
+        /* Extended button styling */
+        .btn-extended {
+            min-width: 140px;
+            padding: 0.5rem 1.5rem !important;
+            font-weight: 500;
+            border-radius: 0.375rem !important;
+            transition: all 0.3s ease;
+        }
+        .btn-extended:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-extended.btn-blue {
+            background: #007BFF;
+            border-color: #007BFF;
+            color: white;
+        }
+        .btn-extended.btn-blue:hover {
+            background: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-extended.btn-red {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        .btn-extended.btn-red:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+        .btn-extended.btn-gray {
+            background: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+        .btn-extended.btn-gray:hover {
+            background: #5a6268;
+            border-color: #5a6268;
+        }
+        
+        /* Dark mode for profile photo */
+        .dark-mode .profile-photo-wrapper .photo-overlay {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Password page layout - same as profile page */
+        .content-wrapper.password-layout {
+            margin-left: 250px;
+            padding: 56px 0 0 0 !important;
+            min-height: 100vh;
+            transition: margin-left 0.2s;
+            font-size: 0.97rem;
+        }
+        .content-wrapper.password-layout .container-fluid {
+            padding: 0;
+            margin: 0;
+            height: calc(100vh - 56px);
+        }
+        .content-wrapper.password-layout .card {
+            margin: 0 !important;
+            border-radius: 0;
+            height: calc(100vh - 56px);
+            display: flex;
+            flex-direction: column;
+        }
+        .content-wrapper.password-layout .card-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        .content-wrapper.password-layout .card-header {
+            border-radius: 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .content-wrapper.password-layout .card-footer {
+            border-radius: 0;
+            border-top: 1px solid #e9ecef;
+        }
+        .collapsed-content.password-layout {
+            margin-left: 70px !important;
+        }
+        
+        /* Password page photo positioning - same as profile */
+        .password-layout .profile-photo-wrapper {
+            margin-bottom: 1.5rem;
+        }
+        .password-layout .text-center {
+            margin-bottom: 2rem;
+        }
+        
+        /* Dark mode for password layout */
+        .dark-mode .content-wrapper.password-layout .card {
+            background: #23272f !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .content-wrapper.password-layout .card-header,
+        .dark-mode .content-wrapper.password-layout .card-footer {
+            border-color: #3a3f4a !important;
+        }
+        
+        /* Export button styling */
+        .btn-export {
+            min-width: 120px;
+            padding: 0.5rem 1.2rem !important;
+            font-weight: 500;
+            border-radius: 0.375rem !important;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        .btn-export:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-export.btn-success {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-export.btn-success:hover {
+            background: #218838;
+            border-color: #218838;
+        }
+        
+        /* Consistent button styling for table actions */
+        .btn-table-action {
+            min-width: 120px;
+            padding: 0.5rem 1.2rem !important;
+            font-weight: 500;
+            border-radius: 0.375rem !important;
+            transition: all 0.3s ease;
+        }
+        .btn-table-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Vertical action buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            min-width: 80px;
+        }
+        .action-buttons .btn {
+            width: 100%;
+            font-size: 0.8rem !important;
+            padding: 0.25rem 0.5rem !important;
+            border-radius: 0.25rem !important;
+        }
+        
+        /* Search and Filter Card */
+        .search-filter-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .search-filter-card .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+        .search-filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+        .search-filter-row .form-group {
+            margin-bottom: 0;
+            flex: 1;
+            min-width: 200px;
+        }
+        .search-filter-row .btn {
+            white-space: nowrap;
+        }
+        
+        /* Print/Export buttons */
+        .btn-print {
+            min-width: 100px;
+            padding: 0.5rem 1rem !important;
+            font-weight: 500;
+            border-radius: 0.375rem !important;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        .btn-print:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-print.btn-excel {
+            background: #217346;
+            border-color: #217346;
+            color: white;
+        }
+        .btn-print.btn-excel:hover {
+            background: #1e6b3d;
+            border-color: #1e6b3d;
+        }
+        .btn-print.btn-pdf {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        .btn-print.btn-pdf:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+        .btn-print.btn-csv {
+            background: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+        .btn-print.btn-csv:hover {
+            background: #5a6268;
+            border-color: #5a6268;
+        }
+        
+        /* Print modal styling */
+        .print-modal .modal-content {
+            border-radius: 0.5rem;
+        }
+        .print-modal .modal-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .print-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .print-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        .print-option:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+        .print-option.selected {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+        .print-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .print-option.excel i { color: #217346; }
+        .print-option.pdf i { color: #dc3545; }
+        .print-option.csv i { color: #6c757d; }
+        
+        /* New pagination styling */
+        .pagination-new {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0.5rem 0;
+        }
+        .pagination-info-new {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .pagination-controls .btn {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Dark mode support */
+        .dark-mode .search-filter-card {
+            background: #2a2f3a !important;
+            border-color: #3a3f4a !important;
+        }
+        .dark-mode .search-filter-card .card-title {
+            color: #e0e0e0 !important;
+        }
+        
+        /* Modal positioning - center all modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 250px;
+            top: 56px;
+            width: calc(100% - 250px);
+            height: calc(100vh - 56px);
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        .modal.fade-out {
+            opacity: 0;
+        }
+        .modal-dialog {
+            margin: 0;
+            max-width: 500px;
+            width: 90%;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .modal-dialog::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        .modal-content {
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        
+        /* Handle collapsed sidebar for modals */
+        .sidebar-collapsed ~ .content-wrapper .modal {
+            left: 70px;
+            width: calc(100% - 70px);
+        }
+        
+        /* Table Styles - Consistent with Stok Barang */
+        .table {
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+        
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .table tbody td {
+            vertical-align: middle;
+            padding: 0.75rem;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+        
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        /* Dark mode table styles */
+        .dark-mode .table thead th {
+            background-color: #374151;
+            border-bottom-color: #4b5563;
+            color: #e5e7eb;
+        }
+        
+        .dark-mode .table tbody td {
+            border-bottom-color: #4b5563;
+            color: #e5e7eb;
+        }
+        
+        .dark-mode .table tbody tr:hover {
+            background-color: #374151;
+        }
+        
+        .dark-mode .table-bordered {
+            border-color: #4b5563;
+        }
+        
+        .dark-mode .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
     </style>
     <?= $this->renderSection('head') ?>
 </head>
@@ -555,6 +1236,68 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Immediate dark mode check to prevent flash of unstyled content
+        (function() {
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+            }
+        })();
+        
+        // Enhanced dark mode management
+        function initializeDarkMode() {
+            const darkSwitch = document.getElementById('darkSwitch');
+            if (!darkSwitch) return;
+            
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+            // Apply saved preference
+            if (savedDarkMode) {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+                darkSwitch.checked = true;
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                document.body.classList.remove('dark-mode');
+                darkSwitch.checked = false;
+            }
+            
+            // Single event listener for dark mode toggle
+            darkSwitch.addEventListener('change', function() {
+                const isDarkMode = this.checked;
+                
+                // Immediately update localStorage
+                localStorage.setItem('darkMode', isDarkMode.toString());
+                
+                // Immediately update DOM classes
+                if (isDarkMode) {
+                    document.documentElement.classList.add('dark-mode');
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                    document.body.classList.remove('dark-mode');
+                }
+                
+                // Force immediate visual update by triggering reflow
+                document.body.offsetHeight;
+                
+                // Dispatch custom event for any other components that need to know
+                const event = new CustomEvent('darkModeChanged', { detail: { isDarkMode } });
+                document.dispatchEvent(event);
+                
+                // Debug log
+                console.log('Dark mode toggled:', isDarkMode);
+            });
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeDarkMode);
+        } else {
+            initializeDarkMode();
+        }
+        
         const sidebar = document.getElementById('sidebar');
         const contentWrapper = document.getElementById('contentWrapper');
         const mainHeader = document.getElementById('mainHeader');
@@ -569,22 +1312,37 @@
                 if (mainHeader) {
                     mainHeader.classList.toggle('collapsed-header', collapsed);
                 }
-            });
-        }
-        
-        // Dark mode switch
-        const darkSwitch = document.getElementById('darkSwitch');
-        if (darkSwitch) {
-            darkSwitch.addEventListener('change', function() {
-                if (this.checked) {
-                    document.body.classList.add('dark-mode');
-                } else {
-                    document.body.classList.remove('dark-mode');
+                
+                // Handle profile-layout class
+                if (contentWrapper.classList.contains('profile-layout')) {
+                    contentWrapper.classList.toggle('collapsed-content', collapsed);
+                }
+                
+                // Handle password-layout class
+                if (contentWrapper.classList.contains('password-layout')) {
+                    contentWrapper.classList.toggle('collapsed-content', collapsed);
                 }
             });
         }
         
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure dark mode is properly applied on page load
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            const darkSwitch = document.getElementById('darkSwitch');
+            
+            if (savedDarkMode && darkSwitch) {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+                darkSwitch.checked = true;
+            } else if (!savedDarkMode && darkSwitch) {
+                document.documentElement.classList.remove('dark-mode');
+                document.body.classList.remove('dark-mode');
+                darkSwitch.checked = false;
+            }
+            
+            // Force immediate visual update
+            document.body.offsetHeight;
+            
             var notifBtn = document.getElementById('notifDropdown');
             if (notifBtn) {
                 var notifDropdown = notifBtn.closest('.dropdown-notif');

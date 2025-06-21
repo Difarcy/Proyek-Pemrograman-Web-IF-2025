@@ -34,10 +34,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Keluar</th>
                                     <th>No. Transaksi</th>
-                                    <th>Customer</th>
-                                    <th>Jumlah Item</th>
+                                    <th>Nama Barang</th>
+                                    <th>Jumlah</th>
+                                    <th>Tujuan/Keterangan</th>
+                                    <th>Petugas</th>
                                     <th>Total Harga</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -48,20 +50,141 @@
                                     <td>1</td>
                                     <td>2024-03-20</td>
                                     <td>BK20240320001</td>
-                                    <td>PT Customer Sejahtera</td>
-                                    <td>3</td>
+                                    <td>Laptop Asus</td>
+                                    <td>2</td>
+                                    <td>Penjualan ke Customer</td>
+                                    <td>Admin</td>
                                     <td>Rp 3.500.000</td>
-                                    <td><span class="badge badge-success">Selesai</span></td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-keluar/delete/1') ?>')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BK20240320001')">
-                                            <i class="fas fa-print"></i>
-                                        </button>
+                                        <?php 
+                                        $status = 'Selesai';
+                                        switch($status) {
+                                            case 'Menunggu':
+                                                echo '<span class="badge-status badge-status-menunggu">menunggu</span>';
+                                                break;
+                                            case 'Diproses':
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                                break;
+                                            case 'Selesai':
+                                                echo '<span class="badge-status badge-status-selesai">selesai</span>';
+                                                break;
+                                            case 'Dibatalkan':
+                                                echo '<span class="badge-status badge-status-dibatalkan">dibatalkan</span>';
+                                                break;
+                                            case 'Pending':
+                                                echo '<span class="badge-status badge-status-pending">pending</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-keluar/delete/1') ?>')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BK20240320001')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>2024-03-21</td>
+                                    <td>BK20240321001</td>
+                                    <td>Mouse Gaming</td>
+                                    <td>5</td>
+                                    <td>Penjualan Retail</td>
+                                    <td>Kasir</td>
+                                    <td>Rp 1.250.000</td>
+                                    <td>
+                                        <?php 
+                                        $status = 'Selesai';
+                                        switch($status) {
+                                            case 'Menunggu':
+                                                echo '<span class="badge-status badge-status-menunggu">menunggu</span>';
+                                                break;
+                                            case 'Diproses':
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                                break;
+                                            case 'Selesai':
+                                                echo '<span class="badge-status badge-status-selesai">selesai</span>';
+                                                break;
+                                            case 'Dibatalkan':
+                                                echo '<span class="badge-status badge-status-dibatalkan">dibatalkan</span>';
+                                                break;
+                                            case 'Pending':
+                                                echo '<span class="badge-status badge-status-pending">pending</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-keluar/delete/2') ?>')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BK20240321001')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>2024-03-22</td>
+                                    <td>BK20240322001</td>
+                                    <td>Keyboard Mechanical</td>
+                                    <td>1</td>
+                                    <td>Penggunaan Internal</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>Rp 1.500.000</td>
+                                    <td>
+                                        <?php 
+                                        $status = 'Diproses';
+                                        switch($status) {
+                                            case 'Menunggu':
+                                                echo '<span class="badge-status badge-status-menunggu">menunggu</span>';
+                                                break;
+                                            case 'Diproses':
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                                break;
+                                            case 'Selesai':
+                                                echo '<span class="badge-status badge-status-selesai">selesai</span>';
+                                                break;
+                                            case 'Dibatalkan':
+                                                echo '<span class="badge-status badge-status-dibatalkan">dibatalkan</span>';
+                                                break;
+                                            case 'Pending':
+                                                echo '<span class="badge-status badge-status-pending">pending</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-keluar/delete/3') ?>')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BK20240322001')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -223,7 +346,7 @@
                         <table class="table">
                             <tr>
                                 <th>Status</th>
-                                <td><span class="badge badge-success">Selesai</span></td>
+                                <td><span class="badge-status badge-status-selesai">selesai</span></td>
                             </tr>
                             <tr>
                                 <th>Total Item</th>

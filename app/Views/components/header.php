@@ -13,7 +13,32 @@
         <i class="fas fa-layer-group mr-2" style="font-size:1.1rem;"></i>VSTOCK Inventory
     </span>
     <div class="flex-grow-1 text-center" style="font-size:1.05rem;font-weight:700;letter-spacing:0.5px;position:absolute;left:0;right:0;margin:auto;pointer-events:none;z-index:0;color:#007BFF;">
-        <!-- Judul halaman bisa diisi dinamis di setiap view -->
+        <?php
+        // Mendeteksi halaman yang sedang aktif berdasarkan URL
+        $current_url = current_url();
+        $menu_text = '';
+        
+        if (strpos($current_url, 'dashboard') !== false) {
+            $menu_text = 'Menu Utama';
+        } elseif (strpos($current_url, 'stok-barang') !== false || 
+                  strpos($current_url, 'barang-masuk') !== false || 
+                  strpos($current_url, 'barang-keluar') !== false ||
+                  strpos($current_url, 'laporan') !== false) {
+            $menu_text = 'Manajemen Stok';
+        } elseif (strpos($current_url, 'data-customer') !== false || 
+                  strpos($current_url, 'data-supplier') !== false || 
+                  strpos($current_url, 'data-petugas') !== false) {
+            $menu_text = 'Data Master';
+        } elseif (strpos($current_url, 'profil') !== false || 
+                  strpos($current_url, 'ubah-password') !== false || 
+                  strpos($current_url, 'manajemen-pengguna') !== false ||
+                  strpos($current_url, 'profil-toko') !== false) {
+            $menu_text = 'Pengaturan';
+        } else {
+            $menu_text = 'Menu Utama';
+        }
+        ?>
+        <?= $menu_text ?>
     </div>
     <div class="user-info d-flex align-items-center ml-auto" style="z-index:1;">
         <!-- Notifikasi -->

@@ -34,56 +34,158 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama Pengguna</th>
                                     <th>Username</th>
-                                    <th>Nama Lengkap</th>
                                     <th>Email</th>
+                                    <th>Telepon</th>
                                     <th>Role</th>
+                                    <th>Alamat</th>
+                                    <th>Kota</th>
                                     <th>Status</th>
-                                    <th>Terakhir Login</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if (empty($users)): ?>
                                 <tr>
                                     <td>1</td>
+                                    <td>Admin Utama</td>
                                     <td>admin</td>
-                                    <td>Administrator</td>
-                                    <td>admin@example.com</td>
-                                    <td><span class="badge badge-primary">Admin</span></td>
-                                    <td><span class="badge badge-success">Aktif</span></td>
-                                    <td>2024-03-20 10:30</td>
+                                    <td>admin@email.com</td>
+                                    <td>081234567890</td>
+                                    <td>Admin</td>
+                                    <td>Jl. Sudirman No. 123</td>
+                                    <td>Jakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-reset">
-                                            <i class="fas fa-key"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/manajemen-pengguna/delete/1') ?>')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>staff</td>
-                                    <td>Staff Gudang</td>
-                                    <td>staff@example.com</td>
-                                    <td><span class="badge badge-info">Staff</span></td>
-                                    <td><span class="badge badge-success">Aktif</span></td>
-                                    <td>2024-03-20 09:15</td>
+                                    <td>Kasir Utama</td>
+                                    <td>kasir</td>
+                                    <td>kasir@email.com</td>
+                                    <td>081234567891</td>
+                                    <td>Kasir</td>
+                                    <td>Jl. Thamrin No. 456</td>
+                                    <td>Jakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-reset">
-                                            <i class="fas fa-key"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/manajemen-pengguna/delete/2') ?>')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>gudang</td>
+                                    <td>gudang@email.com</td>
+                                    <td>081234567892</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>Jl. Gatot Subroto No. 789</td>
+                                    <td>Bandung</td>
+                                    <td><span class="badge-status badge-status-nonaktif">nonaktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Kasir Kedua</td>
+                                    <td>kasir2</td>
+                                    <td>kasir2@email.com</td>
+                                    <td>081234567893</td>
+                                    <td>Kasir</td>
+                                    <td>Jl. Asia Afrika No. 321</td>
+                                    <td>Bandung</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Petugas Gudang Kedua</td>
+                                    <td>gudang2</td>
+                                    <td>gudang2@email.com</td>
+                                    <td>081234567894</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>Jl. Malioboro No. 654</td>
+                                    <td>Yogyakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php else: ?>
+                                <?php foreach ($users as $index => $user): ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= $user['nama'] ?? 'Nama Pengguna' ?></td>
+                                    <td><?= $user['username'] ?? 'username' ?></td>
+                                    <td><?= $user['email'] ?? 'email@example.com' ?></td>
+                                    <td><?= $user['telepon'] ?? '081234567890' ?></td>
+                                    <td><?= $user['role'] ?? 'User' ?></td>
+                                    <td><?= $user['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
+                                    <td><?= $user['kota'] ?? 'Jakarta' ?></td>
+                                    <td>
+                                        <?php 
+                                        $status = $user['status'] ?? 'Aktif';
+                                        if ($status === 'Aktif') {
+                                            echo '<span class="badge-status badge-status-aktif">aktif</span>';
+                                        } else {
+                                            echo '<span class="badge-status badge-status-nonaktif">nonaktif</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

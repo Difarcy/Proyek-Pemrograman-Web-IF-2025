@@ -5,23 +5,25 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <h1 class="mb-4">Barang Masuk</h1>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
             <h5 class="mb-0">Daftar Barang Masuk</h5>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">
                 <i class="fas fa-plus"></i> Tambah Barang Masuk
             </button>
         </div>
-        <div class="card-body">
+        <div class="card-body p-3">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Masuk</th>
                             <th>No. Transaksi</th>
-                            <th>Supplier</th>
-                            <th>Jumlah Item</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah</th>
+                            <th>Nama Supplier</th>
+                            <th>Petugas</th>
                             <th>Total Harga</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -34,26 +36,49 @@
                                     <td><?= $index + 1 ?></td>
                                     <td><?= $item['tanggal'] ?? '2024-03-20' ?></td>
                                     <td><?= $item['no_transaksi'] ?? 'BM20240320001' ?></td>
-                                    <td><?= $item['supplier'] ?? 'PT Supplier Jaya' ?></td>
-                                    <td><?= $item['jumlah_item'] ?? 5 ?></td>
+                                    <td><?= $item['nama_barang'] ?? 'Laptop Asus' ?></td>
+                                    <td><?= $item['jumlah'] ?? 5 ?></td>
+                                    <td><?= $item['nama_supplier'] ?? 'PT Supplier Jaya' ?></td>
+                                    <td><?= $item['nama_petugas'] ?? 'Admin' ?></td>
                                     <td><?= 'Rp ' . number_format($item['total_harga'] ?? 5000000, 0, ',', '.') ?></td>
                                     <td>
-                                        <span class="badge badge-<?= ($item['status'] ?? 'selesai') === 'selesai' ? 'success' : 'warning' ?>">
-                                            <?= ucfirst($item['status'] ?? 'selesai') ?>
-                                        </span>
+                                        <?php 
+                                        $status = $item['status'] ?? 'Menunggu';
+                                        switch($status) {
+                                            case 'Menunggu':
+                                                echo '<span class="badge-status badge-status-menunggu">menunggu</span>';
+                                                break;
+                                            case 'Diproses':
+                                                echo '<span class="badge-status badge-status-diproses">diproses</span>';
+                                                break;
+                                            case 'Selesai':
+                                                echo '<span class="badge-status badge-status-selesai">selesai</span>';
+                                                break;
+                                            case 'Dibatalkan':
+                                                echo '<span class="badge-status badge-status-dibatalkan">dibatalkan</span>';
+                                                break;
+                                            case 'Pending':
+                                                echo '<span class="badge-status badge-status-pending">pending</span>';
+                                                break;
+                                            default:
+                                                echo '<span class="badge-status badge-status-menunggu">menunggu</span>';
+                                        }
+                                        ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <a href="<?= base_url('admin/barang-masuk/delete/' . ($item['id'] ?? 1)) ?>" 
-                                           class="btn btn-danger btn-sm" 
-                                           onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('<?= $item['no_transaksi'] ?? 'BM20240320001' ?>')">
-                                            <i class="fas fa-print"></i>
-                                        </button>
+                                        <div class="action-buttons">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <a href="<?= base_url('admin/barang-masuk/delete/' . ($item['id'] ?? 1)) ?>" 
+                                               class="btn btn-danger btn-sm" 
+                                               onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('<?= $item['no_transaksi'] ?? 'BM20240320001' ?>')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -62,20 +87,72 @@
                                 <td>1</td>
                                 <td>2024-03-20</td>
                                 <td>BM20240320001</td>
-                                <td>PT Supplier Jaya</td>
+                                <td>Laptop Asus</td>
                                 <td>5</td>
+                                <td>PT Supplier Jaya</td>
+                                <td>Admin</td>
                                 <td>Rp 5.000.000</td>
                                 <td><span class="badge badge-success">Selesai</span></td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-masuk/delete/1') ?>')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BM20240320001')">
-                                        <i class="fas fa-print"></i>
-                                    </button>
+                                    <div class="action-buttons">
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-masuk/delete/1') ?>')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BM20240320001')">
+                                            <i class="fas fa-print"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2024-03-21</td>
+                                <td>BM20240321001</td>
+                                <td>Mouse Gaming</td>
+                                <td>10</td>
+                                <td>CV Maju Bersama</td>
+                                <td>Petugas Gudang</td>
+                                <td>Rp 2.500.000</td>
+                                <td><span class="badge badge-success">Selesai</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-masuk/delete/2') ?>')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BM20240321001')">
+                                            <i class="fas fa-print"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2024-03-22</td>
+                                <td>BM20240322001</td>
+                                <td>Keyboard Mechanical</td>
+                                <td>3</td>
+                                <td>PT Supplier Jaya</td>
+                                <td>Admin</td>
+                                <td>Rp 4.500.000</td>
+                                <td><span class="badge badge-warning">Proses</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-detail">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/barang-masuk/delete/3') ?>')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm" onclick="printInvoice('BM20240322001')">
+                                            <i class="fas fa-print"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endif; ?>

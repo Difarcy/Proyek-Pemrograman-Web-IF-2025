@@ -34,36 +34,151 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIP</th>
-                                    <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>No. Telepon</th>
+                                    <th>Nama Petugas</th>
                                     <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Jabatan</th>
+                                    <th>Alamat</th>
+                                    <th>Kota</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if (empty($petugas)): ?>
                                 <tr>
                                     <td>1</td>
-                                    <td>PEG001</td>
-                                    <td>Andi Wijaya</td>
-                                    <td>Staff Gudang</td>
+                                    <td>Ahmad Rizki</td>
+                                    <td>ahmad.rizki@email.com</td>
                                     <td>081234567890</td>
-                                    <td>andi@example.com</td>
-                                    <td><span class="badge badge-success">Aktif</span></td>
+                                    <td>Admin</td>
+                                    <td>Jl. Sudirman No. 123</td>
+                                    <td>Jakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
                                     <td>
-                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<?= base_url('admin/data-petugas/delete/1') ?>')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-riwayat">
-                                            <i class="fas fa-history"></i>
-                                        </button>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Siti Nurhaliza</td>
+                                    <td>siti.nurhaliza@email.com</td>
+                                    <td>081234567891</td>
+                                    <td>Kasir</td>
+                                    <td>Jl. Thamrin No. 456</td>
+                                    <td>Jakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Budi Santoso</td>
+                                    <td>budi.santoso@email.com</td>
+                                    <td>081234567892</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>Jl. Gatot Subroto No. 789</td>
+                                    <td>Bandung</td>
+                                    <td><span class="badge-status badge-status-nonaktif">nonaktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Dewi Sartika</td>
+                                    <td>dewi.sartika@email.com</td>
+                                    <td>081234567893</td>
+                                    <td>Kasir</td>
+                                    <td>Jl. Asia Afrika No. 321</td>
+                                    <td>Bandung</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Rudi Hermawan</td>
+                                    <td>rudi.hermawan@email.com</td>
+                                    <td>081234567894</td>
+                                    <td>Petugas Gudang</td>
+                                    <td>Jl. Malioboro No. 654</td>
+                                    <td>Yogyakarta</td>
+                                    <td><span class="badge-status badge-status-aktif">aktif</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php else: ?>
+                                <?php foreach ($petugas as $index => $petugas_item): ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= $petugas_item['nama'] ?? 'Nama Petugas' ?></td>
+                                    <td><?= $petugas_item['email'] ?? 'email@example.com' ?></td>
+                                    <td><?= $petugas_item['telepon'] ?? '081234567890' ?></td>
+                                    <td><?= $petugas_item['jabatan'] ?? 'Petugas' ?></td>
+                                    <td><?= $petugas_item['alamat'] ?? 'Jl. Contoh No. 123' ?></td>
+                                    <td><?= $petugas_item['kota'] ?? 'Jakarta' ?></td>
+                                    <td>
+                                        <?php 
+                                        $status = $petugas_item['status'] ?? 'Aktif';
+                                        if ($status === 'Aktif') {
+                                            echo '<span class="badge-status badge-status-aktif">aktif</span>';
+                                        } else {
+                                            echo '<span class="badge-status badge-status-nonaktif">nonaktif</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

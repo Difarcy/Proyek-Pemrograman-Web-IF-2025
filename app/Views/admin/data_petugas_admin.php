@@ -142,7 +142,7 @@
                                             </button>
                                             <button class="btn btn-sm btn-danger" title="Hapus">
                                                 <i class="bi bi-trash"></i>
-                                            </button>
+                                        </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -170,10 +170,10 @@
                                         <div class="action-buttons">
                                             <button class="btn btn-sm btn-primary" title="Edit">
                                                 <i class="bi bi-pencil"></i>
-                                            </button>
+                                        </button>
                                             <button class="btn btn-sm btn-danger" title="Hapus">
                                                 <i class="bi bi-trash"></i>
-                                            </button>
+                                        </button>
                                         </div>
                                     </td>
                                 </tr>

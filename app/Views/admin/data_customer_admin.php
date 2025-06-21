@@ -3,37 +3,37 @@
 <?= $this->section('title') ?>Data Customer<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="container-fluid">
+        <div class="container-fluid">
     <h1 class="mb-4">Data Customer</h1>
     <div class="card mb-4">
         <div class="card-header bg-white d-flex justify-content-between align-items-center border-0">
             <h5 class="mb-0">Daftar Customer</h5>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">
-                <i class="fas fa-plus"></i> Tambah Customer
-            </button>
-        </div>
+                            <i class="fas fa-plus"></i> Tambah Customer
+                        </button>
+                    </div>
         <div class="card-body p-3">
-            <div class="table-responsive">
+                    <div class="table-responsive">
                 <table class="table table-bordered table-striped mb-0">
-                    <thead>
-                        <tr>
-                            <th>No</th>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
                             <th>Nama Customer</th>
                             <th>Email</th>
                             <th>Telepon</th>
-                            <th>Alamat</th>
+                                    <th>Alamat</th>
                             <th>Kota</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                         <?php if (empty($customers)): ?>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
+                                <tr>
+                                    <td>1</td>
+                                    <td>John Doe</td>
                             <td>john.doe@email.com</td>
-                            <td>081234567890</td>
+                                    <td>081234567890</td>
                             <td>Jl. Sudirman No. 123</td>
                             <td>Jakarta</td>
                             <td><span class="badge-status badge-status-aktif">aktif</span></td>
@@ -120,7 +120,7 @@
                                     </button>
                                     <button class="btn btn-sm btn-danger" title="Hapus">
                                         <i class="bi bi-trash"></i>
-                                    </button>
+                                        </button>
                                 </div>
                             </td>
                         </tr>
@@ -147,20 +147,20 @@
                                 <div class="action-buttons">
                                     <button class="btn btn-sm btn-primary" title="Edit">
                                         <i class="bi bi-pencil"></i>
-                                    </button>
+                                        </button>
                                     <button class="btn btn-sm btn-danger" title="Hapus">
                                         <i class="bi bi-trash"></i>
-                                    </button>
+                                        </button>
                                 </div>
-                            </td>
-                        </tr>
+                                    </td>
+                                </tr>
                         <?php endforeach; ?>
                         <?php endif; ?>
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal Tambah -->
@@ -339,8 +339,8 @@
     
     function confirmDelete(url) {
         if (confirm('Yakin ingin menghapus customer ini?')) {
-            window.location.href = url;
-        }
+                window.location.href = url;
+            }
     }
 </script>
 <?= $this->endSection() ?> 

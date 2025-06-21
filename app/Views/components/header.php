@@ -45,16 +45,63 @@
         <div class="dropdown mr-2 dropdown-notif">
             <button class="btn btn-link position-relative p-0" id="notifDropdown" type="button" aria-haspopup="true" aria-expanded="false" style="font-size:1.4rem;color:#343a40;outline:none!important;box-shadow:none!important;">
                 <i class="fas fa-bell"></i>
-                <span class="badge badge-danger position-absolute d-flex align-items-center justify-content-center" style="top: 0.1px; right: 6px; font-size: 0.5rem; border-radius: 50%; width: 12px; height: 12px; border: 1px solid white;">1</span>
+                <span class="badge badge-danger position-absolute d-flex align-items-center justify-content-center" style="top: 0.1px; right: 6px; font-size: 0.5rem; border-radius: 50%; width: 12px; height: 12px; border: 1px solid white;">5</span>
             </button>
-            <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="notifDropdown" style="min-width:270px;">
-                <span class="dropdown-item-text font-weight-bold">Notifikasi</span>
+            <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="notifDropdown" style="min-width:320px;max-height:400px;overflow-y:auto;">
+                <span class="dropdown-item font-weight-bold">Notifikasi</span>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item small" href="#"><i class="fas fa-exclamation-circle text-danger mr-2"></i>Stok barang <b>BRG002</b> habis!</a>
-                <a class="dropdown-item small" href="#"><i class="fas fa-arrow-down text-info mr-2"></i>Barang masuk: <b>Laptop Asus</b></a>
-                <a class="dropdown-item small" href="#"><i class="fas fa-arrow-up text-success mr-2"></i>Barang keluar: <b>Mouse Gaming</b></a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-exclamation-circle text-danger mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">Stok Habis</div>
+                        <small class="text-muted">Stok barang <b>BRG002 - Mouse Gaming</b> telah habis!</small>
+                        <small class="text-muted d-block">2 menit yang lalu</small>
+                    </div>
+                </a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-plus-circle text-success mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">Barang Ditambahkan</div>
+                        <small class="text-muted">Admin berhasil menambahkan <b>Laptop Asus ROG</b></small>
+                        <small class="text-muted d-block">15 menit yang lalu</small>
+                    </div>
+                </a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-arrow-down text-info mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">Barang Masuk</div>
+                        <small class="text-muted">Barang masuk: <b>Keyboard Mechanical</b> dari PT Supplier Jaya</small>
+                        <small class="text-muted d-block">1 jam yang lalu</small>
+                    </div>
+                </a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-arrow-up text-warning mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">Barang Keluar</div>
+                        <small class="text-muted">Barang keluar: <b>Monitor LED</b> untuk Customer John Doe</small>
+                        <small class="text-muted d-block">2 jam yang lalu</small>
+                    </div>
+                </a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-user-plus text-primary mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">User Baru</div>
+                        <small class="text-muted">Kasir baru <b>Siti Nurhaliza</b> telah ditambahkan</small>
+                        <small class="text-muted d-block">3 jam yang lalu</small>
+                    </div>
+                </a>
+                <a class="dropdown-item small" href="#">
+                    <i class="fas fa-edit text-info mr-2"></i>
+                    <div>
+                        <div class="font-weight-bold">Data Diperbarui</div>
+                        <small class="text-muted">Data supplier <b>PT Supplier Makmur</b> telah diperbarui</small>
+                        <small class="text-muted d-block">5 jam yang lalu</small>
+                    </div>
+                </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Lihat Semua Notifikasi</a>
+                <a class="dropdown-item text-center small text-primary" href="#">
+                    <i></i>Lihat Semua Notifikasi
+                </a>
             </div>
         </div>
         <!-- Dark Mode Switch -->
@@ -68,7 +115,7 @@
                 <img class="rounded-circle" src="<?= base_url('assets/img/profil.png') ?>" alt="Avatar" width="32" height="32">
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow-sm mt-3" aria-labelledby="userDropdown">
-                <span class="dropdown-item-text">
+                <span class="dropdown-item-text dropdown-item font-weight-bold" style="pointer-events: none;">
                     <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i>
                     <?= ucfirst(session('username') ?? 'Admin') ?>
                 </span>

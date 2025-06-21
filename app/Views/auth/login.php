@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="/vstock.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -141,6 +140,48 @@
             width: 100%;
             max-width: 320px;
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #181a1b !important;
+            color: #f8f9fa !important;
+        }
+
+        body.dark-mode .bg-white {
+            background-color: #212529 !important;
+            color: #f8f9fa !important;
+        }
+
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background-color: #2c2f33;
+            border-color: #495057;
+            color: #f8f9fa;
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #adb5bd;
+        }
+
+        body.dark-mode .btn-primary {
+            background-color: #0d6efd;
+        }
+
+        body.dark-mode .text-muted {
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .text-primary {
+            color: #ffffff !important;
+        }
+
+        .fa-moon {
+            color: #adb5bd;
+        }
+
+        body.dark-mode .fa-moon {
+            color: #f6c23e; /* Bulan kuning saat dark mode */
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -149,8 +190,15 @@
             <div class="col-md-6 bg-primary p-0 position-relative" style="min-height:300px;">
                 <img src="/assets/img/inventory-management-system.png" alt="Inventory Management System" class="w-100 h-100" style="object-fit:cover; min-height:100%; min-width:100%;">
             </div>
-            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center p-4">
-                <div class="w-100 text-center mb-5">
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center p-4 position-relative">
+                <!-- Dark Mode Toggle -->
+                <div class="position-absolute top-0 end-0 p-3">
+                    <button id="darkModeToggle" class="btn btn-sm btn-outline-secondary rounded-circle" title="Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+
+                <div class="w-100 text-center mb-5 mt-4">
                     <div class="mb-1">
                         <h3 class="fw-bold text-primary mb-0">VSTOCK</h3>
                         <div class="text-muted small">Manage Your Inventory with Ease and Efficiency</div>
@@ -181,41 +229,51 @@
             </div>
         </div>
     </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('passwordInput');
-        let show = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('passwordInput');
+            let show = false;
 
-        // Function to toggle password visibility
-        function togglePasswordVisibility() {
-            show = !show;
-            passwordInput.type = show ? 'text' : 'password';
-            togglePassword.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
-        }
+            function togglePasswordVisibility() {
+                show = !show;
+                passwordInput.type = show ? 'text' : 'password';
+                togglePassword.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+            }
 
-        // Function to handle password input changes
-        function handlePasswordInput() {
-            if (passwordInput.value.length > 0) {
-                togglePassword.classList.add('visible');
-            } else {
-                togglePassword.classList.remove('visible');
-                // Reset to password type if input is empty
-                if (show) {
-                    show = false;
-                    passwordInput.type = 'password';
-                    togglePassword.querySelector('i').className = 'fa-solid fa-eye';
+            function handlePasswordInput() {
+                if (passwordInput.value.length > 0) {
+                    togglePassword.classList.add('visible');
+                } else {
+                    togglePassword.classList.remove('visible');
+                    if (show) {
+                        show = false;
+                        passwordInput.type = 'password';
+                        togglePassword.querySelector('i').className = 'fa-solid fa-eye';
+                    }
                 }
             }
-        }
 
-        // Add event listeners
-        togglePassword.addEventListener('click', togglePasswordVisibility);
-        passwordInput.addEventListener('input', handlePasswordInput);
-        passwordInput.addEventListener('focus', handlePasswordInput);
-        passwordInput.addEventListener('blur', handlePasswordInput);
-    });
+            togglePassword.addEventListener('click', togglePasswordVisibility);
+            passwordInput.addEventListener('input', handlePasswordInput);
+            passwordInput.addEventListener('focus', handlePasswordInput);
+            passwordInput.addEventListener('blur', handlePasswordInput);
+
+            // Dark Mode
+            const darkToggle = document.getElementById('darkModeToggle');
+            const savedTheme = localStorage.getItem('vstock-dark');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+
+            darkToggle.addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('vstock-dark', document.body.classList.contains('dark-mode'));
+            });
+        });
     </script>
 </body>
-</html> 
+</html>

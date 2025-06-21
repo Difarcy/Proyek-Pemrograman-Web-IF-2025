@@ -213,6 +213,57 @@
         .main-header.collapsed-header {
             left: 70px !important;
         }
+        /* === SIDEBAR DARK MODE === */
+        body.dark-mode .sidebar {
+            background: #2a2f36 !important; /* abu gelap modern */
+            color: #ffffff !important;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* === Brand / Logo Sidebar === */
+        body.dark-mode .sidebar .brand-link {
+            background: #1b1b1b !important; /* hitam pekat */
+            color: #ffffff !important;
+        }
+
+        /* === Text, Icon, dan Header Sidebar === */
+        body.dark-mode .sidebar .brand-link span,
+        body.dark-mode .sidebar .nav-header,
+        body.dark-mode .sidebar .nav-link,
+        body.dark-mode .sidebar .nav-link i {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .sidebar .nav-header {
+            color: #cfd8dc !important; /* abu terang */
+        }
+
+        /* === Hover dan Active Sidebar Link === */
+        body.dark-mode .sidebar .nav-link.active,
+        body.dark-mode .sidebar .nav-link:hover {
+            background: linear-gradient(90deg, #1b1b1b 60%, #2a2f36 100%) !important;
+            color: #ffffff !important;
+            text-decoration: none;
+            box-shadow: 0 4px 18px 0 rgba(255, 255, 255, 0.06);
+            transform: scale(1.08);
+        }
+
+        /* === Sidebar Collapse Handling === */
+        body.dark-mode .sidebar-collapsed .brand-link span,
+        body.dark-mode .sidebar-collapsed .nav-link span,
+        body.dark-mode .sidebar-collapsed .hide-on-collapse {
+            display: none !important;
+        }
+
+        body.dark-mode .sidebar .nav-link i {
+            margin-right: 8px;
+            font-size: 1.08rem;
+            transition: margin 0.2s;
+        }
+
+        body.dark-mode .sidebar-collapsed .nav-link i {
+            margin-right: 0;
+        }
         .info-widget {
             background: #fff;
             border-radius: 1.1rem;
@@ -384,20 +435,39 @@
             box-shadow: 0 2px 12px 0 rgba(0,0,0,0.2) !important;
         }
         .dark-mode .card {
-            background-color: #2d3748;
-            border-color: #4a5568;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2) !important;
+        }
+        /* Saat dark mode aktif */
+        body.dark-mode .custom-control-label::before {
+            background-color: #ffffff !important; /* track putih */
+            border-color: #ffffff !important;
+        }
+
+        body.dark-mode .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+            background-color: #000000 !important; /* bulat hitam */
         }
         .dark-mode .card-header {
-            background-color: #2d3748;
-            border-bottom-color: #4a5568;
+            background-color: #2d3748 !important;
+            border-bottom-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .main-header .app-title,
+        body.dark-mode .main-header .text-center,
+        body.dark-mode .main-header i,
+        body.dark-mode .main-header svg,
+        body.dark-mode .main-header svg rect {
+            color: #ffffff !important;
+            fill: #ffffff !important;
         }
         .dark-mode .card-header h5 {
-            color: #e2e8f0;
+            color: #e2e8f0 !important;
         }
         .dark-mode .card-footer {
-            background-color: #2d3748;
-            border-top-color: #4a5568;
+            background-color: #2d3748 !important;
+            border-top-color: #4a5568 !important;
+            color: #e2e8f0 !important;
         }
         .dark-mode .card-body {
             color: #e0e0e0 !important;
@@ -628,7 +698,7 @@
         /* Warna status */
         .badge-status-tersedia { background: #28a745 !important; }
         .badge-status-habis { background: #ff6a8d !important; }
-        .badge-status-hampirhabis { background: #ffc107 !important; color: #000 !important; }
+        .badge-status-hampirhabis { background: #ffc107 !important;}
         .badge-status-barumasuk { background: #4e9af1 !important; }
         .badge-status-tidakaktif { background: #adb5bd !important; }
         .badge-status {
@@ -966,201 +1036,306 @@
             padding: 0.25rem 0.5rem !important;
             border-radius: 0.25rem !important;
         }
-        
-        /* Search and Filter Card */
-        .search-filter-card {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
+        .btn-table-action,
+        .btn-export,
+        .btn-print {
+            min-width: 80px;        /* lebih ramping */
+            height: 26px;           /* lebih pendek */
+            padding: 2px 6px;
+            font-size: 11px;        /* lebih kecil lagi */
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
         }
+
+        /* Spasi ikon */
+        .btn-table-action i,
+        .btn-export i,
+        .btn-print i {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+
+        /* Jarak antar tombol */
+        .card-header .btn + .btn {
+            margin-left: 5px;
+        }
+
+        /* Responsif HP */
+        @media (max-width: 576px) {
+            .card-header .btn {
+                margin-top: 6px;
+                width: 100%;
+            }
+        }
+       /* Tombol Profil Admin */
+        .btn-extended {
+            min-width: 80px;
+            height: 26px;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 500;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 5px;
+        }
+
+        .btn-extended i {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+
+        /* Warna tombol */
+        .btn-blue { background-color: #007bff; color: #fff; }
+        .btn-red { background-color: #dc3545; color: #fff; }
+        .btn-gray { background-color: #6c757d; color: #fff; }
+
+        /* Hover efek */
+        .btn-blue:hover { background-color: #0056b3; }
+        .btn-red:hover { background-color: #b52a37; }
+        .btn-gray:hover { background-color: #5a6268; }
+        /* Search and Filter Card Styles */
+        .search-filter-card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
         .search-filter-card .card-title {
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 600;
             color: #495057;
             margin-bottom: 1rem;
         }
+        
         .search-filter-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             align-items: end;
-            flex-wrap: wrap;
         }
+        
         .search-filter-row .form-group {
             margin-bottom: 0;
-            flex: 1;
-            min-width: 200px;
-        }
-        .search-filter-row .btn {
-            white-space: nowrap;
         }
         
-        /* Print/Export buttons */
-        .btn-print {
-            min-width: 100px;
-            padding: 0.5rem 1rem !important;
+        .search-filter-row label {
+            font-size: 0.875rem;
             font-weight: 500;
-            border-radius: 0.375rem !important;
-            transition: all 0.3s ease;
-            margin-left: 0.5rem;
-        }
-        .btn-print:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        .btn-print.btn-excel {
-            background: #217346;
-            border-color: #217346;
-            color: white;
-        }
-        .btn-print.btn-excel:hover {
-            background: #1e6b3d;
-            border-color: #1e6b3d;
-        }
-        .btn-print.btn-pdf {
-            background: #dc3545;
-            border-color: #dc3545;
-            color: white;
-        }
-        .btn-print.btn-pdf:hover {
-            background: #c82333;
-            border-color: #c82333;
-        }
-        .btn-print.btn-csv {
-            background: #6c757d;
-            border-color: #6c757d;
-            color: white;
-        }
-        .btn-print.btn-csv:hover {
-            background: #5a6268;
-            border-color: #5a6268;
-        }
-        
-        /* Print modal styling */
-        .print-modal .modal-content {
-            border-radius: 0.5rem;
-        }
-        .print-modal .modal-header {
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .print-options {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .print-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-        .print-option:hover {
-            border-color: #007bff;
-            background: #f8f9fa;
-        }
-        .print-option.selected {
-            border-color: #007bff;
-            background: #e3f2fd;
-        }
-        .print-option i {
-            font-size: 2rem;
+            color: #495057;
             margin-bottom: 0.5rem;
+            display: block;
         }
-        .print-option.excel i { color: #217346; }
-        .print-option.pdf i { color: #dc3545; }
-        .print-option.csv i { color: #6c757d; }
         
-        /* New pagination styling */
-        .pagination-new {
+        /* Pagination Styles */
+        .pagination-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 1rem;
-            padding: 0.5rem 0;
+            padding: 1rem 0;
+            width: 100%;
         }
+        
         .pagination-info-new {
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             color: #6c757d;
+            flex-shrink: 0;
         }
+        
         .pagination-controls {
             display: flex;
             gap: 0.5rem;
-        }
-        .pagination-controls .btn {
-            padding: 0.25rem 0.75rem;
-            font-size: 0.875rem;
-        }
-        
-        /* Dark mode support */
-        .dark-mode .search-filter-card {
-            background: #2a2f3a !important;
-            border-color: #3a3f4a !important;
-        }
-        .dark-mode .search-filter-card .card-title {
-            color: #e0e0e0 !important;
-        }
-        
-        /* Modal positioning - center all modals */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 250px;
-            top: 56px;
-            width: calc(100% - 250px);
-            height: calc(100vh - 56px);
-            overflow: hidden;
-            background-color: rgba(0,0,0,0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal.show {
-            display: flex !important;
             align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-        .modal.fade-out {
-            opacity: 0;
-        }
-        .modal-dialog {
-            margin: 0;
-            max-width: 500px;
-            width: 90%;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .modal-dialog::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-        }
-        .modal-content {
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .modal-content::-webkit-scrollbar {
-            width: 0;
-            height: 0;
+            flex-shrink: 0;
         }
         
-        /* Handle collapsed sidebar for modals */
-        .sidebar-collapsed ~ .content-wrapper .modal {
-            left: 70px;
-            width: calc(100% - 70px);
+        .pagination-controls .btn {
+            font-size: 0.875rem;
+            padding: 0.375rem 0.75rem;
+            border: none;
+            background: transparent;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            transition: none;
+            cursor: default;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .pagination-controls .btn:hover:not(:disabled) {
+            background: transparent;
+            color: #007bff;
+            text-decoration: none;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .pagination-controls .btn:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .pagination-controls .btn.active {
+            background: transparent;
+            color: #007bff;
+            font-weight: bold;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .pagination-controls .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            color: #6c757d;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .pagination-dots {
+            display: none;
+        }
+        
+        /* Print Options Styles */
+        .print-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .print-option {
+            border: 2px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            background: #fff;
+        }
+        
+        .print-option:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+        
+        .print-option.selected {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+        
+        .print-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .print-option .option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .print-option .option-desc {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        /* Fade Animation */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        /* Dark mode styles for new components */
+        .dark-mode .search-filter-card {
+            background: #2d3748;
+            border-color: #4a5568;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .search-filter-card .card-title {
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .search-filter-row label {
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .pagination-info-new {
+            color: #a0aec0;
+        }
+        
+        .dark-mode .pagination-controls .btn {
+            background: transparent;
+            border: none;
+            color: #3182ce;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .dark-mode .pagination-controls .btn:hover:not(:disabled) {
+            background: transparent;
+            color: #3182ce;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .dark-mode .pagination-controls .btn:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .dark-mode .pagination-controls .btn.active {
+            background: transparent;
+            color: #3182ce;
+            font-weight: bold;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .dark-mode .pagination-dots {
+            color: #a0aec0;
+        }
+        
+        .dark-mode .modal-content {
+            background: #2d3748;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .modal-header {
+            border-bottom-color: #4a5568;
+        }
+        
+        .dark-mode .modal-footer {
+            border-top-color: #4a5568;
+        }
+        
+        .dark-mode .print-option {
+            background: #2d3748;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .print-option:hover {
+            border-color: #3182ce;
+            background: #4a5568;
+        }
+        
+        .dark-mode .print-option.selected {
+            border-color: #3182ce;
+            background: #2c5282;
+        }
+        
+        .dark-mode .print-option .option-desc {
+            color: #a0aec0;
         }
         
         /* Table Styles - Consistent with Stok Barang */
@@ -1222,6 +1397,269 @@
         
         .dark-mode .table-striped tbody tr:nth-of-type(odd) {
             background-color: rgba(255, 255, 255, 0.02);
+        }
+        
+        /* Search and Filter Input Styles */
+        .search-filter-card .form-control,
+        .search-filter-card .form-select,
+        .dropdown-menu,
+        .dropdown-item,
+        .form-control,
+        .form-select {
+            font-size: 0.875rem !important;
+        }
+        
+        /* Profile dropdown specific styles */
+        .dropdown-profile .dropdown-menu,
+        .dropdown-profile .dropdown-item {
+            font-size: 0.875rem !important;
+        }
+        
+        /* Dark mode for search and filter inputs */
+        .dark-mode .search-filter-card .form-control,
+        .dark-mode .search-filter-card .form-select,
+        .dark-mode .dropdown-menu,
+        .dark-mode .dropdown-item,
+        .dark-mode .form-control,
+        .dark-mode .form-select {
+            font-size: 0.875rem !important;
+        }
+        
+        /* Action Buttons Styles */
+        .action-buttons {
+            display: flex;
+            gap: 0.25rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            margin: 0.125rem;
+        }
+        
+        .btn-print, .btn-export, .btn-table-action {
+            margin-left: 0.5rem;
+        }
+        
+        /* Modal positioning - center all modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 250px;
+            top: 56px;
+            width: calc(100% - 250px);
+            height: calc(100vh - 56px);
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        .modal.fade-out {
+            opacity: 0;
+        }
+        .modal-dialog {
+            margin: 0;
+            max-width: 500px;
+            width: 90%;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .modal-dialog::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        .modal-content {
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        
+        /* Handle collapsed sidebar for modals */
+        .sidebar-collapsed ~ .content-wrapper .modal {
+            left: 70px;
+            width: calc(100% - 70px);
+        }
+        
+        /* Modal Content Styles */
+        .modal-header {
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem 1.5rem;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid #dee2e6;
+            padding: 1rem 1.5rem;
+        }
+        /* === TABEL DARK MODE === */
+        body.dark-mode table.table-bordered,
+        body.dark-mode table.table-bordered th,
+        body.dark-mode table.table-bordered td {
+            border-color: #ffffff !important;
+            color: #ffffff !important;
+            background-color: #2b2b2b !important; /* abu gelap modern */
+        }
+
+        /* === CARD DARK MODE === */
+        body.dark-mode .card,
+        body.dark-mode .card-header,
+        body.dark-mode .card-body,
+        body.dark-mode .card-footer {
+            background-color: #2b2b2b !important;
+            color: #ffffff !important;
+        }
+
+        /* === LEGEND KUSTOM GRAFIK (Teks) === */
+        body.dark-mode .custom-legend-masukkeluar span {
+            color: #ffffff !important;
+        }
+
+        /* === LINK FOOTER === */
+        body.dark-mode .card-footer a {
+            color: #ffffff !important;
+        }
+
+        /* === CIRCLE & BAR LEGEND KATEGORI === */
+        body.dark-mode .legend-circle,
+        body.dark-mode .legend-bar {
+            border-color: #ffffff !important;
+        }
+        /* Dark mode dropdown styles */
+        .dark-mode .dropdown-menu {
+            background: #2d3748 !important;
+            border-color: #4a5568 !important;
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .dropdown-item {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .dropdown-item:hover {
+            background: #4a5568 !important;
+        }
+        
+        .dark-mode .dropdown-item:active {
+            background: #3182ce !important;
+            color: #fff !important;
+        }
+        
+        .dark-mode .dropdown-divider {
+            border-color: #4a5568 !important;
+        }
+        
+        /* Dark mode notification dropdown specific */
+        .dark-mode .dropdown-notif .dropdown-menu {
+            background: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+        
+        .dark-mode .dropdown-notif .dropdown-item {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .dropdown-notif .dropdown-item:hover {
+            background: #4a5568 !important;
+        }
+        
+        /* Dark mode profile dropdown specific */
+        .dark-mode .dropdown-profile .dropdown-menu {
+            background: #2d3748 !important;
+            border-color: #4a5568 !important;
+        }
+        
+        .dark-mode .dropdown-profile .dropdown-item {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .dropdown-profile .dropdown-item:hover {
+            background: #4a5568 !important;
+        }
+        
+        /* Notification dropdown styles */
+        .dropdown-notif .dropdown-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .dropdown-notif .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-notif .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .dropdown-notif .dropdown-item .font-weight-bold {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-notif .dropdown-item small {
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        .dropdown-notif .dropdown-item i {
+            font-size: 1rem;
+            margin-top: 0.125rem;
+        }
+        
+        /* Dark mode notification styles */
+        .dark-mode .dropdown-notif .dropdown-item {
+            border-bottom-color: #4a5568;
+        }
+        
+        .dark-mode .dropdown-notif .dropdown-item:hover {
+            background: #4a5568 !important;
+        }
+        
+        .dark-mode .dropdown-notif .dropdown-item small.text-muted {
+            color: #a0aec0 !important;
+        }
+        /* === PAGINATION TEXT STYLE (DARK MODE) === */
+        body.dark-mode .pagination-controls .btn {
+            background: none !important;
+            border: none !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-weight: 500;
+        }
+
+        /* Aktif (halaman sekarang) */
+        body.dark-mode .pagination-controls .btn.active {
+            color: #007BFF !important;
+            text-decoration: underline;
+        }
+
+        /* Disabled (misalnya Previous saat di halaman 1) */
+        body.dark-mode .pagination-controls .btn:disabled {
+            color: #888888 !important;
+            cursor: not-allowed;
+            text-decoration: none;
         }
     </style>
     <?= $this->renderSection('head') ?>
@@ -1361,6 +1799,47 @@
                     notifDropdown.classList.remove('show-notif');
                 });
             }
+        });
+        </script>
+        <script>
+        // Fungsi deteksi dark mode
+        const isDarkMode = () => document.body.classList.contains('dark-mode');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const charts = Chart.instances;
+
+            const updateChartColors = () => {
+                Object.values(charts).forEach(chart => {
+                    // Ubah warna angka (ticks) di sumbu X & Y
+                    if (chart.options.scales) {
+                        ['x', 'y'].forEach(axis => {
+                            if (chart.options.scales[axis]?.ticks) {
+                                chart.options.scales[axis].ticks.color = isDarkMode() ? '#ffffff' : '#666666';
+                            }
+                            if (chart.options.scales[axis]?.grid) {
+                                chart.options.scales[axis].grid.color = isDarkMode() ? '#444444' : '#f0f2f7';
+                            }
+                        });
+                    }
+
+                    // Ubah warna teks legend
+                    if (chart.options.plugins?.legend?.labels) {
+                        chart.options.plugins.legend.labels.color = isDarkMode() ? '#ffffff' : '#666666';
+                    }
+
+                    chart.update();
+                });
+            };
+
+            // Pertama kali muat
+            updateChartColors();
+
+            // Pantau perubahan class "dark-mode"
+            const observer = new MutationObserver(updateChartColors);
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
         });
     </script>
     <?= $this->renderSection('scripts') ?>

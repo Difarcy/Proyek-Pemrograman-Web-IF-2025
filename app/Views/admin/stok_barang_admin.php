@@ -109,7 +109,7 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="<?= base_url('admin/stok-barang/edit/' . ($item['id'] ?? 1)) ?>" class="btn btn-warning btn-sm">
+                                            <a href="<?= base_url('admin/stok-barang/edit/' . ($item['id'] ?? 1)) ?>" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
                                             <a href="<?= base_url('admin/stok-barang/delete/' . ($item['id'] ?? 1)) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus barang ini?')">
@@ -124,11 +124,11 @@
                         <!-- Data Dummy - Always Show -->
                         <tr>
                             <td><?= $hasData ? count($barang) + 1 : 1 ?></td>
-                            <td>BRG001</td>
-                            <td>Laptop Asus</td>
-                            <td>Elektronik</td>
+                                <td>BRG001</td>
+                                <td>Laptop Asus</td>
+                                <td>Elektronik</td>
                             <td>Asus</td>
-                            <td>5</td>
+                                <td>5</td>
                             <td>Rp 10.000.000</td>
                             <td><span class="badge-status badge-status-tersedia">tersedia</span></td>
                             <td>
@@ -140,15 +140,15 @@
                                         <i class="fas fa-trash"></i> Hapus
                                     </a>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
+                                </td>
+                            </tr>
+                            <tr>
                             <td><?= $hasData ? count($barang) + 2 : 2 ?></td>
-                            <td>BRG002</td>
-                            <td>Mouse Gaming</td>
-                            <td>Elektronik</td>
+                                <td>BRG002</td>
+                                <td>Mouse Gaming</td>
+                                <td>Elektronik</td>
                             <td>Logitech</td>
-                            <td>3</td>
+                                <td>3</td>
                             <td>Rp 250.000</td>
                             <td><span class="badge-status badge-status-hampirhabis">hampir habis</span></td>
                             <td>
@@ -220,14 +220,14 @@
                                         <i class="fas fa-trash"></i> Hapus
                                     </a>
                                 </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 
                 <!-- Pagination -->
-                <div class="pagination-new">
+                <div class="pagination-container">
                     <div class="pagination-info-new">
                         Showing 1 to 5 of 5 entries
                     </div>
@@ -238,7 +238,6 @@
                         <button class="btn" onclick="goToPage(3)">3</button>
                         <button class="btn" onclick="goToPage(4)">4</button>
                         <button class="btn" onclick="goToPage(5)">5</button>
-                        <span class="pagination-dots">...</span>
                         <button class="btn" onclick="nextPage()">Next</button>
                     </div>
                 </div>

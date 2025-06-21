@@ -1,6 +1,6 @@
 <div class="sidebar" id="sidebar">
     <div class="sidebar-content">
-        <div class="brand-link">
+        <div class="brand-link" style="pointer-events: none;">
             <img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo">
             <span>VSTOCK</span>
         </div>

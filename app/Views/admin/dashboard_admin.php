@@ -1,9 +1,16 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>Dashboard<?= $this->endSection() ?>
 
+<?= $this->section('head') ?>
+<!-- ========================================
+     DASHBOARD ADMIN CSS
+     ======================================== -->
+<link rel="stylesheet" href="<?= base_url('assets/css/dashboard_admin.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
-    <div class="container-fluid">
+    <div class="container dashboard-admin">
         <h1 class="mb-4">Dashboard</h1>
         <div class="row tight-widgets">
             <div class="col-12 col-md-6 col-xl-3 mb-2">
@@ -61,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-3">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Barang Terbaru</h5></div>
                     <div class="card-body p-3">
                         <div class="table-responsive">
@@ -103,7 +110,7 @@
                                         <td>Elektronik</td>
                                         <td>1</td>
                                         <td>2024-03-18</td>
-                                        <td><span class="badge-status-hampirhabis">hampir habis</span></td>
+                                        <td><span class="badge-status badge-status-hampirhabis">hampir habis</span></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -135,7 +142,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-3">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Transaksi Barang Masuk Terbaru</h5></div>
                     <div class="card-body p-3">
                         <div class="table-responsive">
@@ -159,7 +166,7 @@
                                         <td>Laptop Asus</td>
                                         <td>10</td>
                                         <td>PT Supplier Jaya</td>
-                                        <td><span class="badge-status-menunggu">Menunggu</span></td>
+                                        <td><span class="badge-status badge-status-menunggu">Menunggu</span></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -168,7 +175,7 @@
                                         <td>Mouse Gaming</td>
                                         <td>0</td>
                                         <td>PT Supplier Jaya</td>
-                                        <td><span class="badge-status-diproses">Diproses</span></td>
+                                        <td><span class="badge-status badge-status-diproses">Diproses</span></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -177,7 +184,7 @@
                                         <td>Keyboard Mechanical</td>
                                         <td>5</td>
                                         <td>PT Supplier Makmur</td>
-                                        <td><span class="badge-status-selesai">Selesai</span></td>
+                                        <td><span class="badge-status badge-status-selesai">Selesai</span></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -186,7 +193,7 @@
                                         <td>Printer Epson</td>
                                         <td>0</td>
                                         <td>PT Supplier Makmur</td>
-                                        <td><span class="badge-status-dibatalkan">Dibatalkan</span></td>
+                                        <td><span class="badge-status badge-status-dibatalkan">Dibatalkan</span></td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -195,7 +202,7 @@
                                         <td>Flashdisk 32GB</td>
                                         <td>15</td>
                                         <td>PT Supplier Jaya</td>
-                                        <td><span class="badge-status-pending">Pending</span></td>
+                                        <td><span class="badge-status badge-status-pending">Pending</span></td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
@@ -204,7 +211,7 @@
                                         <td>Monitor LG</td>
                                         <td>2</td>
                                         <td>PT Supplier Makmur</td>
-                                        <td><span class="badge-status-retur">Retur</span></td>
+                                        <td><span class="badge-status badge-status-retur">Retur</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -218,7 +225,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-3">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Transaksi Barang Keluar Terbaru</h5></div>
                     <div class="card-body p-3">
                         <div class="table-responsive">
@@ -242,7 +249,7 @@
                                         <td>Laptop Asus</td>
                                         <td>2</td>
                                         <td>PT Customer Sejahtera</td>
-                                        <td><span class="badge-status-menunggu">Menunggu</span></td>
+                                        <td><span class="badge-status badge-status-menunggu">Menunggu</span></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -251,7 +258,7 @@
                                         <td>Mouse Gaming</td>
                                         <td>1</td>
                                         <td>PT Customer Sejahtera</td>
-                                        <td><span class="badge-status-diproses">Diproses</span></td>
+                                        <td><span class="badge-status badge-status-diproses">Diproses</span></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -260,7 +267,7 @@
                                         <td>Keyboard Mechanical</td>
                                         <td>1</td>
                                         <td>PT Customer Makmur</td>
-                                        <td><span class="badge-status-dikirim">Dikirim</span></td>
+                                        <td><span class="badge-status badge-status-dikirim">Dikirim</span></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -269,7 +276,7 @@
                                         <td>Printer Epson</td>
                                         <td>1</td>
                                         <td>PT Customer Makmur</td>
-                                        <td><span class="badge-status-selesai">Selesai</span></td>
+                                        <td><span class="badge-status badge-status-selesai">Selesai</span></td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -278,7 +285,7 @@
                                         <td>Flashdisk 32GB</td>
                                         <td>5</td>
                                         <td>PT Customer Jaya</td>
-                                        <td><span class="badge-status-ditolak">Ditolak</span></td>
+                                        <td><span class="badge-status badge-status-ditolak">Ditolak</span></td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
@@ -287,7 +294,7 @@
                                         <td>Monitor LG</td>
                                         <td>1</td>
                                         <td>PT Customer Jaya</td>
-                                        <td><span class="badge-status-dibatalkan">Dibatalkan</span></td>
+                                        <td><span class="badge-status badge-status-dibatalkan">Dibatalkan</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -300,7 +307,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-8 mb-4">
+            <div class="col-12 col-lg-8 mb-3">
                 <div class="card h-100">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Grafik Barang Masuk/Keluar</h5></div>
                     <div class="card-body">
@@ -312,7 +319,7 @@
                                     <span class="legend-bar" style="--legend-color:#4e9af1"></span>
                                     <span class="legend-circle" style="--legend-color:#4e9af1"></span>
                                 </span>
-                                <span style="margin-left:0.6rem;">Barang Masuk</span>
+                                <span style="margin-left:0.6rem; color: #333;">Barang Masuk</span>
                             </div>
                             <div class="legend-line">
                                 <span class="legend-shape">
@@ -320,13 +327,13 @@
                                     <span class="legend-bar" style="--legend-color:#28a745"></span>
                                     <span class="legend-circle" style="--legend-color:#28a745"></span>
                                 </span>
-                                <span style="margin-left:0.6rem;">Barang Keluar</span>
+                                <span style="margin-left:0.6rem; color: #333;">Barang Keluar</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 mb-4">
+            <div class="col-12 col-lg-4 mb-3">
                 <div class="card h-100">
                     <div class="card-header bg-white border-0"><h5 class="mb-0">Grafik Stok Barang per Kategori</h5></div>
                     <div class="card-body">
@@ -339,74 +346,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script>
-    // Grafik Barang Masuk/Keluar
-    const ctxMasukKeluar = document.getElementById('chartMasukKeluar').getContext('2d');
-    new Chart(ctxMasukKeluar, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [
-                {
-                    label: 'Barang Masuk',
-                    data: [12, 19, 15, 17, 22, 18, 25, 20, 23, 19, 21, 24],
-                    borderColor: '#4e9af1',
-                    backgroundColor: 'rgba(78,154,241,0.12)',
-                    tension: 0.35,
-                    pointRadius: 3,
-                    pointBackgroundColor: '#4e9af1',
-                    fill: true
-                },
-                {
-                    label: 'Barang Keluar',
-                    data: [8, 14, 10, 13, 16, 12, 18, 15, 17, 13, 15, 18],
-                    borderColor: '#28a745',
-                    backgroundColor: 'rgba(40,167,69,0.10)',
-                    tension: 0.35,
-                    pointRadius: 3,
-                    pointBackgroundColor: '#28a745',
-                    fill: true
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false },
-                tooltip: { mode: 'index', intersect: false }
-            },
-            scales: {
-                x: { grid: { display: false } },
-                y: { beginAtZero: true, grid: { color: '#f0f2f7' } }
-            }
-        }
-    });
-    
-    // Grafik Stok Barang per Kategori
-    const ctxKategori = document.getElementById('chartKategori').getContext('2d');
-    new Chart(ctxKategori, {
-        type: 'pie',
-        data: {
-            labels: ['Elektronik', 'Aksesoris', 'ATK', 'Lainnya'],
-            datasets: [{
-                data: [40, 25, 20, 15],
-                backgroundColor: [
-                    '#4e9af1', // biru
-                    '#28a745', // hijau
-                    '#ffc107', // kuning
-                    '#ff6a8d'  // pink
-                ],
-                borderWidth: 2,
-                borderColor: '#fff',
-                hoverOffset: 6
-            }]
-        },
-        options: {
-            plugins: {
-                legend: { display: true, position: 'bottom' },
-                tooltip: { enabled: true }
-            }
-        }
-    });
-</script>
+<!-- ========================================
+     DASHBOARD ADMIN JAVASCRIPT
+     ======================================== -->
+<script src="<?= base_url('assets/js/dashboard_admin.js') ?>"></script>
 <?= $this->endSection() ?>

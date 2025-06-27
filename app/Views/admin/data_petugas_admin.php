@@ -1,4 +1,4 @@
-﻿<?= $this->extend('layout/main') ?>
+﻿<?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>data_petugas<?= $this->endSection() ?>
 

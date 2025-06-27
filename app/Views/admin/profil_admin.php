@@ -1,4 +1,4 @@
-﻿<?= $this->extend('layout/main') ?>
+﻿<?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>Profil Admin<?= $this->endSection() ?>
 
@@ -79,36 +79,9 @@
 </div>
 
     <!-- Hidden file input for photo upload -->
-    <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+    <input type="file" id="profilePhotoInput" accept="image/*">
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script>
-    // Add profile-layout class to content wrapper
-    document.addEventListener('DOMContentLoaded', function() {
-    const contentWrapper = document.getElementById('contentWrapper');
-        if (contentWrapper) {
-            contentWrapper.classList.add('profile-layout');
-        }
-    });
-    
-    // Function to handle profile photo change
-    function changeProfilePhoto() {
-        document.getElementById('profilePhotoInput').click();
-    }
-    
-    // Handle file selection
-    document.getElementById('profilePhotoInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            // Here you can add logic to upload the file to server
-            // For now, we'll just show a preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.querySelector('.profile-photo').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
+    <script src="<?= base_url('assets/js/profil_admin.js') ?>"></script>
 <?= $this->endSection() ?>

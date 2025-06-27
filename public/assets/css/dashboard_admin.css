@@ -1,0 +1,195 @@
+/* ========================================
+   DASHBOARD ADMIN CSS
+   File: public/assets/css/dashboard_admin.css
+   Deskripsi: CSS khusus untuk halaman dashboard admin
+   ======================================== */
+
+/* === WIDGET CARDS === */
+.widget-gradient {
+    border-radius: 1.1rem;
+    color: #fff;
+    padding: 1rem 1.1rem 0.6rem 1.1rem;
+    margin-bottom: 0.7rem;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+    width: 100%;
+    max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+.widget-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.widget-gradient.bg1 {
+    background: linear-gradient(135deg, #4e9af1 0%, #5bb6f9 100%);
+}
+
+.widget-gradient.bg2 {
+    background: linear-gradient(135deg, #2ed8b6 0%, #59e6c2 100%);
+}
+
+.widget-gradient.bg3 {
+    background: linear-gradient(135deg, #f6c445 0%, #f9d37c 100%);
+}
+
+.widget-gradient.bg4 {
+    background: linear-gradient(135deg, #ff6a8d 0%, #ff8ca8 100%);
+}
+
+.widget-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.01em;
+}
+
+.widget-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+}
+
+.widget-icon {
+    font-size: 1.35rem;
+    opacity: 0.85;
+    margin-bottom: 0.1rem;
+}
+
+.widget-value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    text-align: right;
+    margin-left: 0.7rem;
+}
+
+.widget-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.93rem;
+    opacity: 0.93;
+    font-weight: 500;
+    margin-top: 0.1rem;
+}
+
+.widget-footer-label {
+    font-size: 0.91rem;
+}
+
+.widget-footer-value {
+    font-size: 0.93rem;
+    font-weight: 600;
+}
+
+/* === TIGHT WIDGETS LAYOUT === */
+.row.tight-widgets {
+    margin-left: -0.3rem;
+    margin-right: -0.3rem;
+}
+
+.tight-widgets > [class^='col-'] {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
+@media (max-width: 991.98px) {
+    .widget-gradient { 
+        min-height: 80px; 
+        padding: 0.7rem 0.7rem 0.4rem 0.7rem; 
+    }
+    .widget-title { 
+        font-size: 0.91rem; 
+    }
+    .widget-icon { 
+        font-size: 1.05rem; 
+    }
+    .widget-value { 
+        font-size: 1.05rem; 
+    }
+    .widget-footer { 
+        font-size: 0.85rem; 
+    }
+}
+
+/* === DASHBOARD TEXT STYLING === */
+.dashboard-admin .card-header h5 {
+    color: #000 !important;
+    font-weight: 600;
+}
+
+.dashboard-admin .table th {
+    color: #000 !important;
+    font-weight: 600;
+}
+
+.dashboard-admin .table td {
+    color: #000 !important;
+}
+
+.dashboard-admin .widget-title {
+    color: #fff !important;
+}
+
+.dashboard-admin .widget-value {
+    color: #fff !important;
+}
+
+.dashboard-admin .widget-footer-label {
+    color: #fff !important;
+}
+
+.dashboard-admin .widget-footer-value {
+    color: #fff !important;
+}
+
+/* === CUSTOM LEGEND STYLING === */
+.custom-legend-masukkeluar {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.legend-line {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.legend-shape {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.legend-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--legend-color);
+}
+
+.legend-bar {
+    width: 12px;
+    height: 3px;
+    background-color: var(--legend-color);
+    border-radius: 1px;
+}
+
+@media (max-width: 768px) {
+    .custom-legend-masukkeluar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+} 

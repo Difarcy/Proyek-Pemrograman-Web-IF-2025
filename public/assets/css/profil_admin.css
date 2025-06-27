@@ -1,0 +1,287 @@
+/*
+ * PROFIL ADMIN CSS
+ * ================
+ * File: profil_admin.css
+ * Description: CSS khusus untuk halaman Profil Admin
+ * Author: VSTOCK Team
+ * Date: 2024
+ */
+
+/* === PROFILE LAYOUT STYLES === */
+.profile-layout {
+    background: #f8f9fa;
+}
+
+.profile-layout .card {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    overflow: hidden;
+}
+
+.profile-layout .card-header {
+    background: #fff !important;
+    border-bottom: 1px solid #e3e6f0;
+    padding: 1.5rem;
+}
+
+.profile-layout .card-header h5 {
+    color: #5a5c69;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.profile-layout .card-body {
+    padding: 2rem;
+}
+
+/* === PROFILE PHOTO STYLES === */
+.profile-photo-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.profile-photo-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.profile-photo-wrapper:hover .photo-overlay {
+    opacity: 1;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.photo-overlay i {
+    color: #fff;
+    font-size: 2rem;
+}
+
+/* === PROFILE INFO STYLES === */
+.profile-layout .col-md-4 {
+    border-right: 1px solid #e3e6f0;
+    padding-right: 2rem;
+}
+
+.profile-layout .col-md-4 h5 {
+    color: #5a5c69;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.profile-layout .col-md-4 p {
+    color: #858796;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* === FORM STYLES === */
+.profile-layout .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.profile-layout .form-group label {
+    font-weight: 500;
+    color: #5a5c69;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.profile-layout .form-control {
+    border: 1px solid #d1d3e2;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    transition: all 0.15s ease-in-out;
+    background: #fff;
+}
+
+.profile-layout .form-control:focus {
+    border-color: #bac8f3;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    background: #fff;
+}
+
+.profile-layout .form-control[readonly] {
+    background: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.profile-layout textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* === BUTTON STYLES === */
+.btn-extended {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s ease-in-out;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.btn-extended i {
+    font-size: 0.875rem;
+}
+
+.btn-extended.btn-blue {
+    background: #4e73df;
+    border-color: #4e73df;
+    color: #fff;
+}
+
+.btn-extended.btn-blue:hover {
+    background: #2e59d9;
+    border-color: #2653d4;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-extended.btn-red {
+    background: #e74a3b;
+    border-color: #e74a3b;
+    color: #fff;
+}
+
+.btn-extended.btn-red:hover {
+    background: #d52a1a;
+    border-color: #c82333;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-extended.btn-gray {
+    background: #858796;
+    border-color: #858796;
+    color: #fff;
+}
+
+.btn-extended.btn-gray:hover {
+    background: #717384;
+    border-color: #6b6d7d;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .profile-layout .card-body {
+        padding: 1.5rem;
+    }
+    
+    .profile-layout .col-md-4 {
+        border-right: none;
+        border-bottom: 1px solid #e3e6f0;
+        padding-right: 0;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .btn-extended {
+        width: 100%;
+        justify-content: center;
+        margin-right: 0;
+    }
+}
+
+/* === DARK MODE SUPPORT === */
+body.dark-mode .profile-layout {
+    background: #1a1d21;
+}
+
+body.dark-mode .profile-layout .card {
+    background: #2a2f36;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .profile-layout .card-header {
+    background: #2a2f36 !important;
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .profile-layout .card-header h5 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .profile-layout .col-md-4 {
+    border-right-color: #404040;
+}
+
+body.dark-mode .profile-layout .col-md-4 h5 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .profile-layout .col-md-4 p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .profile-layout .form-group label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .profile-layout .form-control {
+    background: #2a2f36;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+body.dark-mode .profile-layout .form-control:focus {
+    background: #2a2f36;
+    border-color: #007bff;
+    color: #e0e0e0;
+}
+
+body.dark-mode .profile-layout .form-control[readonly] {
+    background: #1b1b1b;
+    color: #b0b0b0;
+}
+
+body.dark-mode .photo-overlay {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+    body.dark-mode .profile-layout .col-md-4 {
+        border-bottom-color: #404040;
+    }
+} 

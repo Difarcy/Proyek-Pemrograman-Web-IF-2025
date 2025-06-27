@@ -1,6 +1,6 @@
-<?= $this->include('components/header') ?>
-<?= $this->include('components/sidebar_user') ?>
-
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('title') ?>Dashboard<?= $this->endSection() ?>
+<?= $this->section('content') ?>
 <!-- Content Wrapper -->
 <div class="content-wrapper">
     <!-- Content Header -->

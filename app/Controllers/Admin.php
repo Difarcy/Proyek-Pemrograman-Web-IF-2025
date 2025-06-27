@@ -46,7 +46,9 @@ class Admin extends BaseController
             'totalSupplier' => $this->supplierModel->countAll(),
             'totalPetugas' => $this->petugasModel->countAll(),
             'stokMenipis' => $this->barangModel->where('stok <=', 10)->findAll(),
-            'transaksiTerbaru' => $this->transaksiModel->orderBy('tanggal', 'DESC')->limit(5)->findAll()
+            'transaksiTerbaru' => $this->transaksiModel->orderBy('tanggal', 'DESC')->limit(5)->findAll(),
+            'page_css' => ['assets/css/dashboard_admin.css'],
+            'page_js' => ['assets/js/dashboard_admin.js']
         ];
 
         return view('admin/dashboard_admin', $data);
@@ -57,7 +59,9 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Stok Barang',
-            'barang' => $this->barangModel->findAll()
+            'barang' => $this->barangModel->findAll(),
+            'page_css' => ['assets/css/stok_barang_admin.css'],
+            'page_js' => ['assets/js/stok_barang_admin.js']
         ];
 
         return view('admin/stok_barang_admin', $data);
@@ -783,11 +787,23 @@ class Admin extends BaseController
 
     public function profil()
     {
-        return view('admin/profil_admin');
+        $data = [
+            'title' => 'Profil Admin',
+            'page_css' => ['assets/css/profil_admin.css'],
+            'page_js' => ['assets/js/profil_admin.js']
+        ];
+
+        return view('admin/profil_admin', $data);
     }
 
     public function ubahPassword()
     {
-        return view('admin/ubah_password_admin');
+        $data = [
+            'title' => 'Ubah Password',
+            'page_css' => ['assets/css/ubah_password_admin.css'],
+            'page_js' => ['assets/js/ubah_password_admin.js']
+        ];
+
+        return view('admin/ubah_password_admin', $data);
     }
 }

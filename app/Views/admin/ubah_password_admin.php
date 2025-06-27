@@ -1,4 +1,4 @@
-﻿<?= $this->extend('layout/main') ?>
+﻿<?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>Ubah Password<?= $this->endSection() ?>
 
@@ -26,15 +26,34 @@
                         <form>
                             <div class="form-group">
                                 <label>Password Lama</label>
-                                <input type="password" class="form-control" placeholder="Masukkan password lama">
+                                <div class="password-field-wrapper">
+                                    <input type="password" class="form-control" id="oldPassword" placeholder="Masukkan password lama">
+                                    <button type="button" class="password-toggle" data-toggle="oldPassword" onclick="togglePasswordVisibility('oldPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Password Baru</label>
-                                <input type="password" class="form-control" placeholder="Masukkan password baru">
+                                <div class="password-field-wrapper">
+                                    <input type="password" class="form-control" id="newPassword" placeholder="Masukkan password baru">
+                                    <button type="button" class="password-toggle" data-toggle="newPassword" onclick="togglePasswordVisibility('newPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="passwordStrength" class="password-strength"></div>
+                                <div id="passwordStrengthMeter" class="password-strength-meter">
+                                    <div class="meter-fill"></div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control" placeholder="Konfirmasi password baru">
+                                <div class="password-field-wrapper">
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Konfirmasi password baru">
+                                    <button type="button" class="password-toggle" data-toggle="confirmPassword" onclick="togglePasswordVisibility('confirmPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-extended btn-blue">
@@ -53,13 +72,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script>
-    // Add password-layout class to content wrapper
-    document.addEventListener('DOMContentLoaded', function() {
-        const contentWrapper = document.getElementById('contentWrapper');
-        if (contentWrapper) {
-            contentWrapper.classList.add('password-layout');
-        }
-    });
-</script>
+    <script src="<?= base_url('assets/js/ubah_password_admin.js') ?>"></script>
 <?= $this->endSection() ?>

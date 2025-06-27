@@ -7,74 +7,60 @@
     </div>
     <ul class="nav-list">
         <li>
-            <a href="<?= base_url('admin/dashboard') ?>" class="<?= service('uri')->getSegment(2) == 'dashboard' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/dashboard') ?>" class="<?= service('uri')->getSegment(2) == 'dashboard' ? ' active' : '' ?>">
                 <i class="fas fa-tachometer-alt"></i>
                 <span class="links_name">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/stok-barang') ?>" class="<?= service('uri')->getSegment(2) == 'stok-barang' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/stok-barang') ?>" class="<?= service('uri')->getSegment(2) == 'stok-barang' ? ' active' : '' ?>">
                 <i class="fas fa-boxes"></i>
                 <span class="links_name">Stok Barang</span>
             </a>
             <span class="tooltip">Stok Barang</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/barang-masuk') ?>" class="<?= service('uri')->getSegment(2) == 'barang-masuk' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/barang-masuk') ?>" class="<?= service('uri')->getSegment(2) == 'barang-masuk' ? ' active' : '' ?>">
                 <i class="fas fa-arrow-down"></i>
                 <span class="links_name">Barang Masuk</span>
             </a>
             <span class="tooltip">Barang Masuk</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/barang-keluar') ?>" class="<?= service('uri')->getSegment(2) == 'barang-keluar' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/barang-keluar') ?>" class="<?= service('uri')->getSegment(2) == 'barang-keluar' ? ' active' : '' ?>">
                 <i class="fas fa-arrow-up"></i>
                 <span class="links_name">Barang Keluar</span>
             </a>
             <span class="tooltip">Barang Keluar</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/laporan') ?>" class="<?= service('uri')->getSegment(2) == 'laporan' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/laporan') ?>" class="<?= service('uri')->getSegment(2) == 'laporan' ? ' active' : '' ?>">
                 <i class="fas fa-file-alt"></i>
                 <span class="links_name">Laporan</span>
             </a>
             <span class="tooltip">Laporan</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/data-customer') ?>" class="<?= service('uri')->getSegment(2) == 'data-customer' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/data-customer') ?>" class="<?= service('uri')->getSegment(2) == 'data-customer' ? ' active' : '' ?>">
                 <i class="fas fa-users"></i>
                 <span class="links_name">Data Customer</span>
             </a>
             <span class="tooltip">Data Customer</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/data-supplier') ?>" class="<?= service('uri')->getSegment(2) == 'data-supplier' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/data-supplier') ?>" class="<?= service('uri')->getSegment(2) == 'data-supplier' ? ' active' : '' ?>">
                 <i class="fas fa-truck"></i>
                 <span class="links_name">Data Supplier</span>
             </a>
             <span class="tooltip">Data Supplier</span>
         </li>
         <li>
-            <a href="<?= base_url('admin/data-petugas') ?>" class="<?= service('uri')->getSegment(2) == 'data-petugas' ? ' active' : '' ?>">
+            <a href="<?= base_url('user/data-petugas') ?>" class="<?= service('uri')->getSegment(2) == 'data-petugas' ? ' active' : '' ?>">
                 <i class="fas fa-user-tie"></i>
                 <span class="links_name">Data Petugas</span>
             </a>
             <span class="tooltip">Data Petugas</span>
-        </li>
-        <li>
-            <a href="<?= base_url('admin/manajemen-pengguna') ?>" class="<?= service('uri')->getSegment(2) == 'manajemen-pengguna' ? ' active' : '' ?>">
-                <i class="fas fa-user-cog"></i>
-                <span class="links_name">Manajemen Pengguna</span>
-            </a>
-            <span class="tooltip">Manajemen Pengguna</span>
-        </li>
-        <li>
-            <a href="<?= base_url('admin/profil-toko') ?>" class="<?= service('uri')->getSegment(2) == 'profil-toko' ? ' active' : '' ?>">
-                <i class="fas fa-store"></i>
-                <span class="links_name">Profil Toko</span>
-            </a>
-            <span class="tooltip">Profil Toko</span>
         </li>
     </ul>
 </div> 

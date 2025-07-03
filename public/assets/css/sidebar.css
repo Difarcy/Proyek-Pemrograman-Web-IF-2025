@@ -1,0 +1,122 @@
+/*
+|--------------------------------------------------------------------------
+| Sidebar Styles (Referensi)
+| Penanda: sidebar.css untuk partials/sidebar_admin.php & sidebar_user.php
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-content {
+  background: #23272f;
+  color: #fff;
+  width: 240px;
+  min-height: 100vh;
+  overflow-y: auto;
+  height: 100vh;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+.logo-details {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 18px;
+  margin-bottom: 8px;
+}
+.logo-img {
+  height: 32px;
+  width: 32px;
+  margin-right: 6px;
+  object-fit: contain;
+  display: block;
+}
+.logo_name {
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-list li {
+  position: relative;
+}
+.nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-left: 4px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+.nav-list a i {
+  font-size: 1.15rem;
+  min-width: 22px;
+  text-align: center;
+}
+.links_name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.nav-list a.active, .nav-list a:hover {
+  background: #31343b;
+  border-left: 4px solid #4eaaff;
+  color: #fff;
+}
+.tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #23272f;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  margin-left: 8px;
+  white-space: nowrap;
+  z-index: 10;
+}
+.nav-list li:hover .tooltip {
+  opacity: 1;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+.sidebar-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 80px;
+    min-width: 80px;
+  }
+  .sidebar-logo span,
+  .sidebar-link span {
+    display: none;
+  }
+}

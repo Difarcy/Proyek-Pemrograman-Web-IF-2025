@@ -69,8 +69,8 @@ $routes->group('admin', ['filter' => 'auth:admin'], function($routes) {
     $routes->get('laporan/export/excel', 'Admin::exportExcel');
     $routes->get('laporan/export/pdf', 'Admin::exportPdf');
 
-    // Manajemen Pengguna routes
-    $routes->get('manajemen-pengguna', 'Admin::manajemenPengguna');
+    // Kelola Pengguna routes
+    $routes->get('kelola-pengguna', 'Admin::kelolaPengguna');
     $routes->get('profil-toko', 'Admin::profilToko');
 
     // Rute untuk profil dan ubah password

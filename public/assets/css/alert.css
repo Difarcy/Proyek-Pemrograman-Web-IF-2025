@@ -1,0 +1,30 @@
+/* =============================
+   ALERT & WARNING STYLES (VStock)
+   ============================= */
+
+/* Alert error: tampil seperti input */
+.alert-error {
+    background: #ffeaea;
+    color: #d32f2f;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem; /* Sama seperti input */
+    margin: 0 auto 0.8rem auto; /* Sama dengan input & button */
+    text-align: center;
+    font-size: 0.95rem; /* Sama dengan input */
+    height: 36px; /* Sama dengan input */
+    width: 90%; /* Sama seperti input */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Saat error muncul */
+.alert-error.show {
+    opacity: 1;
+    visibility: visible;
+}

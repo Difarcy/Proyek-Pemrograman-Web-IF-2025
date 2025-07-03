@@ -1,0 +1,157 @@
+/*
+|--------------------------------------------------------------------------
+| Header Styles
+| Penanda: header.css untuk partials/header.php
+|--------------------------------------------------------------------------
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 240px;
+  width: calc(100% - 240px);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 18px 0 rgba(0,0,0,0.10);
+  padding: 4px 0 4px 0;
+  min-height: 40px;
+  border-radius: 0;
+  z-index: 300;
+  margin: 0;
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.header-left {
+  flex: 1;
+  justify-content: flex-start;
+}
+.header-center {
+  flex: 2;
+  justify-content: center;
+}
+.header-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.header-title,
+.header-login-time {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #222;
+  letter-spacing: 0.3px;
+}
+
+.header-profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  background: #f3f4f6;
+}
+
+.layout-main {
+  padding-top: 48px;
+}
+
+@media (max-width: 900px) {
+  .main-header {
+    left: 80px;
+    width: calc(100% - 80px);
+    flex-direction: column;
+    min-height: 48px;
+    gap: 6px;
+  }
+  .header-section {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .header-center {
+    justify-content: center;
+    margin: 4px 0;
+  }
+  .layout-main {
+    padding-top: 56px;
+  }
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  min-width: 220px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+  border-radius: 16px;
+  padding: 10px 0;
+  z-index: 999;
+  font-size: 0.93rem;
+  margin-top: 10px;
+  text-align: left;
+}
+.profile-dropdown-username {
+  font-weight: 600;
+  color: #222;
+  padding: 12px 22px 12px 22px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 0.93rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  color: #23272f;
+  text-decoration: none;
+  font-size: 0.93rem;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.profile-dropdown-link:last-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.profile-dropdown-link i {
+  min-width: 20px;
+  text-align: center;
+}
+.profile-dropdown-link:hover {
+  background: #f3f4f6;
+}
+.profile-dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0;
+  width: 100%;
+}
+
+.header-section.header-right { position: relative; }
+
+.profile-dropdown.show {
+  display: block;
+}

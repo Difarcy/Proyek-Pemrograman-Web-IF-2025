@@ -1,54 +1,56 @@
 <?php
-
 namespace App\Controllers;
-
-use App\Models\UserModel;
+use App\Models\User;
 use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
     public function login()
     {
+        // Jika sudah login, redirect ke dashboard
+        $session = session();
+        if ($session->get('isLoggedIn')) {
+            if ($session->get('role') === 'admin') {
+                return redirect()->to('/admin/dashboard');
+            } else {
+                return redirect()->to('/user/dashboard');
+            }
+        }
         return view('auth/login');
     }
 
     public function attemptLogin()
     {
+        $session = session();
+        $userModel = new User();
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $userModel = new UserModel();
         $user = $userModel->where('username', $username)->first();
-
         if ($user) {
-            // Debug: Log the password verification
-            log_message('debug', 'Attempting login for user: ' . $username);
-            log_message('debug', 'Password verification result: ' . (password_verify($password, $user['password']) ? 'true' : 'false'));
-            
             if (password_verify($password, $user['password'])) {
-            $sessionData = [
-                'user_id' => $user['id'],
-                'username' => $user['username'],
-                'role' => $user['role'],
-                'logged_in' => true
-            ];
-            
-            session()->set($sessionData);
-
-            if ($user['role'] === 'admin') {
-                return redirect()->to('/admin/dashboard');
-            } else {
-                return redirect()->to('/user/dashboard');
+                $session->set([
+                    'user_id'   => $user['id'],
+                    'username'  => $user['username'],
+                    'nama'      => $user['nama'],
+                    'role'      => $user['role'],
+                    'isLoggedIn'=> true
+                ]);
+                if ($user['role'] === 'admin') {
+                    return redirect()->to('/admin/dashboard');
+                } else {
+                    return redirect()->to('/user/dashboard');
                 }
             }
         }
-
-        return redirect()->back()->with('error', 'Username dan password salah');
+        // Jika gagal
+        $session->setFlashdata('error', 'Username atau Password Salah!');
+        return redirect()->to('/');
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/');
     }
-} 
+}

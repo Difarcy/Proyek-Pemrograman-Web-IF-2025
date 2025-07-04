@@ -6,7 +6,7 @@
 */
 
 .dashboard-page-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #222;
   margin-bottom: 4px;
@@ -39,7 +39,7 @@
 }
 
 .widget-title {
-  font-size: 0.98rem;
+  font-size: 0.94rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -90,14 +90,4 @@
   font-size: 0.98rem;
   font-weight: 600;
   opacity: 0.85;
-}
-
-@media (max-width: 900px) {
-  .dashboard-widgets {
-    flex-direction: column;
-    gap: 12px;
-  }
-  .widget {
-    max-width: 100%;
-  }
 }

@@ -71,4 +71,33 @@ class Barang extends Model
             ]
         ];
     }
+
+    /**
+     * Filter barang berdasarkan pencarian, jenis, dan merek
+     */
+    public function filterBarang($search = '', $jenis = '', $merek = '', $limit = null, $offset = null)
+    {
+        $builder = $this;
+        if ($search) {
+            $builder = $builder->groupStart()
+                ->like('kode_barang', $search)
+                ->orLike('nama_barang', $search)
+                ->groupEnd();
+        }
+        if ($jenis) {
+            $builder = $builder->where('jenis_barang', $jenis);
+        }
+        if ($merek) {
+            $builder = $builder->where('merek_barang', $merek);
+        }
+        
+        if ($limit !== null) {
+            $builder = $builder->limit($limit);
+        }
+        if ($offset !== null) {
+            $builder = $builder->offset($offset);
+        }
+        
+        return $builder->findAll();
+    }
 } 

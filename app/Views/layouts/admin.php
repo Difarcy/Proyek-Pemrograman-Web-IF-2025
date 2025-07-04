@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/alert.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/stok_barang.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/tabel.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/pagination.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/button.css') ?>">
 
     <!-- Font Awesome (CDN) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -47,6 +51,7 @@
     <script src="<?= base_url('assets/js/sidebar.js') ?>"></script>
     <script src="<?= base_url('assets/js/header.js') ?>"></script>
     <script src="<?= base_url('assets/js/dashboard.js') ?>"></script>
+    <script src="<?= base_url('assets/js/stok_barang.js') ?>"></script>
 
     <!-- Tambahan Script dari halaman -->
     <?= $this->renderSection('scripts') ?>

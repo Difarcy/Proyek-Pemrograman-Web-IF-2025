@@ -1,427 +1,145 @@
 <?= $this->extend('layouts/user') ?>
 <?= $this->section('title') ?>Stok Barang<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-    <!-- Content Header -->
-    <div class="content-header">
-        <div class="v-container-fluid">
-            <div class="v-row v-mb-2">
-                <div class="v-col-sm-6">
-                    <h1 class="v-m-0">Stok Barang</h1>
-                </div>
-            </div>
+
+<h2 class="stok-barang-page-title">Stok Barang</h2>
+
+<div class="stok-barang-container">
+  <div class="stok-barang-card">
+    <div class="stok-barang-content">
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <div class="filter-header" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; gap: 10px;">
+          <div class="filter-controls" style="display: flex; gap: 15px; align-items: center;">
+            <button type="button" class="btn btn-success" onclick="exportExcel()">
+              <i class="fas fa-file-excel"></i> Export
+            </button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='tambah_barang_url';">
+              <i class="fas fa-plus"></i> Tambah
+            </button>
+          </div>
         </div>
+        
+        <form method="get" id="filterForm">
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label for="search">Pencarian</label>
+              <input type="text" name="search" placeholder="Cari kode/nama barang..." value="<?= esc($filterSearch) ?>">
+            </div>
+
+            <div class="filter-group">
+              <label for="jenis">Jenis</label>
+              <select name="jenis" onchange="this.form.submit()">
+                <option value="">Semua Jenis</option>
+                <option value="Elektronik" <?= $filterJenis=='Elektronik'?'selected':'' ?>>Elektronik</option>
+                <option value="Pakaian" <?= $filterJenis=='Pakaian'?'selected':'' ?>>Pakaian</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="merek">Merek</label>
+              <select name="merek" onchange="this.form.submit()">
+                <option value="">Semua Merek</option>
+                <option value="Samsung" <?= $filterMerek=='Samsung'?'selected':'' ?>>Samsung</option>
+                <option value="LG" <?= $filterMerek=='LG'?'selected':'' ?>>LG</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>&nbsp;</label>
+              <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='<?= current_url() ?>?entries=<?= $perPage ?>'">
+                <i class="fas fa-refresh"></i> Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Show Entries Filter -->
+      <div class="show-entries-bar">
+        <form method="get" id="entriesForm" style="display: flex; align-items: center; gap: 8px; margin: 8px 0;">
+          <label for="entries">Show</label>
+          <select id="entries" name="entries" onchange="this.form.submit();">
+            <option value="10" <?= ($perPage == 10) ? 'selected' : '' ?>>10</option>
+            <option value="25" <?= ($perPage == 25) ? 'selected' : '' ?>>25</option>
+            <option value="50" <?= ($perPage == 50) ? 'selected' : '' ?>>50</option>
+            <option value="100" <?= ($perPage == 100) ? 'selected' : '' ?>>100</option>
+          </select>
+          <span>entries</span>
+          <input type="hidden" name="search" value="<?= esc($filterSearch) ?>">
+          <input type="hidden" name="jenis" value="<?= esc($filterJenis) ?>">
+          <input type="hidden" name="merek" value="<?= esc($filterMerek) ?>">
+        </form>
+      </div>
+
+      <!-- Table Section -->
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Kode Barang</th>
+              <th>Nama Barang</th>
+              <th>Jenis Barang</th>
+              <th>Merek Barang</th>
+              <th>Stok</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php if (!empty($stokBarang)): ?>
+            <?php $no = 1 + (($currentPage - 1) * $perPage); foreach ($stokBarang as $barang): ?>
+            <tr>
+              <td><?= $no++ ?></td>
+              <td><?= esc($barang['kode_barang']) ?></td>
+              <td><?= esc($barang['nama_barang']) ?></td>
+              <td><?= esc($barang['jenis_barang']) ?></td>
+              <td><?= esc($barang['merek_barang']) ?></td>
+              <td><?= esc($barang['stok']) ?></td>
+              <td><?= esc($barang['keterangan']) ?></td>
+              <td>
+                <div class="table-actions">
+                  <a href="#" class="action-btn action-btn-edit">Edit</a>
+                  <a href="#" class="action-btn action-btn-delete">Hapus</a>
+                </div>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="8" style="text-align:center; color:#9ca3af; font-size:15px;">Tidak ada data barang.</td>
+            </tr>
+          <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination-bar">
+        <div class="pagination-info">
+          Showing <?= ($total > 0) ? ($perPage * ($currentPage - 1)) + 1 : 0 ?> to <?= min(($perPage * ($currentPage - 1)) + count($stokBarang), $total) ?> of <?= $total ?> entries
+        </div>
+        <div class="pagination-nav">
+          <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>&search=<?= urlencode($filterSearch) ?>&jenis=<?= urlencode($filterJenis) ?>&merek=<?= urlencode($filterMerek) ?>&entries=<?= $perPage ?>" class="pagination-link-with-params">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+          <?php endif; ?>
+          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $currentPage): ?>
+              <span class="pagination-link active"><?= $i ?></span>
+            <?php else: ?>
+              <a href="?page=<?= $i ?>&search=<?= urlencode($filterSearch) ?>&jenis=<?= urlencode($filterJenis) ?>&merek=<?= urlencode($filterMerek) ?>&entries=<?= $perPage ?>" class="pagination-link-with-params"><?= $i ?></a>
+            <?php endif; ?>
+          <?php endfor; ?>
+          <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>&search=<?= urlencode($filterSearch) ?>&jenis=<?= urlencode($filterJenis) ?>&merek=<?= urlencode($filterMerek) ?>&entries=<?= $perPage ?>" class="pagination-link-with-params">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          <?php endif; ?>
+        </div>
+      </div>
     </div>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="v-container-fluid">
-            <!-- Filter -->
-            <div class="v-card">
-                <div class="v-card-header">
-                    <h3 class="v-card-title">Filter</h3>
-                </div>
-                <div class="v-card-body">
-                    <form action="<?= base_url('user/stok-barang') ?>" method="get">
-                        <div class="v-row">
-                            <div class="v-col-md-3">
-                                <div class="v-form-group">
-                                    <label>Kategori</label>
-                                    <select class="v-form-control" name="kategori">
-                                        <option value="">Semua Kategori</option>
-                                        <option value="elektronik">Elektronik</option>
-                                        <option value="aksesoris">Aksesoris</option>
-                                        <option value="komponen">Komponen</option>
-                                        <option value="peripheral">Peripheral</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="v-col-md-3">
-                                <div class="v-form-group">
-                                    <label>Status Stok</label>
-                                    <select class="v-form-control" name="status">
-                                        <option value="">Semua Status</option>
-                                        <option value="aman">Aman</option>
-                                        <option value="hampir_habis">Hampir Habis</option>
-                                        <option value="habis">Habis</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="v-col-md-3">
-                                <div class="v-form-group">
-                                    <label>Pencarian</label>
-                                    <input type="text" class="v-form-control" name="search" placeholder="Cari barang...">
-                                </div>
-                            </div>
-                            <div class="v-col-md-3">
-                                <div class="v-form-group">
-                                    <label>&nbsp;</label>
-                                    <button type="submit" class="v-btn v-btn-primary v-btn-block">
-                                        <i class="fas fa-search"></i> Cari
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Tabel Stok -->
-            <div class="v-card">
-                <div class="v-card-header">
-                    <h3 class="v-card-title">Data Stok Barang</h3>
-                    <div class="v-card-tools">
-                        <button type="button" class="v-btn v-btn-success" onclick="exportExcel()">
-                            <i class="fas fa-file-excel"></i> Export Excel
-                        </button>
-                        <button type="button" class="v-btn v-btn-danger" onclick="exportPDF()">
-                            <i class="fas fa-file-pdf"></i> Export PDF
-                        </button>
-                    </div>
-                </div>
-                <div class="v-card-body">
-                    <div class="v-table-responsive">
-                        <table class="v-table v-table-bordered v-table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Kategori</th>
-                                    <th>Stok</th>
-                                    <th>Satuan</th>
-                                    <th>Harga</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>BRG001</td>
-                                    <td>Laptop Asus</td>
-                                    <td>Elektronik</td>
-                                    <td>10</td>
-                                    <td>Unit</td>
-                                    <td>Rp 15.000.000</td>
-                                    <td><span class="v-badge v-badge-success">Aman</span></td>
-                                    <td>
-                                        <button type="button" class="v-btn v-btn-info v-btn-sm" data-toggle="modal" data-target="#modal-detail" onclick="showDetail('BRG001')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button type="button" class="v-btn v-btn-primary v-btn-sm" data-toggle="modal" data-target="#modal-barang-masuk" onclick="prepareBarangMasuk('BRG001')">
-                                            <i class="fas fa-arrow-down"></i>
-                                        </button>
-                                        <button type="button" class="v-btn v-btn-warning v-btn-sm" data-toggle="modal" data-target="#modal-barang-keluar" onclick="prepareBarangKeluar('BRG001')">
-                                            <i class="fas fa-arrow-up"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>BRG002</td>
-                                    <td>Mouse Gaming</td>
-                                    <td>Aksesoris</td>
-                                    <td>5</td>
-                                    <td>Unit</td>
-                                    <td>Rp 500.000</td>
-                                    <td><span class="v-badge v-badge-warning">Hampir Habis</span></td>
-                                    <td>
-                                        <button type="button" class="v-btn v-btn-info v-btn-sm" data-toggle="modal" data-target="#modal-detail" onclick="showDetail('BRG002')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button type="button" class="v-btn v-btn-primary v-btn-sm" data-toggle="modal" data-target="#modal-barang-masuk" onclick="prepareBarangMasuk('BRG002')">
-                                            <i class="fas fa-arrow-down"></i>
-                                        </button>
-                                        <button type="button" class="v-btn v-btn-warning v-btn-sm" data-toggle="modal" data-target="#modal-barang-keluar" onclick="prepareBarangKeluar('BRG002')">
-                                            <i class="fas fa-arrow-up"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  </div>
 </div>
 
-<!-- Modal Detail -->
-<div class="v-modal v-fade" id="modal-detail">
-    <div class="v-modal-dialog">
-        <div class="v-modal-content">
-            <div class="v-modal-header">
-                <h4 class="v-modal-title">Detail Barang</h4>
-                <button type="button" class="v-btn v-btn-default" data-dismiss="modal">Tutup</button>
-            </div>
-            <div class="v-modal-body">
-                <table class="v-table">
-                    <tr>
-                        <th style="width: 150px;">Kode Barang</th>
-                        <td id="detail-kode">BRG001</td>
-                    </tr>
-                    <tr>
-                        <th>Nama Barang</th>
-                        <td id="detail-nama">Laptop Asus</td>
-                    </tr>
-                    <tr>
-                        <th>Kategori</th>
-                        <td id="detail-kategori">Elektronik</td>
-                    </tr>
-                    <tr>
-                        <th>Stok</th>
-                        <td id="detail-stok">10 Unit</td>
-                    </tr>
-                    <tr>
-                        <th>Harga</th>
-                        <td id="detail-harga">Rp 15.000.000</td>
-                    </tr>
-                    <tr>
-                        <th>Status</th>
-                        <td id="detail-status"><span class="v-badge v-badge-success">Aman</span></td>
-                    </tr>
-                    <tr>
-                        <th>Deskripsi</th>
-                        <td id="detail-deskripsi">Laptop Asus dengan spesifikasi tinggi</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Barang Masuk -->
-<div class="v-modal v-fade" id="modal-barang-masuk">
-    <div class="v-modal-dialog">
-        <div class="v-modal-content">
-            <div class="v-modal-header">
-                <h4 class="v-modal-title">Tambah Barang Masuk</h4>
-                <button type="button" class="v-btn v-btn-default" data-dismiss="modal">Batal</button>
-            </div>
-            <form action="<?= base_url('user/barang-masuk/tambah') ?>" method="post">
-                <div class="v-modal-body">
-                    <input type="hidden" name="kode_barang" id="masuk-kode">
-                    <div class="v-form-group">
-                        <label>Nama Barang</label>
-                        <input type="text" class="v-form-control" id="masuk-nama" readonly>
-                    </div>
-                    <div class="v-form-group">
-                        <label>Supplier</label>
-                        <select class="v-form-control" name="supplier" required>
-                            <option value="">Pilih Supplier</option>
-                            <option value="SUP001">PT Supplier Jaya</option>
-                            <option value="SUP002">CV Supplier Makmur</option>
-                        </select>
-                    </div>
-                    <div class="v-form-group">
-                        <label>Jumlah</label>
-                        <input type="number" class="v-form-control" name="jumlah" required min="1">
-                    </div>
-                    <div class="v-form-group">
-                        <label>Harga Beli</label>
-                        <input type="number" class="v-form-control" name="harga_beli" required min="0">
-                    </div>
-                    <div class="v-form-group">
-                        <label>Keterangan</label>
-                        <textarea class="v-form-control" name="keterangan" rows="3"></textarea>
-                    </div>
-                    <div class="v-modal-footer v-justify-content-between">
-                        <button type="button" class="v-btn v-btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="v-btn v-btn-primary">Simpan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Barang Keluar -->
-<div class="v-modal v-fade" id="modal-barang-keluar">
-    <div class="v-modal-dialog">
-        <div class="v-modal-content">
-            <div class="v-modal-header">
-                <h4 class="v-modal-title">Tambah Barang Keluar</h4>
-                <button type="button" class="v-btn v-btn-default" data-dismiss="modal">Batal</button>
-            </div>
-            <form action="<?= base_url('user/barang-keluar/tambah') ?>" method="post">
-                <div class="v-modal-body">
-                    <input type="hidden" name="kode_barang" id="keluar-kode">
-                    <div class="v-form-group">
-                        <label>Nama Barang</label>
-                        <input type="text" class="v-form-control" id="keluar-nama" readonly>
-                    </div>
-                    <div class="v-form-group">
-                        <label>Stok Tersedia</label>
-                        <input type="text" class="v-form-control" id="keluar-stok" readonly>
-                    </div>
-                    <div class="v-form-group">
-                        <label>Customer</label>
-                        <select class="v-form-control" name="customer" required>
-                            <option value="">Pilih Customer</option>
-                            <option value="CUST001">John Doe</option>
-                            <option value="CUST002">Jane Smith</option>
-                        </select>
-                    </div>
-                    <div class="v-form-group">
-                        <label>Jumlah</label>
-                        <input type="number" class="v-form-control" name="jumlah" required min="1" id="keluar-jumlah">
-                    </div>
-                    <div class="v-form-group">
-                        <label>Harga Jual</label>
-                        <input type="number" class="v-form-control" name="harga_jual" required min="0">
-                    </div>
-                    <div class="v-form-group">
-                        <label>Keterangan</label>
-                        <textarea class="v-form-control" name="keterangan" rows="3"></textarea>
-                    </div>
-                    <div class="v-modal-footer v-justify-content-between">
-                        <button type="button" class="v-btn v-btn-default" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="v-btn v-btn-primary">Simpan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    $(document).ready(function() {
-        // Initialize DataTables
-        $('.v-table').DataTable({
-            "responsive": true,
-            "autoWidth": false
-        });
-    });
-
-    // Function to show detail
-    function showDetail(kode) {
-        // Simulate API call
-        const data = {
-            'BRG001': {
-                kode: 'BRG001',
-                nama: 'Laptop Asus',
-                kategori: 'Elektronik',
-                stok: '10 Unit',
-                harga: 'Rp 15.000.000',
-                status: '<span class="v-badge v-badge-success">Aman</span>',
-                deskripsi: 'Laptop Asus dengan spesifikasi tinggi'
-            },
-            'BRG002': {
-                kode: 'BRG002',
-                nama: 'Mouse Gaming',
-                kategori: 'Aksesoris',
-                stok: '5 Unit',
-                harga: 'Rp 500.000',
-                status: '<span class="v-badge v-badge-warning">Hampir Habis</span>',
-                deskripsi: 'Mouse gaming dengan DPI tinggi'
-            }
-        };
-
-        const item = data[kode];
-        $('#detail-kode').text(item.kode);
-        $('#detail-nama').text(item.nama);
-        $('#detail-kategori').text(item.kategori);
-        $('#detail-stok').text(item.stok);
-        $('#detail-harga').text(item.harga);
-        $('#detail-status').html(item.status);
-        $('#detail-deskripsi').text(item.deskripsi);
-    }
-
-    // Function to prepare barang masuk
-    function prepareBarangMasuk(kode) {
-        // Simulate API call
-        const data = {
-            'BRG001': {
-                kode: 'BRG001',
-                nama: 'Laptop Asus'
-            },
-            'BRG002': {
-                kode: 'BRG002',
-                nama: 'Mouse Gaming'
-            }
-        };
-
-        const item = data[kode];
-        $('#masuk-kode').val(item.kode);
-        $('#masuk-nama').val(item.nama);
-    }
-
-    // Function to prepare barang keluar
-    function prepareBarangKeluar(kode) {
-        // Simulate API call
-        const data = {
-            'BRG001': {
-                kode: 'BRG001',
-                nama: 'Laptop Asus',
-                stok: 10
-            },
-            'BRG002': {
-                kode: 'BRG002',
-                nama: 'Mouse Gaming',
-                stok: 5
-            }
-        };
-
-        const item = data[kode];
-        $('#keluar-kode').val(item.kode);
-        $('#keluar-nama').val(item.nama);
-        $('#keluar-stok').val(item.stok + ' Unit');
-        $('#keluar-jumlah').attr('max', item.stok);
-    }
-
-    // Function to export to Excel
-    function exportExcel() {
-        Swal.fire({
-            title: 'Mengekspor ke Excel',
-            text: 'Mohon tunggu sebentar...',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        // Simulate export process
-        setTimeout(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: 'Data berhasil diekspor ke Excel',
-                showConfirmButton: false,
-                timer: 2000
-            });
-        }, 2000);
-    }
-
-    // Function to export to PDF
-    function exportPDF() {
-        Swal.fire({
-            title: 'Mengekspor ke PDF',
-            text: 'Mohon tunggu sebentar...',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        // Simulate export process
-        setTimeout(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: 'Data berhasil diekspor ke PDF',
-                showConfirmButton: false,
-                timer: 2000
-            });
-        }, 2000);
-    }
-</script>
-</body>
-</html> 
+<?= $this->endSection() ?>

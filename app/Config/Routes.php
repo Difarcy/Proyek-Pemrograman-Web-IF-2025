@@ -17,7 +17,7 @@ $routes->group('admin', ['filter' => 'auth:admin'], function($routes) {
     $routes->get('dashboard', 'Admin::index');
     
     // Barang routes
-    $routes->get('stok-barang', 'Admin::barang');
+    $routes->get('stok-barang', 'Admin::stok');
     $routes->get('stok-barang/create', 'Admin::createBarang');
     $routes->post('stok-barang/store', 'Admin::storeBarang');
     $routes->get('stok-barang/edit/(:num)', 'Admin::editBarang/$1');
@@ -83,7 +83,7 @@ $routes->group('user', ['filter' => 'auth:user'], function($routes) {
     $routes->get('dashboard', 'User::index');
     
     // Barang routes
-    $routes->get('stok-barang', 'User::barang');
+    $routes->get('stok-barang', 'User::stok');
     $routes->get('stok-barang/create', 'User::createBarang');
     $routes->post('stok-barang/store', 'User::storeBarang');
     $routes->get('stok-barang/edit/(:num)', 'User::editBarang/$1');

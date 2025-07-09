@@ -14,124 +14,160 @@ $routes->get('auth/logout', 'Auth::logout');
 
 // Admin routes
 $routes->group('admin', ['filter' => 'auth:admin'], function($routes) {
-    $routes->get('dashboard', 'Admin::index');
-    
-    // Barang routes
-    $routes->get('stok-barang', 'Admin::stok');
-    $routes->get('stok-barang/create', 'Admin::createBarang');
-    $routes->post('stok-barang/store', 'Admin::storeBarang');
-    $routes->get('stok-barang/edit/(:num)', 'Admin::editBarang/$1');
-    $routes->post('stok-barang/update/(:num)', 'Admin::updateBarang/$1');
-    $routes->get('stok-barang/delete/(:num)', 'Admin::deleteBarang/$1');
-    
-    // Customer routes
-    $routes->get('data-customer', 'Admin::customer');
-    $routes->get('data-customer/create', 'Admin::createCustomer');
-    $routes->post('data-customer/store', 'Admin::storeCustomer');
-    $routes->get('data-customer/edit/(:num)', 'Admin::editCustomer/$1');
-    $routes->post('data-customer/update/(:num)', 'Admin::updateCustomer/$1');
-    $routes->get('data-customer/delete/(:num)', 'Admin::deleteCustomer/$1');
-    
-    // Supplier routes
-    $routes->get('data-supplier', 'Admin::supplier');
-    $routes->get('data-supplier/create', 'Admin::createSupplier');
-    $routes->post('data-supplier/store', 'Admin::storeSupplier');
-    $routes->get('data-supplier/edit/(:num)', 'Admin::editSupplier/$1');
-    $routes->post('data-supplier/update/(:num)', 'Admin::updateSupplier/$1');
-    $routes->get('data-supplier/delete/(:num)', 'Admin::deleteSupplier/$1');
-
-    // Petugas routes
-    $routes->get('data-petugas', 'Admin::petugas');
-    $routes->get('data-petugas/create', 'Admin::createPetugas');
-    $routes->post('data-petugas/store', 'Admin::storePetugas');
-    $routes->get('data-petugas/edit/(:num)', 'Admin::editPetugas/$1');
-    $routes->post('data-petugas/update/(:num)', 'Admin::updatePetugas/$1');
-    $routes->get('data-petugas/delete/(:num)', 'Admin::deletePetugas/$1');
-    
-    // Barang Masuk routes
-    $routes->get('barang-masuk', 'Admin::barangMasuk');
-    $routes->get('barang-masuk/create', 'Admin::createBarangMasuk');
-    $routes->post('barang-masuk/store', 'Admin::storeBarangMasuk');
-    $routes->get('barang-masuk/edit/(:num)', 'Admin::editBarangMasuk/$1');
-    $routes->post('barang-masuk/update/(:num)', 'Admin::updateBarangMasuk/$1');
-    $routes->get('barang-masuk/delete/(:num)', 'Admin::deleteBarangMasuk/$1');
-    
-    // Barang Keluar routes
-    $routes->get('barang-keluar', 'Admin::barangKeluar');
-    $routes->get('barang-keluar/create', 'Admin::createBarangKeluar');
-    $routes->post('barang-keluar/store', 'Admin::storeBarangKeluar');
-    $routes->get('barang-keluar/edit/(:num)', 'Admin::editBarangKeluar/$1');
-    $routes->post('barang-keluar/update/(:num)', 'Admin::updateBarangKeluar/$1');
-    $routes->get('barang-keluar/delete/(:num)', 'Admin::deleteBarangKeluar/$1');
-    
-    // Laporan routes
-    $routes->get('laporan', 'Admin::laporan');
-    $routes->get('laporan/export/excel', 'Admin::exportExcel');
-    $routes->get('laporan/export/pdf', 'Admin::exportPdf');
-
+    $routes->get('dashboard', 'DashboardController::index');
+    // Barang
+    $routes->get('stok-barang', 'BarangController::index');
+    $routes->get('stok-barang/create', 'BarangController::create');
+    $routes->post('stok-barang/store', 'BarangController::store');
+    $routes->get('stok-barang/edit/(:num)', 'BarangController::edit/$1');
+    $routes->post('stok-barang/update/(:num)', 'BarangController::update/$1');
+    $routes->post('stok-barang/delete/(:num)', 'BarangController::delete/$1');
+    $routes->get('stok-barang/get/(:num)', 'BarangController::get/$1');
+    $routes->get('stok-barang/export', 'BarangController::export');
+    $routes->get('stok-barang/kategori-list', 'BarangController::kategoriList');
+    $routes->get('stok-barang/search', 'BarangController::search');
+    // Customer
+    $routes->get('data-customer', 'CustomerController::index');
+    $routes->get('data-customer/create', 'CustomerController::create');
+    $routes->post('data-customer/store', 'CustomerController::store');
+    $routes->get('data-customer/edit/(:num)', 'CustomerController::edit/$1');
+    $routes->post('data-customer/update/(:num)', 'CustomerController::update/$1');
+    $routes->post('data-customer/delete/(:num)', 'CustomerController::delete/$1');
+    $routes->get('data-customer/get/(:num)', 'CustomerController::get/$1');
+    $routes->get('data-customer/export', 'CustomerController::export');
+    $routes->get('data-customer/search', 'CustomerController::search');
+    // Supplier
+    $routes->get('data-supplier', 'SupplierController::index');
+    $routes->get('data-supplier/create', 'SupplierController::create');
+    $routes->post('data-supplier/store', 'SupplierController::store');
+    $routes->get('data-supplier/edit/(:num)', 'SupplierController::edit/$1');
+    $routes->post('data-supplier/update/(:num)', 'SupplierController::update/$1');
+    $routes->post('data-supplier/delete/(:num)', 'SupplierController::delete/$1');
+    $routes->get('data-supplier/get/(:num)', 'SupplierController::get/$1');
+    $routes->get('data-supplier/export', 'SupplierController::export');
+    $routes->get('data-supplier/search', 'SupplierController::search');
+    // Petugas
+    $routes->get('data-petugas', 'PetugasController::index');
+    $routes->get('data-petugas/create', 'PetugasController::create');
+    $routes->post('data-petugas/store', 'PetugasController::store');
+    $routes->get('data-petugas/edit/(:num)', 'PetugasController::edit/$1');
+    $routes->post('data-petugas/update/(:num)', 'PetugasController::update/$1');
+    $routes->post('data-petugas/delete/(:num)', 'PetugasController::delete/$1');
+    $routes->get('data-petugas/get/(:num)', 'PetugasController::get/$1');
+    $routes->get('data-petugas/export', 'PetugasController::export');
+    $routes->get('data-petugas/search', 'PetugasController::search');
+    // Barang Masuk
+    $routes->get('barang-masuk', 'BarangMasukController::index');
+    $routes->get('barang-masuk/create', 'BarangMasukController::create');
+    $routes->post('barang-masuk/store', 'BarangMasukController::store');
+    $routes->get('barang-masuk/edit/(:num)', 'BarangMasukController::edit/$1');
+    $routes->post('barang-masuk/update/(:num)', 'BarangMasukController::update/$1');
+    $routes->post('barang-masuk/delete/(:num)', 'BarangMasukController::delete/$1');
+    $routes->get('barang-masuk/get/(:num)', 'BarangMasukController::get/$1');
+    $routes->get('barang-masuk/export', 'BarangMasukController::export');
+    $routes->get('barang-masuk/search', 'BarangMasukController::search');
+    // Barang Keluar
+    $routes->get('barang-keluar', 'BarangKeluarController::index');
+    $routes->get('barang-keluar/create', 'BarangKeluarController::create');
+    $routes->post('barang-keluar/store', 'BarangKeluarController::store');
+    $routes->get('barang-keluar/edit/(:num)', 'BarangKeluarController::edit/$1');
+    $routes->post('barang-keluar/update/(:num)', 'BarangKeluarController::update/$1');
+    $routes->post('barang-keluar/delete/(:num)', 'BarangKeluarController::delete/$1');
+    $routes->get('barang-keluar/get/(:num)', 'BarangKeluarController::get/$1');
+    $routes->get('barang-keluar/export', 'BarangKeluarController::export');
+    $routes->get('barang-keluar/search', 'BarangKeluarController::search');
     // Kelola Pengguna routes
     $routes->get('kelola-pengguna', 'Admin::kelolaPengguna');
-    $routes->get('profil-toko', 'Admin::profilToko');
+    $routes->post('kelola-pengguna/store', 'Admin::storeUser');
+    $routes->get('kelola-pengguna/get/(:num)', 'Admin::getUser/$1');
+    $routes->post('kelola-pengguna/update/(:num)', 'Admin::updateUser/$1');
+    $routes->post('kelola-pengguna/toggle-status/(:num)', 'Admin::toggleUserStatus/$1');
+    $routes->post('kelola-pengguna/delete/(:num)', 'Admin::deleteUser/$1');
+    $routes->get('kelola-pengguna/export', 'Admin::exportUsers');
+    $routes->get('kelola-pengguna/search', 'Admin::searchUser');
+    
+    // Test route
 
-    // Rute untuk profil dan ubah password
+    $routes->get('profil-toko', 'Admin::profilToko');
+    $routes->post('profil-toko/update', 'Admin::updateProfilToko');
+    $routes->post('profil-toko/update-foto', 'Admin::updateFotoToko');
+
+    // Rute untuk profil dan reset password
     $routes->get('profil', 'Admin::profil');
-    $routes->get('ubah-password', 'Admin::ubahPassword');
+    $routes->post('profil/update', 'Admin::updateProfil');
+    $routes->post('profil/update-foto', 'Admin::updateFotoProfil');
+    $routes->get('reset-password', 'Admin::resetPassword');
+    $routes->post('reset-password-action', 'Admin::resetPasswordAction');
 });
 
 // User routes
 $routes->group('user', ['filter' => 'auth:user'], function($routes) {
-    $routes->get('dashboard', 'User::index');
-    
-    // Barang routes
-    $routes->get('stok-barang', 'User::stok');
-    $routes->get('stok-barang/create', 'User::createBarang');
-    $routes->post('stok-barang/store', 'User::storeBarang');
-    $routes->get('stok-barang/edit/(:num)', 'User::editBarang/$1');
-    $routes->post('stok-barang/update/(:num)', 'User::updateBarang/$1');
-    $routes->get('stok-barang/delete/(:num)', 'User::deleteBarang/$1');
-    
-    // Customer routes
-    $routes->get('data-customer', 'User::customer');
-    $routes->get('data-customer/create', 'User::createCustomer');
-    $routes->post('data-customer/store', 'User::storeCustomer');
-    $routes->get('data-customer/edit/(:num)', 'User::editCustomer/$1');
-    $routes->post('data-customer/update/(:num)', 'User::updateCustomer/$1');
-    $routes->get('data-customer/delete/(:num)', 'User::deleteCustomer/$1');
-    
-    // Supplier routes
-    $routes->get('data-supplier', 'User::supplier');
-    $routes->get('data-supplier/create', 'User::createSupplier');
-    $routes->post('data-supplier/store', 'User::storeSupplier');
-    $routes->get('data-supplier/edit/(:num)', 'User::editSupplier/$1');
-    $routes->post('data-supplier/update/(:num)', 'User::updateSupplier/$1');
-    $routes->get('data-supplier/delete/(:num)', 'User::deleteSupplier/$1');
-    
-    // Petugas routes
-    $routes->get('data-petugas', 'User::petugas');
-    $routes->get('data-petugas/create', 'User::createPetugas');
-    $routes->post('data-petugas/store', 'User::storePetugas');
-    $routes->get('data-petugas/edit/(:num)', 'User::editPetugas/$1');
-    $routes->post('data-petugas/update/(:num)', 'User::updatePetugas/$1');
-    $routes->get('data-petugas/delete/(:num)', 'User::deletePetugas/$1');
-    
-    // Barang Masuk routes
-    $routes->get('barang-masuk', 'User::barangMasuk');
-    $routes->get('barang-masuk/create', 'User::createBarangMasuk');
-    $routes->post('barang-masuk/store', 'User::storeBarangMasuk');
-    $routes->get('barang-masuk/edit/(:num)', 'User::editBarangMasuk/$1');
-    $routes->post('barang-masuk/update/(:num)', 'User::updateBarangMasuk/$1');
-    $routes->get('barang-masuk/delete/(:num)', 'User::deleteBarangMasuk/$1');
-    
-    // Barang Keluar routes
-    $routes->get('barang-keluar', 'User::barangKeluar');
-    $routes->get('barang-keluar/create', 'User::createBarangKeluar');
-    $routes->post('barang-keluar/store', 'User::storeBarangKeluar');
-    $routes->get('barang-keluar/edit/(:num)', 'User::editBarangKeluar/$1');
-    $routes->post('barang-keluar/update/(:num)', 'User::updateBarangKeluar/$1');
-    $routes->get('barang-keluar/delete/(:num)', 'User::deleteBarangKeluar/$1');
-    
-    // Laporan routes
-    $routes->get('laporan', 'User::laporan');
-    $routes->get('laporan/export/excel', 'User::exportExcel');
-    $routes->get('laporan/export/pdf', 'User::exportPdf');
+    $routes->get('dashboard', 'DashboardController::index');
+    // Barang
+    $routes->get('stok-barang', 'BarangController::index');
+    $routes->get('stok-barang/create', 'BarangController::create');
+    $routes->post('stok-barang/store', 'BarangController::store');
+    $routes->get('stok-barang/edit/(:num)', 'BarangController::edit/$1');
+    $routes->post('stok-barang/update/(:num)', 'BarangController::update/$1');
+    $routes->post('stok-barang/delete/(:num)', 'BarangController::delete/$1');
+    $routes->get('stok-barang/get/(:num)', 'BarangController::get/$1');
+    $routes->get('stok-barang/export', 'BarangController::export');
+    $routes->get('stok-barang/kategori-list', 'BarangController::kategoriList');
+    $routes->get('stok-barang/search', 'BarangController::search');
+    // Customer
+    $routes->get('data-customer', 'CustomerController::index');
+    $routes->get('data-customer/create', 'CustomerController::create');
+    $routes->post('data-customer/store', 'CustomerController::store');
+    $routes->get('data-customer/edit/(:num)', 'CustomerController::edit/$1');
+    $routes->post('data-customer/update/(:num)', 'CustomerController::update/$1');
+    $routes->post('data-customer/delete/(:num)', 'CustomerController::delete/$1');
+    $routes->get('data-customer/get/(:num)', 'CustomerController::get/$1');
+    $routes->get('data-customer/export', 'CustomerController::export');
+    $routes->get('data-customer/search', 'CustomerController::search');
+    // Supplier
+    $routes->get('data-supplier', 'SupplierController::index');
+    $routes->get('data-supplier/create', 'SupplierController::create');
+    $routes->post('data-supplier/store', 'SupplierController::store');
+    $routes->get('data-supplier/edit/(:num)', 'SupplierController::edit/$1');
+    $routes->post('data-supplier/update/(:num)', 'SupplierController::update/$1');
+    $routes->post('data-supplier/delete/(:num)', 'SupplierController::delete/$1');
+    $routes->get('data-supplier/get/(:num)', 'SupplierController::get/$1');
+    $routes->get('data-supplier/export', 'SupplierController::export');
+    $routes->get('data-supplier/search', 'SupplierController::search');
+    // Petugas
+    $routes->get('data-petugas', 'PetugasController::index');
+    $routes->get('data-petugas/create', 'PetugasController::create');
+    $routes->post('data-petugas/store', 'PetugasController::store');
+    $routes->get('data-petugas/edit/(:num)', 'PetugasController::edit/$1');
+    $routes->post('data-petugas/update/(:num)', 'PetugasController::update/$1');
+    $routes->post('data-petugas/delete/(:num)', 'PetugasController::delete/$1');
+    $routes->get('data-petugas/get/(:num)', 'PetugasController::get/$1');
+    $routes->get('data-petugas/export', 'PetugasController::export');
+    $routes->get('data-petugas/search', 'PetugasController::search');
+    // Barang Masuk
+    $routes->get('barang-masuk', 'BarangMasukController::index');
+    $routes->get('barang-masuk/create', 'BarangMasukController::create');
+    $routes->post('barang-masuk/store', 'BarangMasukController::store');
+    $routes->get('barang-masuk/edit/(:num)', 'BarangMasukController::edit/$1');
+    $routes->post('barang-masuk/update/(:num)', 'BarangMasukController::update/$1');
+    $routes->post('barang-masuk/delete/(:num)', 'BarangMasukController::delete/$1');
+    $routes->get('barang-masuk/get/(:num)', 'BarangMasukController::get/$1');
+    $routes->get('barang-masuk/export', 'BarangMasukController::export');
+    $routes->get('barang-masuk/search', 'BarangMasukController::search');
+    // Barang Keluar
+    $routes->get('barang-keluar', 'BarangKeluarController::index');
+    $routes->get('barang-keluar/create', 'BarangKeluarController::create');
+    $routes->post('barang-keluar/store', 'BarangKeluarController::store');
+    $routes->get('barang-keluar/edit/(:num)', 'BarangKeluarController::edit/$1');
+    $routes->post('barang-keluar/update/(:num)', 'BarangKeluarController::update/$1');
+    $routes->post('barang-keluar/delete/(:num)', 'BarangKeluarController::delete/$1');
+    $routes->get('barang-keluar/get/(:num)', 'BarangKeluarController::get/$1');
+    $routes->get('barang-keluar/export', 'BarangKeluarController::export');
+    $routes->get('barang-keluar/search', 'BarangKeluarController::search');
+    // Rute untuk profil dan reset password user
+    $routes->get('profil', 'User::profil');
+    $routes->post('profil/update', 'User::updateProfil');
+    $routes->post('profil/update-foto', 'User::updateFotoProfil');
+    $routes->get('reset-password', 'User::resetPassword');
+    $routes->post('reset-password-action', 'User::resetPasswordAction');
 });

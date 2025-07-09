@@ -68,38 +68,17 @@ body {
   padding-top: 48px;
 }
 
-@media (max-width: 900px) {
-  .main-header {
-    left: 80px;
-    width: calc(100% - 80px);
-    flex-direction: column;
-    min-height: 48px;
-    gap: 6px;
-  }
-  .header-section {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .header-center {
-    justify-content: center;
-    margin: 4px 0;
-  }
-  .layout-main {
-    padding-top: 56px;
-  }
-}
-
 .profile-dropdown {
   display: none;
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 60%;
+  transform: translateX(-60%);
   background: #fff;
-  min-width: 220px;
+  min-width: 210px;
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
-  border-radius: 16px;
-  padding: 10px 0;
+  border-radius: 12px;
+  padding: 8px 0;
   z-index: 999;
   font-size: 0.93rem;
   margin-top: 10px;
@@ -112,7 +91,7 @@ body {
   border-bottom: 1px solid #e5e7eb;
   margin-bottom: 0;
   margin-top: 0;
-  font-size: 0.93rem;
+  font-size: 0.90rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -124,7 +103,7 @@ body {
   padding: 11px 22px;
   color: #23272f;
   text-decoration: none;
-  font-size: 0.93rem;
+  font-size: 0.90rem;
   transition: background 0.15s;
   border: none;
   background: none;

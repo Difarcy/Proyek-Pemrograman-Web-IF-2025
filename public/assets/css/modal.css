@@ -1,0 +1,192 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Modal Wrapper */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+/* Show Class */
+.modal.show {
+    display: block;
+}
+
+/* Modal Content di Tengah */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background: #fff;
+    max-width: 400px;
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    font-size: 0.88rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    background: #fff;
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Tombol Close */
+.close {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.close:hover {
+    color: #222;
+}
+
+/* Body */
+.modal-body {
+    padding: 20px;
+    background: #fff;
+}
+
+/* Footer */
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 18px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #222;
+}
+.form-group label.required::after {
+    content: " *";
+    color: #dc3545;
+    margin-left: 2px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+/* Export Modal Styles */
+.export-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.export-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.export-option:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+.export-option:active {
+    transform: translateY(0);
+}
+
+.export-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.export-option:nth-child(1) .export-icon {
+    color: #28a745;
+}
+
+.export-option:nth-child(2) .export-icon {
+    color: #dc3545;
+}
+
+.export-option:nth-child(3) .export-icon {
+    color: #17a2b8;
+}
+
+.export-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Loading state for export options */
+.export-option.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.export-option.loading .export-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

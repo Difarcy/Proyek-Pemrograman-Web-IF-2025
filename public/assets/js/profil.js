@@ -1,300 +1,291 @@
-// === GLOBAL VARIABLES ===
-let selectedFile = null;
+// File: profil.js
+// Fungsi: File ini digunakan untuk menangani interaksi dan logika pada halaman Profil Pengguna.
+// Biasanya berisi script untuk mengubah data profil, upload foto profil, dan validasi form profil.
 
-// === PROFILE LAYOUT INITIALIZATION ===
-/**
- * Initialize profile layout
- */
-function initializeProfileLayout() {
-    const contentWrapper = document.getElementById('contentWrapper');
-    if (contentWrapper) {
-        contentWrapper.classList.add('profile-layout');
-    }
-}
-
-// === PROFILE PHOTO FUNCTIONS ===
-/**
- * Trigger file input click for photo upload
- */
-function changeProfilePhoto() {
-    document.getElementById('profilePhotoInput').click();
-}
-
-/**
- * Handle file selection for profile photo
- * @param {Event} event - File input change event
- */
-function handleFileSelection(event) {
-    const file = event.target.files[0];
-    if (file) {
-        // Validate file type
-        if (!validateImageFile(file)) {
-            return;
-        }
-        
-        // Validate file size (max 5MB)
-        if (!validateFileSize(file, 5)) {
-            return;
-        }
-        
-        selectedFile = file;
-        showImagePreview(file);
-    }
-}
-
-/**
- * Validate if selected file is an image
- * @param {File} file - Selected file
- * @returns {boolean} True if valid image
- */
-function validateImageFile(file) {
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-    if (!allowedTypes.includes(file.type)) {
-        showAlert('Error', 'Hanya file gambar (JPG, PNG, GIF) yang diperbolehkan!', 'error');
-        return false;
-    }
-    return true;
-}
-
-/**
- * Validate file size
- * @param {File} file - Selected file
- * @param {number} maxSizeMB - Maximum size in MB
- * @returns {boolean} True if file size is valid
- */
-function validateFileSize(file, maxSizeMB) {
-    const maxSizeBytes = maxSizeMB * 1024 * 1024;
-    if (file.size > maxSizeBytes) {
-        showAlert('Error', `Ukuran file maksimal ${maxSizeMB}MB!`, 'error');
-        return false;
-    }
-    return true;
-}
-
-/**
- * Show image preview
- * @param {File} file - Selected image file
- */
-function showImagePreview(file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const profilePhoto = document.querySelector('.profile-photo');
-        if (profilePhoto) {
-            profilePhoto.src = e.target.result;
-            showAlert('Sukses', 'Preview foto profil berhasil dimuat!', 'success');
-        }
-    };
-    reader.readAsDataURL(file);
-}
-
-// === FORM HANDLING ===
-/**
- * Handle form submission
- * @param {Event} event - Form submit event
- */
-function handleFormSubmit(event) {
-    event.preventDefault();
-    
-    // Validate form
-    if (!validateForm()) {
-        return;
-    }
-    
-    // Show loading state
-    showLoadingState();
-    
-    // Simulate form submission (replace with actual AJAX call)
-    setTimeout(() => {
-        hideLoadingState();
-        showAlert('Sukses', 'Profil berhasil diperbarui!', 'success');
-        
-        // If there's a new photo, upload it
-        if (selectedFile) {
-            uploadProfilePhoto(selectedFile);
-        }
-    }, 2000);
-}
-
-/**
- * Validate form fields
- * @returns {boolean} True if form is valid
- */
-function validateForm() {
-    const form = document.querySelector('form');
-    if (!form) return true;
-    
-    const requiredFields = form.querySelectorAll('[required]');
-    let isValid = true;
-    
-    requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-            field.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            field.classList.remove('is-invalid');
-        }
-    });
-    
-    // Validate email format
-    const emailField = form.querySelector('input[type="email"]');
-    if (emailField && emailField.value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailField.value)) {
-            emailField.classList.add('is-invalid');
-            isValid = false;
-        }
-    }
-    
-    if (!isValid) {
-        showAlert('Error', 'Mohon lengkapi semua field yang wajib diisi!', 'error');
-    }
-    
-    return isValid;
-}
-
-/**
- * Upload profile photo to server
- * @param {File} file - Image file to upload
- */
-function uploadProfilePhoto(file) {
-    // Create FormData for file upload
-    const formData = new FormData();
-    formData.append('profile_photo', file);
-    
-    // Here you would normally send the file to server
-    // For now, we'll just show a success message
-    console.log('Uploading profile photo:', file.name);
-    showAlert('Info', 'Foto profil akan diupload ke server...', 'info');
-}
-
-// === UI UTILITY FUNCTIONS ===
-/**
- * Show alert message
- * @param {string} title - Alert title
- * @param {string} message - Alert message
- * @param {string} type - Alert type (success, error, warning, info)
- */
-function showAlert(title, message, type = 'info') {
-    // Use SweetAlert2 if available, otherwise use browser alert
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: title,
-            text: message,
-            icon: type,
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#4e73df'
-        });
-    } else {
-        alert(`${title}: ${message}`);
-    }
-}
-
-/**
- * Show loading state
- */
-function showLoadingState() {
-    const submitBtn = document.querySelector('button[type="submit"]');
-    if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
-    }
-}
-
-/**
- * Hide loading state
- */
-function hideLoadingState() {
-    const submitBtn = document.querySelector('button[type="submit"]');
-    if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Perubahan';
-    }
-}
-
-// === EVENT LISTENERS ===
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize profile layout
-    initializeProfileLayout();
-    
-    // Add form submit handler
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmit);
+    // Elements
+    const btnUbah = document.getElementById('btnUbah');
+    const btnSimpan = document.getElementById('btnSimpan');
+    const btnBatal = document.getElementById('btnBatal');
+    const fotoInput = document.getElementById('fotoInput');
+    const fotoTokoInput = document.getElementById('fotoTokoInput');
+    const profilImage = document.getElementById('profilImage');
+    const profilTokoImage = document.getElementById('profilTokoImage');
+    const profilForm = document.getElementById('profilForm');
+    const profilTokoForm = document.getElementById('profilTokoForm');
+    const cameraIcon = document.getElementById('cameraIcon');
+
+    // Check if we're on profil page or profil toko page
+    const isProfilToko = window.location.pathname.includes('profil-toko');
+    const currentForm = isProfilToko ? profilTokoForm : profilForm;
+    const currentFotoInput = isProfilToko ? fotoTokoInput : fotoInput;
+    // Ganti: const currentImage = isProfilToko ? profilTokoImage : profilImage;
+
+    // Initialize form state
+    let originalFormData = {};
+
+    // Save original form data
+    if (currentForm) {
+        const formData = new FormData(currentForm);
+        for (let [key, value] of formData.entries()) {
+            originalFormData[key] = value;
+        }
     }
-    
-    // Add file input change handler
-    const fileInput = document.getElementById('profilePhotoInput');
-    if (fileInput) {
-        fileInput.addEventListener('change', handleFileSelection);
-    }
-    
-    // Add real-time validation
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            validateField(this);
+
+    // Edit button click handler
+    if (btnUbah) {
+        btnUbah.addEventListener('click', function() {
+            enableFormEditing();
         });
+    }
+
+    // Cancel button click handler
+    if (btnBatal) {
+        btnBatal.addEventListener('click', function() {
+            cancelEditing();
+        });
+    }
+
+    // Save button click handler
+    if (btnSimpan) {
+        btnSimpan.addEventListener('click', function() {
+            saveProfile();
+        });
+    }
+
+    // Photo upload handler
+    if (currentFotoInput) {
+        currentFotoInput.addEventListener('change', function(e) {
+            handlePhotoUpload(e);
+        });
+    }
+
+    // Image click handler for photo upload (ubah ke icon kamera)
+    if (cameraIcon && currentFotoInput) {
+        cameraIcon.addEventListener('click', function() {
+            currentFotoInput.click();
+        });
+    }
+
+    // Enable form editing
+    function enableFormEditing() {
+        const inputs = currentForm.querySelectorAll('input[readonly], textarea[readonly]');
         
-        input.addEventListener('input', function() {
-            if (this.classList.contains('is-invalid')) {
-                validateField(this);
+        inputs.forEach(input => {
+            // Skip admin username field (has admin-readonly class)
+            if (input.classList.contains('admin-readonly')) {
+                return;
+            }
+            input.removeAttribute('readonly');
+            input.classList.add('editing');
+        });
+
+        // Show/hide buttons using hidden attribute
+        if (btnUbah) btnUbah.setAttribute('hidden', '');
+        if (btnSimpan) btnSimpan.removeAttribute('hidden');
+        if (btnBatal) btnBatal.removeAttribute('hidden');
+    }
+
+    // Cancel editing
+    function cancelEditing() {
+        const inputs = currentForm.querySelectorAll('input.editing, textarea.editing');
+        
+        inputs.forEach(input => {
+            input.setAttribute('readonly', 'readonly');
+            input.classList.remove('editing');
+            // Restore original value
+            if (originalFormData[input.name]) {
+                input.value = originalFormData[input.name];
             }
         });
-    });
+
+        // Show/hide buttons using hidden attribute
+        if (btnUbah) btnUbah.removeAttribute('hidden');
+        if (btnSimpan) btnSimpan.setAttribute('hidden', '');
+        if (btnBatal) btnBatal.setAttribute('hidden', '');
+    }
+
+    // Save profile
+    function saveProfile() {
+        const formData = new FormData(currentForm);
+        
+        // Add photo file if selected
+        if (currentFotoInput && currentFotoInput.files[0]) {
+            formData.append('foto', currentFotoInput.files[0]);
+        }
+
+        // Fix URL calculation
+        const url = isProfilToko ? 
+            '/admin/profil-toko/update' : 
+            '/' + (window.location.pathname.includes('admin') ? 'admin' : 'user') + '/profil/update';
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message || 'Profil berhasil diperbarui.');
+                
+                // Update session data if needed
+                if (data.foto) {
+                    // Update profile image
+                    if (isProfilToko) {
+                        fetch('/admin/profil-toko/data')
+                            .then(res => res.json())
+                            .then(profile => {
+                                if (profile.foto) {
+                                    const img = document.getElementById('profilTokoImage');
+                                    if (img) img.src = '/uploads/profil/' + profile.foto + '?' + new Date().getTime();
+                                }
+                            });
+                    } else {
+                        fetch('/' + (window.location.pathname.includes('admin') ? 'admin' : 'user') + '/profil/data')
+                            .then(res => res.json())
+                            .then(profile => {
+                                if (profile.foto) {
+                                    const img = document.getElementById('profilImage');
+                                    if (img) img.src = '/uploads/profil/' + profile.foto + '?' + new Date().getTime();
+                                }
+                            });
+                    }
+                    // Update header profile image
+                    const headerProfileImg = document.querySelector('.header-profile-img');
+                    if (headerProfileImg) {
+                        headerProfileImg.src = '/uploads/profil/' + data.foto + '?' + new Date().getTime();
+                    }
+                }
+
+                // Save new form data as original
+                const newFormData = new FormData(currentForm);
+                for (let [key, value] of newFormData.entries()) {
+                    originalFormData[key] = value;
+                }
+
+                // Disable editing
+                cancelEditing();
+            } else {
+                alert(data.message || 'Maaf, terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+            }
+        })
+        .catch(error => {
+            console.error('Error saving profile:', error);
+            alert('Maaf, terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+        });
+    }
+
+    // Handle photo upload
+    function handlePhotoUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Validate file type
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Tipe file tidak didukung. Silakan gunakan JPG, PNG, atau GIF.');
+            return;
+        }
+
+        // Validate file size (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar. Maksimal 2MB.');
+            return;
+        }
+
+        // Preview image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (isProfilToko) {
+                const img = document.getElementById('profilTokoImage');
+                if (img) img.src = e.target.result;
+            } else {
+                const img = document.getElementById('profilImage');
+                if (img) img.src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(file);
+
+        // Auto save photo
+        const formData = new FormData();
+        formData.append('foto', file);
+
+        // Fix URL calculation
+        const url = isProfilToko ? 
+            '/admin/profil-toko/update-foto' : 
+            '/' + (window.location.pathname.includes('admin') ? 'admin' : 'user') + '/profil/update-foto';
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message || 'Foto profil berhasil diperbarui.');
+                // Update profile image and header without reload
+                if (data.foto) {
+                    if (isProfilToko) {
+                        fetch('/admin/profil-toko/data')
+                            .then(res => res.json())
+                            .then(profile => {
+                                if (profile.foto) {
+                                    const img = document.getElementById('profilTokoImage');
+                                    if (img) img.src = '/uploads/profil/' + profile.foto + '?' + new Date().getTime();
+                                }
+                            });
+                    } else {
+                        fetch('/' + (window.location.pathname.includes('admin') ? 'admin' : 'user') + '/profil/data')
+                            .then(res => res.json())
+                            .then(profile => {
+                                if (profile.foto) {
+                                    const img = document.getElementById('profilImage');
+                                    if (img) img.src = '/uploads/profil/' + profile.foto + '?' + new Date().getTime();
+                                }
+                            });
+                        // Update header profile image hanya jika user ganti foto profil
+                        const headerProfileImg = document.querySelector('.header-profile-img');
+                        if (headerProfileImg) {
+                            headerProfileImg.src = '/uploads/profil/' + data.foto + '?' + new Date().getTime();
+                        }
+                    }
+                }
+            } else {
+                alert(data.message || 'Maaf, terjadi kesalahan saat upload foto. Silakan coba lagi.');
+                // Revert image if upload failed
+                if (isProfilToko) {
+                    const img = document.getElementById('profilTokoImage');
+                    if (img) img.src = img.dataset.originalSrc || img.src;
+                } else {
+                    const img = document.getElementById('profilImage');
+                    if (img) img.src = img.dataset.originalSrc || img.src;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading photo:', error);
+            alert('Maaf, terjadi kesalahan saat upload foto. Silakan coba lagi.');
+            // Revert image if upload failed
+            if (isProfilToko) {
+                const img = document.getElementById('profilTokoImage');
+                if (img) img.src = img.dataset.originalSrc || img.src;
+            } else {
+                const img = document.getElementById('profilImage');
+                if (img) img.src = img.dataset.originalSrc || img.src;
+            }
+        });
+    }
+
+    // Store original image src
+    if (isProfilToko) {
+        const currentImage = profilTokoImage;
+        if (currentImage) {
+            currentImage.dataset.originalSrc = currentImage.src;
+        }
+    } else {
+        const currentImage = profilImage;
+        if (currentImage) {
+            currentImage.dataset.originalSrc = currentImage.src;
+        }
+    }
 });
-
-/**
- * Validate individual field
- * @param {HTMLElement} field - Form field element
- */
-function validateField(field) {
-    const value = field.value.trim();
-    
-    // Remove invalid class by default
-    field.classList.remove('is-invalid');
-    
-    // Check if required field is empty
-    if (field.hasAttribute('required') && !value) {
-        field.classList.add('is-invalid');
-        return;
-    }
-    
-    // Validate email format
-    if (field.type === 'email' && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-            field.classList.add('is-invalid');
-            return;
-        }
-    }
-    
-    // Validate phone number format
-    if (field.type === 'tel' && value) {
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-        if (!phoneRegex.test(value)) {
-            field.classList.add('is-invalid');
-            return;
-        }
-    }
-}
-
-// === KEYBOARD SHORTCUTS ===
-document.addEventListener('keydown', function(event) {
-    // Ctrl/Cmd + S to save
-    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-        event.preventDefault();
-        const submitBtn = document.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.click();
-        }
-    }
-    
-    // Escape to cancel photo selection
-    if (event.key === 'Escape') {
-        const fileInput = document.getElementById('profilePhotoInput');
-        if (fileInput) {
-            fileInput.value = '';
-            selectedFile = null;
-        }
-    }
-}); 

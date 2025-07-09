@@ -1,0 +1,84 @@
+/* Form validation error styling */
+.form-group input.error,
+.form-group select.error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-group input.error:focus,
+.form-group select.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* Loading state styling */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Password input with eye icon */
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input[type="password"],
+.password-input-container input[type="text"] {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: color 0.2s ease;
+    display: none;
+}
+
+.password-toggle i {
+    font-size: 14px;
+    color: #666; /* Default color - abu-abu terang */
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.password-toggle:focus {
+    outline: none;
+    color: #007bff;
+}
+
+.password-toggle.showing i {
+  color: #333 !important;
+}
+
+.password-input-container.has-text .password-toggle {
+  display: block;
+}
+
+.status-active {
+  color: #16a34a;
+  font-weight: bold;
+}
+.status-inactive {
+  color: #dc2626;
+  font-weight: bold;
+}
+

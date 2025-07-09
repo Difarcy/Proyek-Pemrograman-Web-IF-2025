@@ -23,7 +23,6 @@
     <!-- Tambahan CSS dari halaman -->
     <?= $this->renderSection('styles') ?>
 
-    <style>body { font-family: 'Inter', Arial, sans-serif; }</style>
 </head>
 <body>
     <!-- Main Content -->

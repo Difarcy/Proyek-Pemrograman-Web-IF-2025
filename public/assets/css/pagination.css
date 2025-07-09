@@ -41,15 +41,67 @@
   box-sizing: border-box;
 }
 
-.pagination-link.active {
-  background: #2196f3;
-  color: #fff;
-  border-color: #2196f3;
-  font-weight: 500;
+/* Pagination Loading State */
+.pagination-bar.loading {
+    opacity: 0.6;
+    pointer-events: none;
 }
 
-.pagination-link:hover, .pagination-link-with-params:hover {
-  border-color: #2196f3;
-  color: #2196f3;
-  background: #f5faff;
+/* Show Entries Loading State */
+.show-entries-bar.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Pagination Disabled State */
+.pagination-link.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination-link.disabled:hover {
+    background-color: transparent;
+    color: #ccc;
+}
+
+/* Pagination Active State */
+.pagination-link.active {
+    background: #f5faff;
+    color: #2196f3;
+    border-color: #2196f3;
+    font-weight: 500;
+}
+
+.pagination-link.active:hover {
+    background: #f5faff;
+    color: #2196f3;
+    border-color: #2196f3;
+}
+
+/* Pagination Hover Effect */
+.pagination-link-with-params:hover {
+    border-color: #2196f3;
+    color: #fff;
+    background: #2196f3;
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Main content transition */
+main {
+  transition: opacity 0.3s ease;
 } 

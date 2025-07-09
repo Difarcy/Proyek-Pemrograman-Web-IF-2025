@@ -89,20 +89,7 @@
     letter-spacing: 0.01em;
 }
 
-.alert-error {
-    color: #e53935;
-    background-color: #fdecea;
-    border: 1px solid #f5c6cb;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    border-radius: 6px;
-    width: 90%;
-    margin: 0 auto 0.8rem auto;
-    display: none;
-}
-.alert-error.show {
-    display: block;
-}
+
 
 /* Input Username */
 .form-group {
@@ -215,52 +202,4 @@
 .btn-login:hover {
     background: #1e40af;
     border-color: #1e40af;
-}
-
-/* Responsive: Stack vertically on mobile */
-@media (max-width: 900px) {
-    .login-wrapper {
-        max-width: 98vw;
-        max-height: 98vh;
-    }
-}
-
-@media (max-width: 700px) {
-    .login-wrapper {
-        flex-direction: column;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        height: auto;
-    }
-
-    .login-image,
-    .login-form-container {
-        flex: 1 1 auto;
-        width: 100%;
-    }
-
-    .login-image {
-        min-height: 140px;
-        height: 140px;
-        border-right: none;
-        border-bottom: 1.5px solid #e0e0e0;
-    }
-
-    .login-image img {
-        height: 100%;
-        max-width: 100vw;
-    }
-
-    .login-form-container {
-        padding: 1.2rem 0.5rem;
-    }
-
-    .form-group input,
-    .btn-login,
-    .password-wrapper {
-        width: 95%;
-    }
-
-    .alert-error {
-        width: 95%;
-    }
 }

@@ -10,192 +10,133 @@ Tugas ini merupakan pengembangan aplikasi berbasis web yang merujuk dan mengadap
 "Rancang Bangun Aplikasi VStock Menggunakan Codeigniter Untuk Mengelola Data Barang di TB Putra Jaya Perkasa II"
 Karya: Teja Kusumah (NPM 301200033) – Program Studi Teknik Informatika, FTI, Universitas Bale Bandung, 2024.
 
-## Repository GitHub
-Repository ini dapat diakses melalui: [https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025.git](https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025.git)
+---
 
-### Cara Mengakses Repository
-1. Menggunakan Git Clone:
-```bash
-git clone https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025.git
-```
+# Requirement Sistem
 
-2. Menggunakan Download ZIP:
-   - Kunjungi [https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025](https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025)
-   - Klik tombol "Code" (tombol hijau)
-   - Pilih "Download ZIP"
-   - Ekstrak file ZIP yang didownload
-
-# VSTOCK - Sistem Manajemen Stok Barang
-
-VSTOCK adalah sistem manajemen stok barang berbasis web yang dikembangkan menggunakan CodeIgniter 4. Sistem ini dirancang untuk membantu pengelolaan stok barang, data customer, supplier, dan transaksi barang masuk/keluar.
-
-## Fitur Utama
-
-### Admin
-
-#### Dashboard
-- Tampilan ringkasan data stok  
-- Statistik barang masuk & keluar  
-- Grafik penjualan  
-
-#### Stok Barang
-- Manajemen data barang  
-- Monitoring stok  
-- Kategori barang  
-
-#### Barang Masuk
-- Pencatatan barang masuk  
-- Riwayat barang masuk  
-- Laporan barang masuk  
-
-#### Barang Keluar
-- Pencatatan barang keluar  
-- Riwayat barang keluar  
-- Laporan barang keluar  
-
-#### Data Customer
-- Daftar customer  
-- Riwayat transaksi customer  
-- Informasi kontak  
-
-#### Data Supplier
-- Daftar supplier  
-- Riwayat pembelian  
-- Informasi kontak  
-
-#### Data Petugas
-- Daftar petugas  
-- Informasi petugas  
-- Riwayat aktivitas  
-
-#### Laporan
-- Laporan stok  
-- Laporan penjualan  
-- Laporan pembelian  
-- Export laporan  
-
-#### Manajemen Pengguna
-- Tambah pengguna baru  
-- Edit & hapus pengguna  
-- Atur hak akses  
-
-#### Profil Toko
-- Informasi toko  
-- Pengaturan toko  
-- Logo & identitas toko  
+- PHP >= 7.4
+- MySQL/MariaDB
+- Composer
+- Web server (XAMPP/Laragon/Apache/Nginx)
+- Browser modern (Chrome, Firefox, Edge, dsb)
 
 ---
 
-### User
+# Petunjuk Penggunaan di GitHub
 
-#### Dashboard
-- Tampilan ringkasan data stok  
-- Statistik barang masuk & keluar  
+Berikut langkah-langkah untuk menjalankan aplikasi ini secara lokal:
 
-#### Stok Barang
-- Lihat data barang  
-- Monitoring stok  
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/USERNAME/REPO-NAME.git
+   cd REPO-NAME
+   ```
+2. **Install dependency PHP (composer)**
+   ```bash
+   composer install
+   ```
+3. **Buat database dan import file SQL**
+   - Buat database baru di MySQL/MariaDB (misal: `vstock`).
+   - Import file `database.sql` ke database tersebut.
+4. **Atur konfigurasi database**
+   - Edit file `app/Config/Database.php` dan sesuaikan username, password, dan nama database sesuai environment lokal Anda.
+5. **Jalankan aplikasi**
+   - Jika menggunakan XAMPP/Laragon, letakkan folder project di `htdocs`/`www`.
+   - Akses melalui browser: `http://localhost/REPO-NAME/public` atau sesuai setup Anda.
+6. **Login dengan akun default** (lihat bagian Akun Default Demo di bawah).
 
-#### Barang Masuk
-- Pencatatan barang masuk  
-- Riwayat barang masuk  
+> Untuk kontributor: silakan fork, buat branch baru untuk fitur/bugfix, lalu ajukan pull request.
 
-#### Barang Keluar
-- Pencatatan barang keluar  
-- Riwayat barang keluar  
+---
 
-#### Data Customer
-- Lihat data customer  
-- Riwayat transaksi  
+# Tentang Website VStock
 
-#### Data Supplier
-- Lihat data supplier  
-- Riwayat pembelian  
+**VStock** adalah aplikasi web untuk manajemen stok dan distribusi barang pada toko bangunan. Website ini memudahkan admin dan petugas dalam mengelola data barang, pemasukan, pengeluaran, supplier, customer, serta monitoring stok secara real-time.
 
-#### Data Petugas
-- Lihat data petugas  
-- Informasi petugas  
+## Fitur Utama
+- **Manajemen Barang**: Tambah, edit, hapus, dan pencarian data barang.
+- **Barang Masuk & Keluar**: Pencatatan transaksi barang masuk dan keluar, dengan filter tanggal, pencarian, dan export data (Excel, PDF, CSV).
+- **Manajemen Supplier & Customer**: Kelola data supplier dan customer, termasuk pencarian dan filter kota.
+- **Manajemen Petugas**: Kelola data petugas toko beserta jabatan.
+- **Dashboard**: Statistik ringkas, grafik stok, dan aktivitas terakhir.
+- **Profil Toko**: Informasi profil toko dapat diubah oleh admin.
+- **Autentikasi Multi-Role**: Login sebagai admin atau user (petugas), dengan tampilan dan akses berbeda.
+- **Reset Password**: Fitur reset password untuk keamanan akun.
+- **Pagination & Pencarian**: Semua data utama mendukung pencarian dan pagination.
+- **Export & Cetak**: Data dapat diexport ke Excel, PDF, CSV, dan dicetak langsung.
 
-#### Laporan
-- Lihat laporan stok  
-- Lihat laporan transaksi  
+## Halaman-Halaman Utama
+- **Login**: Halaman masuk untuk admin dan user.
+- **Dashboard**: Statistik, grafik, dan ringkasan aktivitas.
+- **Stok Barang**: Daftar barang beserta stok dan detailnya.
+- **Barang Masuk**: Riwayat dan input barang masuk.
+- **Barang Keluar**: Riwayat dan input barang keluar.
+- **Data Supplier**: Manajemen data supplier.
+- **Data Customer**: Manajemen data customer.
+- **Data Petugas**: Manajemen data petugas toko.
+- **Profil Toko**: Informasi dan pengaturan profil toko.
+- **Reset Password**: Ubah password akun.
 
-## Teknologi yang Digunakan
+## Akun Default Demo
+Untuk keperluan demo/testing, berikut akun default yang dapat digunakan:
 
-- PHP 7.4 atau lebih tinggi
-- CodeIgniter 4
-- MySQL
-- Bootstrap 5
-- Font Awesome
-- Google Fonts (Inter)
+**Admin**
+- Username: `admin`
+- Password: `password`
 
-## Persyaratan Sistem
+**User/Petugas**
+- Username: `petugas`
+- Password: `password`
 
-- PHP >= 7.4
-- MySQL >= 5.7
-- Web Server (Apache/Nginx)
-- Composer
+> *Pastikan untuk mengganti password akun default pada lingkungan produksi!*
 
-## Instalasi
+---
 
-1. Clone repository
-```bash
-git clone https://github.com/Difarcy/Proyek-Pemrograman-Web-IF-2025.git
-```
+Website ini dikembangkan untuk membantu digitalisasi manajemen stok dan transaksi pada toko bangunan, serta memudahkan monitoring dan pelaporan bagi pemilik maupun petugas.
 
-2. Install dependencies
-```bash
-composer install
-```
+---
 
-3. Copy file .env.example menjadi .env
-```bash
-cp .env.example .env
-```
+## Contoh Tampilan Website
 
-4. Konfigurasi database di file .env
-```
-database.default.hostname = localhost
-database.default.database = vstock
-database.default.username = root
-database.default.password = 
-database.default.DBDriver = MySQLi
-```
+### Halaman Login
+![Contoh Tampilan Login](public/assets/img/ui/login_example.png)
 
-5. Jalankan migrasi database
-```bash
-php spark migrate
-```
+### Dashboard
+![Contoh Tampilan Dashboard](public/assets/img/ui/dashboard_example.png)
 
-6. Jalankan seeder untuk membuat user default
-```bash
-php spark db:seed UserSeeder
-```
+### Stok Barang
+![Contoh Tampilan Stok Barang](public/assets/img/ui/stok_barang_example.png)
 
-## Akun Default
+### Barang Masuk
+![Contoh Tampilan Barang Masuk](public/assets/img/ui/barang_masuk_example.png)
 
-### Admin
-- Username: admin
-- Password: password
+### Barang Keluar
+![Contoh Tampilan Barang Keluar](public/assets/img/ui/barang_keluar_example.png)
 
-### User
-- Username: user
-- Password: password
+### Data Customer
+![Contoh Tampilan Data Customer](public/assets/img/ui/data_customer_example.png)
 
-## Struktur Folder
+### Data Supplier
+![Contoh Tampilan Data Supplier](public/assets/img/ui/data_supplier_example.png)
 
-```
-app/
-├── Config/         # Konfigurasi aplikasi
-├── Controllers/    # Controller
-├── Database/       # Migrasi dan seeder
-├── Models/         # Model
-└── Views/          # View
-    ├── admin/      # View untuk admin
-    ├── auth/       # View autentikasi
-    └── user/       # View untuk user
-```
+### Data Petugas
+![Contoh Tampilan Data Petugas](public/assets/img/ui/data_petugas_example.png)
 
-## Kontribusi
+### Profil Toko
+![Contoh Tampilan Profil Toko](public/assets/img/ui/profil_toko_example.png)
 
-Silakan buat pull request untuk kontribusi. Untuk perubahan besar, harap buka issue terlebih dahulu untuk mendiskusikan perubahan yang diinginkan.
+> *Gambar di atas hanya contoh. Silakan sesuaikan dengan tampilan terbaru website Anda.*
+
+---
+
+## Video Demo
+
+[Link Video Demo (YouTube/Drive/dsb)](ISI_LINK_VIDEO_DEMO_DISINI)
+
+---
+
+## Kontak & Media Sosial
+
+- 📧 Email: [jafar.siddik@email.com](mailto:jafar.siddik@email.com)
+- 🌐 Facebook: [facebook.com/jafar.siddik](https://facebook.com/jafar.siddik)
+- 📸 Instagram: [instagram.com/jafar.siddik](https://instagram.com/jafar.siddik)

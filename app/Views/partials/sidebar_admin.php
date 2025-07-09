@@ -3,7 +3,7 @@
         <div class="sidebar-logo text-center mr-3">
             <img src="<?= base_url('assets/img/icon/vstock.png') ?>" alt="Logo" class="logo-img">
         </div>
-        <div class="logo_name">VSTOCK</div>
+        <div class="logo_name">VStock</div>
     </div>
     <ul class="nav-list">
         <li>
@@ -34,13 +34,7 @@
             </a>
             <span class="tooltip">Barang Keluar</span>
         </li>
-        <li>
-            <a href="<?= base_url('admin/laporan') ?>" class="<?= service('uri')->getSegment(2) == 'laporan' ? ' active' : '' ?>">
-                <i class="fa-solid fa-file-lines"></i>
-                <span class="links_name">Laporan</span>
-            </a>
-            <span class="tooltip">Laporan</span>
-        </li>
+
         <li>
             <a href="<?= base_url('admin/data-customer') ?>" class="<?= service('uri')->getSegment(2) == 'data-customer' ? ' active' : '' ?>">
                 <i class="fa-solid fa-users"></i>

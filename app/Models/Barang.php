@@ -10,10 +10,9 @@ class Barang extends Model
     protected $allowedFields = [
         'kode_barang',
         'nama_barang',
-        'jenis_barang',
-        'merek_barang',
+        'kategori_barang',
         'stok',
-        'keterangan'
+        'satuan'
     ];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
@@ -31,7 +30,7 @@ class Barang extends Model
                     'required' => 'Kode barang harus diisi',
                     'min_length' => 'Kode barang minimal 3 karakter',
                     'max_length' => 'Kode barang maksimal 20 karakter',
-                    'is_unique' => 'Kode barang sudah ada'
+                    'is_unique' => 'Gagal mengedit input'
                 ]
             ],
             'nama_barang' => [
@@ -42,17 +41,11 @@ class Barang extends Model
                     'max_length' => 'Nama barang maksimal 100 karakter'
                 ]
             ],
-            'jenis_barang' => [
+            'kategori_barang' => [
                 'rules' => 'required|max_length[50]',
                 'errors' => [
-                    'required' => 'Jenis barang harus diisi',
-                    'max_length' => 'Jenis barang maksimal 50 karakter'
-                ]
-            ],
-            'merek_barang' => [
-                'rules' => 'max_length[50]',
-                'errors' => [
-                    'max_length' => 'Merek barang maksimal 50 karakter'
+                    'required' => 'Kategori barang harus diisi',
+                    'max_length' => 'Kategori barang maksimal 50 karakter'
                 ]
             ],
             'stok' => [
@@ -63,19 +56,20 @@ class Barang extends Model
                     'greater_than_equal_to' => 'Stok tidak boleh negatif'
                 ]
             ],
-            'keterangan' => [
-                'rules' => 'max_length[500]',
+            'satuan' => [
+                'rules' => 'required|max_length[20]',
                 'errors' => [
-                    'max_length' => 'Keterangan maksimal 500 karakter'
+                    'required' => 'Satuan harus diisi',
+                    'max_length' => 'Satuan maksimal 20 karakter'
                 ]
             ]
         ];
     }
 
     /**
-     * Filter barang berdasarkan pencarian, jenis, dan merek
+     * Filter barang berdasarkan pencarian dan kategori
      */
-    public function filterBarang($search = '', $jenis = '', $merek = '', $limit = null, $offset = null)
+    public function filterBarang($search = '', $kategori = '', $limit = null, $offset = null)
     {
         $builder = $this;
         if ($search) {
@@ -84,11 +78,8 @@ class Barang extends Model
                 ->orLike('nama_barang', $search)
                 ->groupEnd();
         }
-        if ($jenis) {
-            $builder = $builder->where('jenis_barang', $jenis);
-        }
-        if ($merek) {
-            $builder = $builder->where('merek_barang', $merek);
+        if ($kategori) {
+            $builder = $builder->where('kategori_barang', $kategori);
         }
         
         if ($limit !== null) {

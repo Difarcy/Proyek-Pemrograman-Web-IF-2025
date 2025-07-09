@@ -15,6 +15,7 @@ Karya: Teja Kusumah (NPM 301200033) – Program Studi Teknik Informatika, FTI, U
 # Requirement Sistem
 
 - PHP >= 7.4
+- Codeigniter 4
 - MySQL/MariaDB
 - Composer
 - Web server (XAMPP/Laragon/Apache/Nginx)
@@ -88,55 +89,65 @@ Untuk keperluan demo/testing, berikut akun default yang dapat digunakan:
 - Username: `petugas`
 - Password: `password`
 
-> *Pastikan untuk mengganti password akun default pada lingkungan produksi!*
+---
+
+Website ini dikembangkan untuk membantu digitalisasi manajemen stok (gudang) pada toko bangunan, serta memudahkan monitoring dan pelaporan bagi pemilik maupun petugas.
 
 ---
 
-Website ini dikembangkan untuk membantu digitalisasi manajemen stok dan transaksi pada toko bangunan, serta memudahkan monitoring dan pelaporan bagi pemilik maupun petugas.
-
----
-
-## Contoh Tampilan Website
+## Tampilan Website
 
 ### Halaman Login
-![Contoh Tampilan Login](public/assets/img/ui/login_example.png)
+![Screenshot (304)](https://github.com/user-attachments/assets/f6eab947-9a38-4522-90ef-6b6baa574170)
 
 ### Dashboard
-![Contoh Tampilan Dashboard](public/assets/img/ui/dashboard_example.png)
+![Screenshot (305)](https://github.com/user-attachments/assets/63989a70-8c45-4688-bb53-72df89d7948e)
+![Screenshot (306)](https://github.com/user-attachments/assets/13d4f543-c943-4af5-a4f2-b4a0c4d09e2e)
+![Screenshot (309)](https://github.com/user-attachments/assets/d6242d86-b813-4bac-8e59-34ae294ff360)
+![Screenshot (307)](https://github.com/user-attachments/assets/94c4abda-6eee-482e-8b7b-eec22f2d28a3)
 
 ### Stok Barang
-![Contoh Tampilan Stok Barang](public/assets/img/ui/stok_barang_example.png)
+![Screenshot (310)](https://github.com/user-attachments/assets/7a9e2320-6c0f-49c5-b31d-3f0a45102af7)
+![Screenshot (311)](https://github.com/user-attachments/assets/ce912cb0-509d-4348-90a4-e8700d0c4b1a)
 
 ### Barang Masuk
-![Contoh Tampilan Barang Masuk](public/assets/img/ui/barang_masuk_example.png)
+![Screenshot (313)](https://github.com/user-attachments/assets/b3aee8cf-99c7-4e00-b064-50c1504a2823)
+![Screenshot (312)](https://github.com/user-attachments/assets/518100ed-78d5-4ea3-bca1-0b6492782167)
 
 ### Barang Keluar
-![Contoh Tampilan Barang Keluar](public/assets/img/ui/barang_keluar_example.png)
+![Screenshot (314)](https://github.com/user-attachments/assets/99019e01-69a8-4118-92ed-173e7a4de9f3)
+![Screenshot (315)](https://github.com/user-attachments/assets/0d15c0ed-b67c-479e-b752-ca79a5397429)
 
 ### Data Customer
-![Contoh Tampilan Data Customer](public/assets/img/ui/data_customer_example.png)
+![Screenshot (317)](https://github.com/user-attachments/assets/137c7406-41c2-4907-a03c-0bb3e9c45ccb)
+![Screenshot (316)](https://github.com/user-attachments/assets/cad42c30-91b4-4674-930f-955acce60ac8)
 
 ### Data Supplier
-![Contoh Tampilan Data Supplier](public/assets/img/ui/data_supplier_example.png)
+![Screenshot (318)](https://github.com/user-attachments/assets/c09a8fb6-53da-4aa9-a89e-5065b469f95d)
+![Screenshot (319)](https://github.com/user-attachments/assets/f74fef4b-f3bd-4d86-af8b-dc23442c5eb4)
 
 ### Data Petugas
-![Contoh Tampilan Data Petugas](public/assets/img/ui/data_petugas_example.png)
+![Screenshot (320)](https://github.com/user-attachments/assets/d04be7f1-bc12-43ed-98e6-052188265591)
+![Screenshot (321)](https://github.com/user-attachments/assets/5d7e4ad1-89c9-4b13-b895-b06c92d6ce39)
+
+### Kelola Pengguna
+![Screenshot (322)](https://github.com/user-attachments/assets/3ec82270-dc1b-4b5c-80e0-31252b1b73f9)
 
 ### Profil Toko
-![Contoh Tampilan Profil Toko](public/assets/img/ui/profil_toko_example.png)
+![Screenshot (323)](https://github.com/user-attachments/assets/c65c4bbe-e01e-4299-a654-d024125c05f1)
 
-> *Gambar di atas hanya contoh. Silakan sesuaikan dengan tampilan terbaru website Anda.*
-
----
-
-## Video Demo
-
-[Link Video Demo (YouTube/Drive/dsb)](ISI_LINK_VIDEO_DEMO_DISINI)
+### Profil & Reset Password
+![Screenshot (324)](https://github.com/user-attachments/assets/e560ef1c-8498-4189-b70b-3fdbba18c467)
+![Screenshot (325)](https://github.com/user-attachments/assets/7b0f4294-f247-462f-ba91-87519f4991be)
+![Screenshot (327)](https://github.com/user-attachments/assets/290de28a-e6a0-4da9-9a0c-8dce65914c49)
+![Screenshot (328)](https://github.com/user-attachments/assets/de3a1494-cce1-4c01-afc7-5bf7b7e93083)
+![Screenshot (330)](https://github.com/user-attachments/assets/a858fabd-63d8-4588-8138-436a0aebbad4)
+![Screenshot (329)](https://github.com/user-attachments/assets/cd42794a-1b18-4c3d-83ec-1fecb10fd8be)
 
 ---
 
 ## Kontak & Media Sosial
 
-- 📧 Email: [jafar.siddik@email.com](mailto:jafar.siddik@email.com)
-- 🌐 Facebook: [facebook.com/jafar.siddik](https://facebook.com/jafar.siddik)
-- 📸 Instagram: [instagram.com/jafar.siddik](https://instagram.com/jafar.siddik)
+- 📧 Email: difarcy [@] gmail.com
+- 🌐 Facebook: https://www.facebook.com/difarcy/
+- 📸 Instagram: https://www.instagram.com/difarcy/
